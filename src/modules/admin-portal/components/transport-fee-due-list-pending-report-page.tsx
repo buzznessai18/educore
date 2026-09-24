@@ -102,25 +102,25 @@ export function TransportFeeDueListPendingReportPage() {
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[#03a9f4]">Pending Fee-Descriptions</h2>
-          <p className="text-sm text-[#6b7280]">
-            Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Pending Fee-Descriptions
+          <h2 className="text-xl font-semibold text-info">Pending Fee-Descriptions</h2>
+          <p className="text-sm text-muted-foreground">
+            Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Pending Fee-Descriptions
           </p>
         </div>
         <ActionPills items={TRANSPORT_FEE_DUE_PILLS} />
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#d7e3ec] bg-white shadow-sm">
-        <div className="bg-[#03a9f4] px-4 py-2.5">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-enterprise-sm">
+        <div className="bg-info px-4 py-2.5">
           <h3 className="text-sm font-semibold text-white">Pending Fee-Descriptions</h3>
         </div>
 
-        <div className="space-y-5 bg-[#f8fafc] p-5">
+        <div className="space-y-5 bg-muted/50 p-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>Year</span>
               <Select value={year} onValueChange={setYear}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Year">
+                <SelectTrigger className="h-9 bg-card" aria-label="Year">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -133,10 +133,10 @@ export function TransportFeeDueListPendingReportPage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>Level/Combination</span>
               <Select value={level} onValueChange={setLevel}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Level/Combination">
+                <SelectTrigger className="h-9 bg-card" aria-label="Level/Combination">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -149,10 +149,10 @@ export function TransportFeeDueListPendingReportPage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>Semester</span>
               <Select value={semester} onValueChange={setSemester}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Semester">
+                <SelectTrigger className="h-9 bg-card" aria-label="Semester">
                   <SelectValue placeholder="Nothing selected" />
                 </SelectTrigger>
                 <SelectContent>
@@ -166,10 +166,10 @@ export function TransportFeeDueListPendingReportPage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>Route</span>
               <Select value={route} onValueChange={setRoute}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Route">
+                <SelectTrigger className="h-9 bg-card" aria-label="Route">
                   <SelectValue placeholder="Nothing selected" />
                 </SelectTrigger>
                 <SelectContent>
@@ -183,10 +183,10 @@ export function TransportFeeDueListPendingReportPage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>PickupPoint</span>
               <Select value={pickupPoint} onValueChange={setPickupPoint}>
-                <SelectTrigger className="h-9 bg-white" aria-label="PickupPoint">
+                <SelectTrigger className="h-9 bg-card" aria-label="PickupPoint">
                   <SelectValue placeholder="Nothing selected" />
                 </SelectTrigger>
                 <SelectContent>
@@ -200,24 +200,24 @@ export function TransportFeeDueListPendingReportPage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>From Date</span>
               <Input
                 type="date"
                 value={fromDate}
                 onChange={(event) => setFromDate(event.target.value)}
-                className="h-9 bg-white"
+                className="h-9 bg-card"
                 aria-label="From Date"
               />
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>To Date</span>
               <Input
                 type="date"
                 value={toDate}
                 onChange={(event) => setToDate(event.target.value)}
-                className="h-9 bg-white"
+                className="h-9 bg-card"
                 aria-label="To Date"
               />
             </label>
@@ -225,15 +225,15 @@ export function TransportFeeDueListPendingReportPage() {
 
           <Button
             type="button"
-            className="h-9 rounded-sm bg-[#5cb85c] px-4 text-sm font-semibold text-white hover:bg-[#4cae4c]"
+            className="h-9 rounded-md bg-success px-4 text-sm font-semibold text-white hover:bg-success/90"
             onClick={handleFind}
           >
             <Search className="size-4" />
             Find
           </Button>
 
-          <div className="space-y-3 rounded-sm border border-[#dbe3ea] bg-white p-4">
-            <label className="flex items-center gap-2 text-sm font-medium text-[#111827]">
+          <div className="space-y-3 rounded-xl border border-border bg-card p-4">
+            <label className="flex items-center gap-2 text-sm font-medium text-foreground">
               <Checkbox
                 checked={allFeesSelected}
                 onCheckedChange={(checked) => toggleAllFees(Boolean(checked))}
@@ -244,7 +244,7 @@ export function TransportFeeDueListPendingReportPage() {
 
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {FEE_MONTHS.map((fee) => (
-                <label key={fee} className="flex items-center gap-2 text-sm text-[#111827]">
+                <label key={fee} className="flex items-center gap-2 text-sm text-foreground">
                   <Checkbox
                     checked={selectedFees.includes(fee)}
                     onCheckedChange={() => toggleFee(fee)}

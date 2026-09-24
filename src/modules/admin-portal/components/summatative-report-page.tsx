@@ -55,13 +55,13 @@ function FilterSelect({
   const emptyValue = placeholder === "--ALL" || placeholder === "--ALL--" ? "all" : "none";
 
   return (
-    <label className={`block space-y-1.5 text-sm font-semibold text-[#111827] ${className ?? ""}`}>
+    <label className={`block space-y-1.5 text-sm font-semibold text-foreground ${className ?? ""}`}>
       <span>
         {label}
-        {required ? <span className="text-[#e53935]">*</span> : null}
+        {required ? <span className="text-danger">*</span> : null}
       </span>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="h-9 font-normal bg-white" aria-label={label}>
+        <SelectTrigger className="h-9 font-normal bg-card" aria-label={label}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
@@ -121,7 +121,7 @@ export function SummatativeReportPage() {
 
   return (
     <div className="mx-auto max-w-[1200px] space-y-6 pb-10">
-      <div className="rounded-sm border border-[#d7e3ec] bg-white p-5 shadow-sm sm:p-6">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-enterprise-sm sm:p-6">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 xl:items-end">
           <FilterSelect
             label="Year"
@@ -156,26 +156,26 @@ export function SummatativeReportPage() {
             required={false}
           />
           <div className="flex h-full items-end pb-1">
-            <label className="flex items-center gap-3 text-sm font-semibold text-[#111827]">
+            <label className="flex items-center gap-3 text-sm font-semibold text-foreground">
               <span>Get grades</span>
               <Switch
                 checked={getGrades}
                 onCheckedChange={setGetGrades}
                 aria-label="Get grades"
-                className="data-[state=checked]:bg-[#03a9f4]"
+                className="data-[state=checked]:bg-info"
               />
             </label>
           </div>
         </div>
 
         <div className="mt-4 flex flex-wrap items-center gap-6">
-          <label className="flex items-center gap-3 text-sm font-semibold text-[#111827]">
+          <label className="flex items-center gap-3 text-sm font-semibold text-foreground">
             <span>Show/Hide Header</span>
             <Switch
               checked={showHeader}
               onCheckedChange={setShowHeader}
               aria-label="Show or hide header"
-              className="data-[state=checked]:bg-[#03a9f4]"
+              className="data-[state=checked]:bg-info"
             />
           </label>
         </div>
@@ -183,14 +183,14 @@ export function SummatativeReportPage() {
         <div className="mt-5 flex flex-wrap items-center gap-2">
           <Button
             type="button"
-            className="h-9 rounded-sm bg-[#03a9f4] px-5 text-sm font-semibold text-white hover:bg-[#0288d1]"
+            className="h-9 rounded-md bg-info px-5 text-sm font-semibold text-white hover:bg-info/90"
             onClick={handleSearch}
           >
             Search
           </Button>
           <Button
             type="button"
-            className="h-9 rounded-sm bg-[#03a9f4] px-5 text-sm font-semibold text-white hover:bg-[#0288d1]"
+            className="h-9 rounded-md bg-info px-5 text-sm font-semibold text-white hover:bg-info/90"
             onClick={handlePrint}
           >
             <Printer className="size-4" />
@@ -203,14 +203,14 @@ export function SummatativeReportPage() {
         <div className="flex flex-wrap items-center gap-3">
           <Button
             type="button"
-            className="h-10 rounded-sm bg-[#9e9e9e] px-6 text-sm font-semibold text-white hover:bg-[#757575]"
+            className="h-10 rounded-md bg-muted-foreground px-6 text-sm font-semibold text-white hover:bg-foreground/70"
             onClick={() => navigate({ to: "/academic/marks-report" })}
           >
             Back
           </Button>
           <Button
             type="button"
-            className="h-10 rounded-sm bg-[#03a9f4] px-6 text-sm font-semibold text-white hover:bg-[#0288d1]"
+            className="h-10 rounded-md bg-info px-6 text-sm font-semibold text-white hover:bg-info/90"
             onClick={handlePrint}
           >
             <Printer className="size-4" />
@@ -218,14 +218,14 @@ export function SummatativeReportPage() {
           </Button>
         </div>
 
-        <div className="min-h-[220px] rounded-sm border border-[#e5e7eb] bg-white p-6">
+        <div className="min-h-[220px] rounded-xl border border-border bg-card p-6">
           {!searched ? (
-            <p className="text-sm text-[#9ca3af]"> </p>
+            <p className="text-sm text-muted-foreground/70"> </p>
           ) : (
-            <div className="space-y-2 text-sm text-[#374151]">
+            <div className="space-y-2 text-sm text-foreground">
               {showHeader ? (
-                <div className="border-b border-[#e5e7eb] pb-3">
-                  <p className="text-base font-semibold text-[#0288d1]">Summatative Report</p>
+                <div className="border-b border-border pb-3">
+                  <p className="text-base font-semibold text-info">Summatative Report</p>
                   <p>
                     Year {year} · Level{" "}
                     {LEVEL_OPTIONS.find((item) => item.value === level)?.label} · Class{" "}
@@ -240,7 +240,7 @@ export function SummatativeReportPage() {
                   : STUDENT_OPTIONS.find((item) => item.value === studentId)?.label}
                 {getGrades ? " with grade columns enabled." : "."}
               </p>
-              <p className="text-[#6b7280]">
+              <p className="text-muted-foreground">
                 Sample summative outcomes will appear here once backend marks are connected.
               </p>
             </div>

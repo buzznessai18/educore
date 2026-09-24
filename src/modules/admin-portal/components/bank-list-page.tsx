@@ -180,18 +180,18 @@ export function BankListPage() {
     <div className="relative mx-auto max-w-[1200px] space-y-4 pb-16">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[#03a9f4]">Bank List</h2>
-          <p className="text-sm text-[#6b7280]">
-            Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Bank List
+          <h2 className="text-xl font-semibold text-info">Bank List</h2>
+          <p className="text-sm text-muted-foreground">
+            Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Bank List
           </p>
         </div>
         <ActionPills items={BANK_ACTION_PILLS} />
       </div>
 
-      <div className="rounded-sm border border-[#d7e3ec] bg-white p-5 shadow-sm">
-        <label className="block max-w-[220px] space-y-1.5 text-sm text-[#111827]">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-enterprise-sm">
+        <label className="block max-w-[220px] space-y-1.5 text-sm text-foreground">
           <span>
-            Year<span className="text-[#e53935]">*</span>
+            Year<span className="text-danger">*</span>
           </span>
           <Select
             value={year}
@@ -200,7 +200,7 @@ export function BankListPage() {
               setPage(1);
             }}
           >
-            <SelectTrigger className="h-9 bg-white" aria-label="Year">
+            <SelectTrigger className="h-9 bg-card" aria-label="Year">
               <SelectValue placeholder="--Select--" />
             </SelectTrigger>
             <SelectContent>
@@ -223,7 +223,7 @@ export function BankListPage() {
                   key={action}
                   type="button"
                   size="sm"
-                  className="h-8 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                  className="h-8 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                   onClick={() => handleExport(action)}
                 >
                   <Icon className="size-3.5" />
@@ -232,7 +232,7 @@ export function BankListPage() {
               );
             })}
           </div>
-          <label className="flex items-center gap-2 text-sm text-[#374151]">
+          <label className="flex items-center gap-2 text-sm text-foreground">
             <span>Search:</span>
             <Input
               value={search}
@@ -240,17 +240,17 @@ export function BankListPage() {
                 setSearch(event.target.value);
                 setPage(1);
               }}
-              className="h-8 w-44 bg-white"
+              className="h-8 w-44 bg-card"
               aria-label="Search banks"
             />
           </label>
         </div>
 
-        <div className="mt-4 overflow-hidden rounded-sm border border-[#dbe3ea]">
+        <div className="mt-4 overflow-hidden rounded-xl border border-border">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="bg-[#f8fafc] hover:bg-[#f8fafc]">
+                <TableRow className="bg-muted/50 hover:bg-muted/50">
                   <TableHead className="text-xs font-bold">Bank Id</TableHead>
                   <TableHead className="text-xs font-bold">Bank Name</TableHead>
                   <TableHead className="text-xs font-bold">IFSC Code</TableHead>
@@ -261,7 +261,7 @@ export function BankListPage() {
               <TableBody>
                 {pageRows.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={5} className="h-24 text-center text-sm text-[#6b7280]">
+                    <TableCell colSpan={5} className="h-24 text-center text-sm text-muted-foreground">
                       No data available in table
                     </TableCell>
                   </TableRow>
@@ -269,7 +269,7 @@ export function BankListPage() {
                   pageRows.map((row, index) => (
                     <TableRow
                       key={row.id}
-                      className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}
+                      className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}
                     >
                       <TableCell>{row.bankId}</TableCell>
                       <TableCell className="font-medium">{row.bankName}</TableCell>
@@ -278,7 +278,7 @@ export function BankListPage() {
                         <Button
                           type="button"
                           size="icon"
-                          className="size-8 rounded-full bg-[#03a9f4] text-white hover:bg-[#0288d1]"
+                          className="size-8 rounded-full bg-info text-white hover:bg-info/90"
                           aria-label={`Edit ${row.bankName}`}
                           onClick={() => openEdit(row)}
                         >
@@ -289,7 +289,7 @@ export function BankListPage() {
                         <Button
                           type="button"
                           size="icon"
-                          className="size-8 rounded-full bg-[#e53935] text-white hover:bg-[#c62828]"
+                          className="size-8 rounded-full bg-danger text-white hover:bg-danger/90"
                           aria-label={`Delete ${row.bankName}`}
                           onClick={() => handleDelete(row.id)}
                         >
@@ -304,7 +304,7 @@ export function BankListPage() {
           </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-[#6b7280]">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
           <p>
             Showing {from} to {to} of {filtered.length} entries
           </p>
@@ -341,7 +341,7 @@ export function BankListPage() {
       <Button
         type="button"
         size="icon"
-        className="fixed bottom-8 right-8 z-20 size-12 rounded-full bg-[#5cb85c] text-white shadow-lg hover:bg-[#4cae4c]"
+        className="fixed bottom-8 right-8 z-20 size-12 rounded-full bg-success text-white shadow-lg hover:bg-success/90"
         aria-label="Add bank"
         onClick={openAdd}
       >
@@ -356,7 +356,7 @@ export function BankListPage() {
           <div className="space-y-4 py-2">
             <label className="block space-y-1.5 text-sm">
               <span>
-                Bank Name<span className="text-[#e53935]">*</span>
+                Bank Name<span className="text-danger">*</span>
               </span>
               <Input
                 value={bankName}
@@ -366,7 +366,7 @@ export function BankListPage() {
             </label>
             <label className="block space-y-1.5 text-sm">
               <span>
-                IFSC Code<span className="text-[#e53935]">*</span>
+                IFSC Code<span className="text-danger">*</span>
               </span>
               <Input
                 value={ifscCode}
@@ -381,7 +381,7 @@ export function BankListPage() {
             </Button>
             <Button
               type="button"
-              className="bg-[#03a9f4] text-white hover:bg-[#0288d1]"
+              className="bg-info text-white hover:bg-info/90"
               onClick={handleSave}
             >
               Save

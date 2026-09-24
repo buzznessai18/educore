@@ -57,13 +57,13 @@ function FilterSelect({
   className,
 }: FilterFieldProps) {
   return (
-    <label className={`block space-y-1.5 text-sm text-[#111827] ${className ?? ""}`}>
+    <label className={`block space-y-1.5 text-sm text-foreground ${className ?? ""}`}>
       <span>
         {label}
-        {required ? <span className="text-[#e53935]">*</span> : null}
+        {required ? <span className="text-danger">*</span> : null}
       </span>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="h-9 bg-white" aria-label={label}>
+        <SelectTrigger className="h-9 bg-card" aria-label={label}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
@@ -123,7 +123,7 @@ export function MarksReportPage() {
 
   return (
     <div className="mx-auto max-w-[1200px] space-y-10 pb-10">
-      <div className="rounded-sm border border-[#d7e3ec] bg-white p-5 shadow-sm sm:p-6">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-enterprise-sm sm:p-6">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
           <div className="grid flex-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             <FilterSelect
@@ -162,14 +162,14 @@ export function MarksReportPage() {
           <div className="flex flex-wrap items-end gap-2">
             <Button
               type="button"
-              className="h-8 rounded-sm bg-[#03a9f4] px-4 text-sm font-semibold text-white hover:bg-[#0288d1]"
+              className="h-8 rounded-md bg-info px-4 text-sm font-semibold text-white hover:bg-info/90"
               onClick={handleSearch}
             >
               Search
             </Button>
             <Button
               type="button"
-              className="h-10 rounded-sm bg-[#03a9f4] px-5 text-sm font-semibold text-white hover:bg-[#0288d1]"
+              className="h-10 rounded-md bg-info px-5 text-sm font-semibold text-white hover:bg-info/90"
               onClick={() => handlePrint(false)}
             >
               <Printer className="size-4" />
@@ -182,14 +182,14 @@ export function MarksReportPage() {
       <div className="flex flex-wrap items-center justify-center gap-3">
         <Button
           type="button"
-          className="h-10 rounded-sm bg-[#9e9e9e] px-6 text-sm font-semibold text-white hover:bg-[#757575]"
+          className="h-10 rounded-md bg-muted-foreground px-6 text-sm font-semibold text-white hover:bg-foreground/70"
           onClick={() => navigate({ to: "/academic/marks-card" })}
         >
           Back
         </Button>
         <Button
           type="button"
-          className="h-10 rounded-sm bg-[#03a9f4] px-6 text-sm font-semibold text-white hover:bg-[#0288d1]"
+          className="h-10 rounded-md bg-info px-6 text-sm font-semibold text-white hover:bg-info/90"
           onClick={() => handlePrint(false)}
         >
           <Printer className="size-4" />
@@ -197,7 +197,7 @@ export function MarksReportPage() {
         </Button>
         <Button
           type="button"
-          className="h-10 rounded-sm bg-[#03a9f4] px-6 text-sm font-semibold text-white hover:bg-[#0288d1]"
+          className="h-10 rounded-md bg-info px-6 text-sm font-semibold text-white hover:bg-info/90"
           onClick={() => handlePrint(true)}
         >
           <Printer className="size-4" />

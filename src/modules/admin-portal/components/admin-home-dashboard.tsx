@@ -135,14 +135,14 @@ export function AdminHomeDashboard() {
       {/* KPI cards with overlapping icons */}
       <section className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
         <OverlapStatCard
-          color="bg-[#f39c12]"
+          color="bg-warning"
           icon={User}
           label="No of Students"
           value={String(studentCount)}
           footer="Total Strength"
         />
         <OverlapStatCard
-          color="bg-[#00c0ef]"
+          color="bg-info"
           icon={IndianRupee}
           label="Total Fee Receivable"
           value={formatAmount(feeReceivable)}
@@ -154,7 +154,7 @@ export function AdminHomeDashboard() {
           }
         />
         <OverlapStatCard
-          color="bg-[#00a65a]"
+          color="bg-success"
           icon={IndianRupee}
           label="Total Received Fee"
           value={formatAmount(feeReceived)}
@@ -166,7 +166,7 @@ export function AdminHomeDashboard() {
           }
         />
         <OverlapStatCard
-          color="bg-[#dd4b39]"
+          color="bg-danger"
           icon={IndianRupee}
           label="Balance Fee"
           value={formatAmount(balanceFee)}
@@ -182,25 +182,25 @@ export function AdminHomeDashboard() {
       {/* Bill / bank status tiles */}
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <SplitStatusTile
-          color="bg-[#f39c12]"
+          color="bg-warning"
           icon={FileText}
           value={String(billsPayable)}
           label={`Total Bills Payable(${billsPayable})`}
         />
         <SplitStatusTile
-          color="bg-[#00c0ef]"
+          color="bg-info"
           icon={Check}
           value={String(billsPaid)}
           label={`Total Bills Paid(${billsPaid})`}
         />
         <SplitStatusTile
-          color="bg-[#e84c8a]"
+          color="bg-chart-5"
           icon={List}
           value={String(pendingBills)}
           label={`Pending Bills (${pendingBills})`}
         />
         <SplitStatusTile
-          color="bg-[#605ca8]"
+          color="bg-primary"
           icon={Building2}
           value={String(bankBalance)}
           label="Bank Balance"
@@ -209,7 +209,7 @@ export function AdminHomeDashboard() {
 
       {/* Income / Expense charts */}
       <section className="grid gap-5 xl:grid-cols-2">
-        <Card className="rounded-md border-border shadow-sm">
+        <Card className="rounded-xl border-border shadow-enterprise-sm">
           <CardHeader className="border-b border-border px-5 py-3">
             <CardTitle className="text-base font-semibold text-foreground">Income of the Year</CardTitle>
           </CardHeader>
@@ -218,30 +218,30 @@ export function AdminHomeDashboard() {
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={incomeData} margin={{ left: 8, right: 8, top: 8, bottom: 8 }}>
-                  <CartesianGrid stroke="#e5e7eb" vertical={false} />
+                  <CartesianGrid stroke="var(--border)" vertical={false} />
                   <XAxis
                     dataKey="month"
                     label={{ value: "Months", position: "insideBottom", offset: -2, fontSize: 12 }}
-                    tick={{ fill: "#6b7280", fontSize: 11 }}
+                    tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
                     axisLine={false}
                     tickLine={false}
                   />
                   <YAxis
                     label={{ value: "Income", angle: -90, position: "insideLeft", fontSize: 12 }}
-                    tick={{ fill: "#6b7280", fontSize: 11 }}
+                    tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
                     axisLine={false}
                     tickLine={false}
                     tickFormatter={(value: number) => value.toLocaleString("en-IN")}
                   />
                   <Tooltip formatter={(value: number) => `₹${formatAmount(value)}`} />
-                  <Bar dataKey="income" fill="#3b82f6" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="income" fill="var(--chart-1)" radius={[2, 2, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="rounded-md border-border shadow-sm">
+        <Card className="rounded-xl border-border shadow-enterprise-sm">
           <CardHeader className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-3">
             <CardTitle className="text-base font-semibold text-foreground">
               Expense of the Year ({year})
@@ -260,23 +260,23 @@ export function AdminHomeDashboard() {
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={expenseData} margin={{ left: 8, right: 8, top: 8, bottom: 8 }}>
-                  <CartesianGrid stroke="#e5e7eb" vertical={false} />
+                  <CartesianGrid stroke="var(--border)" vertical={false} />
                   <XAxis
                     dataKey="month"
                     label={{ value: "Month", position: "insideBottom", offset: -2, fontSize: 12 }}
-                    tick={{ fill: "#6b7280", fontSize: 11 }}
+                    tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
                     axisLine={false}
                     tickLine={false}
                   />
                   <YAxis
                     label={{ value: "Expense (₹)", angle: -90, position: "insideLeft", fontSize: 12 }}
-                    tick={{ fill: "#6b7280", fontSize: 11 }}
+                    tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
                     axisLine={false}
                     tickLine={false}
                     tickFormatter={(value: number) => value.toLocaleString("en-IN")}
                   />
                   <Tooltip formatter={(value: number) => `₹${formatAmount(value)}`} />
-                  <Bar dataKey="expenses" fill="#f59e0b" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="expenses" fill="var(--chart-3)" radius={[2, 2, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -287,7 +287,7 @@ export function AdminHomeDashboard() {
       {/* SRM / Attendance / Notice Board */}
       <section className="grid gap-4 lg:grid-cols-3">
         <ModuleSummaryCard
-          color="bg-[#5cb85c]"
+          color="bg-success"
           icon={FileEdit}
           title="SRM"
           lines={[
@@ -297,7 +297,7 @@ export function AdminHomeDashboard() {
           ]}
         />
         <ModuleSummaryCard
-          color="bg-[#00bcd4]"
+          color="bg-info"
           icon={FileText}
           title="ATTENDANCE"
           lines={[
@@ -307,7 +307,7 @@ export function AdminHomeDashboard() {
           ]}
         />
         <ModuleSummaryCard
-          color="bg-[#03a9f4]"
+          color="bg-info"
           icon={List}
           title="NOTICE BOARD"
           lines={["Pending Task", "Upcoming Events", "Time Table"]}
@@ -316,29 +316,29 @@ export function AdminHomeDashboard() {
 
       {/* Tasks + Quick links + Approvals */}
       <section className="grid gap-5 xl:grid-cols-[minmax(0,1.4fr)_220px_240px]">
-        <Card className="overflow-hidden rounded-md border-border shadow-sm">
+        <Card className="overflow-hidden rounded-xl border-border shadow-enterprise-sm">
           <Tabs defaultValue="alerts">
-            <div className="bg-[#9c27b0] px-3 py-2">
+            <div className="bg-primary px-3 py-2">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm font-semibold text-white">Tasks:</span>
                 <TabsList className="h-auto bg-transparent p-0">
                   <TabsTrigger
                     value="alerts"
-                    className="gap-1.5 rounded-sm px-3 py-1.5 text-xs text-white data-[state=active]:bg-white/20 data-[state=active]:shadow-none"
+                    className="gap-1.5 rounded-sm px-3 py-1.5 text-xs text-white data-[state=active]:bg-card/20 data-[state=active]:shadow-none"
                   >
                     <Bug className="size-3.5" />
                     ALERTS
                   </TabsTrigger>
                   <TabsTrigger
                     value="approvals"
-                    className="gap-1.5 rounded-sm px-3 py-1.5 text-xs text-white data-[state=active]:bg-white/20 data-[state=active]:shadow-none"
+                    className="gap-1.5 rounded-sm px-3 py-1.5 text-xs text-white data-[state=active]:bg-card/20 data-[state=active]:shadow-none"
                   >
                     <Code2 className="size-3.5" />
                     APPROVALS
                   </TabsTrigger>
                   <TabsTrigger
                     value="notifications"
-                    className="gap-1.5 rounded-sm px-3 py-1.5 text-xs text-white data-[state=active]:bg-white/20 data-[state=active]:shadow-none"
+                    className="gap-1.5 rounded-sm px-3 py-1.5 text-xs text-white data-[state=active]:bg-card/20 data-[state=active]:shadow-none"
                   >
                     <Cloud className="size-3.5" />
                     NOTIFICATIONS
@@ -393,23 +393,23 @@ export function AdminHomeDashboard() {
 
       {/* Fee collection */}
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <FeeCollectionCard label="Daily Fee Collection" value={0} barClass="bg-[#e91e63]" progress={12} />
-        <FeeCollectionCard label="Weekly Fee Collection" value={0} barClass="bg-[#03a9f4]" progress={18} />
-        <FeeCollectionCard label="Monthly Fee Collection" value={0} barClass="bg-[#dd4b39]" progress={10} />
+        <FeeCollectionCard label="Daily Fee Collection" value={0} barClass="bg-chart-5" progress={12} />
+        <FeeCollectionCard label="Weekly Fee Collection" value={0} barClass="bg-info" progress={18} />
+        <FeeCollectionCard label="Monthly Fee Collection" value={0} barClass="bg-danger" progress={10} />
         <FeeCollectionCard
           label="Yearly Fee Collection"
           value={1999550}
-          barClass="bg-[#37474f]"
+          barClass="bg-foreground"
           progress={64}
         />
       </section>
 
       {/* Enquiry tiles */}
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <EnquiryTile color="bg-[#f39c12]" icon={Pencil} label="Total Enquiries" href="/admissions/enquiries" />
-        <EnquiryTile color="bg-[#e91e63]" icon={Pencil} label="Responded Enquiries" href="/admissions/enquiries" />
-        <EnquiryTile color="bg-[#3498db]" icon={Users} label="Admissions Closed" href="/admissions/admitted" />
-        <EnquiryTile color="bg-[#8e44ad]" icon={Pencil} label="Pending Enquiries" href="/admissions/enquiries" />
+        <EnquiryTile color="bg-warning" icon={Pencil} label="Total Enquiries" href="/admissions/enquiries" />
+        <EnquiryTile color="bg-chart-5" icon={Pencil} label="Responded Enquiries" href="/admissions/enquiries" />
+        <EnquiryTile color="bg-info" icon={Users} label="Admissions Closed" href="/admissions/admitted" />
+        <EnquiryTile color="bg-primary" icon={Pencil} label="Pending Enquiries" href="/admissions/enquiries" />
       </section>
 
       {/* Calendar + Events */}
@@ -421,12 +421,12 @@ export function AdminHomeDashboard() {
           onSelectDate={setSelectedDate}
         />
 
-        <Card className="rounded-md border-border shadow-sm">
+        <Card className="rounded-xl border-border shadow-enterprise-sm">
           <CardHeader className="flex flex-row items-center justify-between gap-3 border-b border-border px-5 py-3">
             <CardTitle className="text-base font-semibold">Event List</CardTitle>
             <Button
               size="sm"
-              className="bg-[#5cb85c] text-white hover:bg-[#4cae4c]"
+              className="bg-success text-white hover:bg-success/90"
               onClick={() => toast.success("Add event workflow ready for Phase 2 wiring")}
             >
               Add New
@@ -474,7 +474,7 @@ function DashboardMonthCalendar({
   };
 
   return (
-    <Card className="rounded-md border-[#e5e7eb] bg-white shadow-sm">
+    <Card className="rounded-xl border-border bg-card shadow-enterprise-sm">
       <CardContent className="p-4 sm:p-5">
         <div className="mb-4 flex items-center justify-between gap-3">
           <div className="flex items-center gap-1">
@@ -485,7 +485,7 @@ function DashboardMonthCalendar({
               <ChevronRight className="size-4" />
             </CalendarNavButton>
           </div>
-          <p className="text-sm font-bold tracking-wide text-[#4b5563] sm:text-[15px]">
+          <p className="text-sm font-bold tracking-wide text-foreground/80 sm:text-[15px]">
             {month.toLocaleString("en-US", { month: "long", year: "numeric" }).toUpperCase()}
           </p>
           <div className="flex items-center gap-1">
@@ -498,14 +498,14 @@ function DashboardMonthCalendar({
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-sm border border-[#e8eaed]">
-          <div className="grid grid-cols-7 border-b border-[#e8eaed] bg-[#f5f7f9]">
+        <div className="overflow-hidden rounded-xl border border-border">
+          <div className="grid grid-cols-7 border-b border-border bg-muted">
             {weekdays.map((day, index) => (
               <div
                 key={day}
                 className={cn(
-                  "py-2.5 text-center text-[11px] font-semibold uppercase tracking-wide text-[#9ca3af]",
-                  index < 6 && "border-r border-[#e8eaed]",
+                  "py-2.5 text-center text-[11px] font-semibold uppercase tracking-wide text-muted-foreground/70",
+                  index < 6 && "border-r border-border",
                 )}
               >
                 {day}
@@ -535,18 +535,18 @@ function DashboardMonthCalendar({
                     }
                   }}
                   className={cn(
-                    "relative h-17 border-b border-[#e8eaed] bg-white p-2 text-left transition-colors hover:bg-[#f8fafc] sm:h-19",
-                    index % 7 !== 6 && "border-r border-[#e8eaed]",
-                    isSelected && "bg-[#eef7f8] hover:bg-[#eef7f8]",
+                    "relative h-17 border-b border-border bg-card p-2 text-left transition-colors hover:bg-muted/50 sm:h-19",
+                    index % 7 !== 6 && "border-r border-border",
+                    isSelected && "bg-info-soft hover:bg-info-soft",
                   )}
                   aria-label={cell.date.toDateString()}
                   aria-pressed={isSelected}
                 >
                   <span
                     className={cn(
-                      "text-sm font-normal leading-none text-[#4b5563]",
-                      !cell.inCurrentMonth && "text-[#9ca3af]",
-                      isSelected && "font-semibold text-[#4caf50]",
+                      "text-sm font-normal leading-none text-foreground/80",
+                      !cell.inCurrentMonth && "text-muted-foreground/70",
+                      isSelected && "font-semibold text-success",
                     )}
                   >
                     {cell.date.getDate()}
@@ -575,7 +575,7 @@ function CalendarNavButton({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="grid size-8 place-items-center rounded-sm border border-[#d1d5db] bg-white text-[#4b5563] transition hover:border-[#9ca3af] hover:bg-[#f9fafb]"
+      className="grid size-8 place-items-center rounded-sm border border-input bg-card text-foreground/80 transition hover:border-muted-foreground hover:bg-muted"
     >
       {children}
     </button>
@@ -613,7 +613,7 @@ function OverlapStatCard({
   footer: ReactNode;
 }) {
   return (
-    <Card className="relative mt-4 rounded-md border-border pt-2 shadow-sm">
+    <Card className="relative mt-4 rounded-xl border-border pt-2 shadow-enterprise-sm">
       <div
         className={cn(
           "absolute -top-3 left-4 grid size-12 place-items-center rounded-md text-white shadow-md",
@@ -643,7 +643,7 @@ function SplitStatusTile({
   label: string;
 }) {
   return (
-    <div className={cn("flex min-h-[88px] overflow-hidden rounded-md text-white shadow-sm", color)}>
+    <div className={cn("flex min-h-[88px] overflow-hidden rounded-xl text-white shadow-enterprise-sm", color)}>
       <div className="grid w-20 shrink-0 place-items-center bg-black/10">
         <Icon className="size-8" />
       </div>
@@ -667,7 +667,7 @@ function ModuleSummaryCard({
   lines: string[];
 }) {
   return (
-    <div className={cn("overflow-hidden rounded-md text-white shadow-sm", color)}>
+    <div className={cn("overflow-hidden rounded-xl text-white shadow-enterprise-sm", color)}>
       <div className="flex items-center gap-3 border-b border-white/20 px-4 py-3">
         <Icon className="size-6" />
         <p className="text-lg font-bold tracking-wide">{title}</p>
@@ -703,7 +703,7 @@ function TaskList({
           <Button
             variant="outline"
             size="icon"
-            className="size-8 border-sky-300 text-sky-600"
+            className="size-8 border-info/40 text-info"
             onClick={() => toast.info(`Edit: ${item}`)}
             aria-label={`Edit ${item}`}
           >
@@ -712,7 +712,7 @@ function TaskList({
           <Button
             variant="outline"
             size="icon"
-            className="size-8 border-red-300 text-red-600"
+            className="size-8 border-danger/40 text-danger"
             onClick={() => toast.message(`Dismissed: ${item}`)}
             aria-label={`Delete ${item}`}
           >
@@ -732,7 +732,7 @@ function PillLink({ href, label }: { href: string; label: string }) {
   return (
     <a
       href={href}
-      className="flex h-10 items-center justify-center rounded-full bg-[#00bcd4] px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-[#00acc1]"
+      className="flex h-10 items-center justify-center rounded-full bg-info px-4 text-sm font-semibold text-white shadow-enterprise-sm transition hover:bg-info/90"
     >
       {label}
     </a>
@@ -753,8 +753,8 @@ function ApprovalCard({
   return (
     <div
       className={cn(
-        "rounded-md p-3 text-white shadow-sm",
-        tone === "green" ? "bg-[#5cb85c]" : "bg-[#d9534f]",
+        "rounded-md p-3 text-white shadow-enterprise-sm",
+        tone === "green" ? "bg-success" : "bg-danger",
       )}
     >
       <div className="flex items-start gap-2">
@@ -781,10 +781,10 @@ function FeeCollectionCard({
   progress: number;
 }) {
   return (
-    <Card className="overflow-hidden rounded-md border-border shadow-sm">
+    <Card className="overflow-hidden rounded-xl border-border shadow-enterprise-sm">
       <CardContent className="space-y-2 p-5">
         <div className="flex items-start gap-3">
-          <IndianRupee className="mt-1 size-8 text-[#5cb85c]" />
+          <IndianRupee className="mt-1 size-8 text-success" />
           <div>
             <p className="text-2xl font-semibold text-foreground">{formatAmount(value)}</p>
             <p className="text-sm text-muted-foreground">{label}</p>
@@ -812,7 +812,7 @@ function EnquiryTile({
   return (
     <a
       href={href}
-      className={cn("flex min-h-[84px] overflow-hidden rounded-md text-white shadow-sm transition hover:opacity-95", color)}
+      className={cn("flex min-h-[84px] overflow-hidden rounded-xl text-white shadow-enterprise-sm transition hover:opacity-95", color)}
     >
       <div className="grid w-20 shrink-0 place-items-center bg-black/15">
         <Icon className="size-7" />

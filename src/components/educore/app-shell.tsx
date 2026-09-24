@@ -569,14 +569,19 @@ function EduCoreShell({
   }, [isDark]);
 
   return (
-    <div className="min-h-screen bg-app text-foreground">
-      <div className="flex min-h-screen w-full">
-        <aside className={cn("hidden border-r border-sidebar-border bg-sidebar transition-all duration-200 lg:block", collapsed ? "w-20" : "w-72")}>
+    <div className="h-svh overflow-hidden bg-app text-foreground">
+      <div className="flex h-full w-full">
+        <aside
+          className={cn(
+            "hidden h-full shrink-0 border-r border-sidebar-border bg-sidebar transition-all duration-200 lg:block",
+            collapsed ? "w-20" : "w-72",
+          )}
+        >
           <SidebarContent currentPath={currentPath} collapsed={collapsed} sections={sections} onNavigate={() => undefined} />
         </aside>
-        <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-30 border-b border-border bg-header/95 backdrop-blur">
-            <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 lg:px-6">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+          <header className="z-30 shrink-0 border-b border-border/80 bg-header/90 shadow-[0_1px_0_0_color-mix(in_oklab,var(--primary)_8%,transparent)] backdrop-blur-md">
+            <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-4 py-3.5 lg:px-6">
               <div className="flex items-center gap-2">
                 <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
                   <SheetTrigger asChild>
@@ -639,7 +644,7 @@ function EduCoreShell({
                   isChequeClearence ||
                   isMopReport ||
                   isDailyMopReport
-                    ? "text-sky-500"
+                    ? "text-primary"
                     : "text-foreground",
                 )}>{pageTitle}</h1>
               </div>
@@ -658,7 +663,9 @@ function EduCoreShell({
               </div>
             </div>
           </header>
-          <main className="min-w-0 flex-1 px-4 py-5 sm:px-6 lg:px-8">{children}</main>
+          <main className="min-h-0 min-w-0 flex-1 overflow-y-auto bg-[radial-gradient(ellipse_at_top,color-mix(in_oklab,var(--primary)_6%,transparent),transparent_55%)] px-4 py-5 sm:px-6 lg:px-8">
+            {children}
+          </main>
         </div>
       </div>
     </div>
@@ -694,8 +701,8 @@ function SidebarContent({
   };
 
   return (
-    <div className="flex h-screen min-h-0 flex-col bg-sidebar">
-      <div className="border-b border-sidebar-border p-4">
+    <div className="flex h-full min-h-0 flex-col bg-sidebar">
+      <div className="shrink-0 border-b border-sidebar-border p-4">
         <BrandMark expanded={!collapsed} />
       </div>
       <ScrollArea className="min-h-0 flex-1">
@@ -760,22 +767,22 @@ function SidebarNavRow({
   const rowClassName = cn(
     "relative flex w-full items-center gap-3 px-4 py-3 text-sm font-semibold transition-colors",
     isActive
-      ? "bg-primary/5 text-primary before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:bg-primary"
-      : "text-slate-600 hover:bg-muted/60 hover:text-foreground",
+      ? "bg-primary-soft text-primary before:absolute before:inset-y-0 before:left-0 before:w-1 before:rounded-r-full before:bg-primary"
+      : "text-muted-foreground hover:bg-muted/70 hover:text-foreground",
     collapsed && "justify-center px-2",
   );
 
-  const labelClassName = cn("truncate", isActive && "underline underline-offset-4");
+  const labelClassName = cn("truncate", isActive && "font-bold");
 
   const content = (
     <>
-      <section.icon className={cn("size-[18px] shrink-0", isActive ? "text-primary" : "text-slate-500")} />
+      <section.icon className={cn("size-[18px] shrink-0", isActive ? "text-primary" : "text-muted-foreground")} />
       {!collapsed && <span className={cn("min-w-0 flex-1 text-left", labelClassName)}>{section.label}</span>}
       {!collapsed && section.expandable && (
         expanded && hasChildren ? (
-          <ChevronDown className={cn("size-3.5 shrink-0", isActive ? "text-primary" : "text-slate-400")} />
+          <ChevronDown className={cn("size-3.5 shrink-0", isActive ? "text-primary" : "text-muted-foreground/70")} />
         ) : (
-          <ChevronRight className={cn("size-3.5 shrink-0", isActive ? "text-primary" : "text-slate-400")} />
+          <ChevronRight className={cn("size-3.5 shrink-0", isActive ? "text-primary" : "text-muted-foreground/70")} />
         )
       )}
     </>
@@ -820,7 +827,7 @@ function SidebarNavRow({
                 onClick={onNavigate}
                 className={cn(
                   "block py-2.5 text-sm font-medium transition-colors",
-                  childActive ? "text-primary underline underline-offset-4" : "text-slate-600 hover:text-foreground",
+                  childActive ? "text-primary font-semibold" : "text-muted-foreground hover:text-foreground",
                 )}
                 aria-current={childActive ? "page" : undefined}
               >

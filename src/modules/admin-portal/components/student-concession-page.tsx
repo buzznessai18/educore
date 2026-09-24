@@ -73,25 +73,25 @@ export function StudentConcessionPage() {
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[#03a9f4]">Student Concession</h2>
-          <p className="text-sm text-[#6b7280]">
-            Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Student Concession
+          <h2 className="text-xl font-semibold text-info">Student Concession</h2>
+          <p className="text-sm text-muted-foreground">
+            Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Student Concession
           </p>
         </div>
         <ActionPills items={STUDENT_CONCESSION_PILLS} />
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#d7e3ec] bg-white shadow-sm">
-        <div className="bg-[#03a9f4] px-4 py-2.5">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-enterprise-sm">
+        <div className="bg-info px-4 py-2.5">
           <h3 className="text-sm font-semibold text-white">Student Concession</h3>
         </div>
 
         <div className="space-y-5 p-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>YearName</span>
               <Select value={yearName} onValueChange={setYearName}>
-                <SelectTrigger className="h-9 bg-white" aria-label="YearName">
+                <SelectTrigger className="h-9 bg-card" aria-label="YearName">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -105,10 +105,10 @@ export function StudentConcessionPage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>FYID</span>
               <Select value={fyid} onValueChange={setFyid}>
-                <SelectTrigger className="h-9 bg-white" aria-label="FYID">
+                <SelectTrigger className="h-9 bg-card" aria-label="FYID">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -122,12 +122,12 @@ export function StudentConcessionPage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>
-                Class<span className="text-[#e53935]">*</span>
+                Class<span className="text-danger">*</span>
               </span>
               <Select value={classId} onValueChange={handleClassChange}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Class">
+                <SelectTrigger className="h-9 bg-card" aria-label="Class">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -141,12 +141,12 @@ export function StudentConcessionPage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>
-                Student<span className="text-[#e53935]">*</span>
+                Student<span className="text-danger">*</span>
               </span>
               <Select value={studentId} onValueChange={setStudentId}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Student">
+                <SelectTrigger className="h-9 bg-card" aria-label="Student">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -160,41 +160,41 @@ export function StudentConcessionPage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>FatherName</span>
               <Input
                 value={fatherName}
                 readOnly
-                className="h-9 bg-[#f3f4f6] text-[#6b7280]"
+                className="h-9 bg-muted text-muted-foreground"
                 aria-label="FatherName"
               />
             </label>
           </div>
 
           <div className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>Attachment</span>
               <Input
                 type="file"
-                className="h-9 cursor-pointer bg-white file:mr-3 file:border-0 file:bg-[#e5e7eb] file:px-2 file:text-sm"
+                className="h-9 cursor-pointer bg-card file:mr-3 file:border-0 file:bg-muted file:px-2 file:text-sm"
                 aria-label="Attachment"
                 onChange={(event) => {
                   const file = event.target.files?.[0];
                   setFileName(file?.name ?? "");
                 }}
               />
-              <span className="block text-xs text-[#6b7280]">
+              <span className="block text-xs text-muted-foreground">
                 {fileName || "No file chosen"}
               </span>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>Remarks</span>
               <Textarea
                 value={remarks}
                 onChange={(event) => setRemarks(event.target.value)}
                 placeholder="Remarks.."
-                className="min-h-[96px] bg-white"
+                className="min-h-[96px] bg-card"
                 aria-label="Remarks"
               />
             </label>
@@ -203,14 +203,14 @@ export function StudentConcessionPage() {
           <div className="flex flex-wrap gap-2">
             <Button
               type="button"
-              className="h-9 rounded-sm bg-[#03a9f4] px-5 text-sm font-semibold text-white hover:bg-[#0288d1]"
+              className="h-9 rounded-md bg-info px-5 text-sm font-semibold text-white hover:bg-info/90"
               onClick={handleSave}
             >
               Save
             </Button>
             <Button
               type="button"
-              className="h-9 rounded-sm bg-[#9e9e9e] px-5 text-sm font-semibold text-white hover:bg-[#757575]"
+              className="h-9 rounded-md bg-muted-foreground px-5 text-sm font-semibold text-white hover:bg-foreground/70"
               onClick={() => {
                 setYearName("none");
                 setFyid("none");

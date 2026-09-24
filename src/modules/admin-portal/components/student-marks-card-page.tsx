@@ -60,13 +60,13 @@ function RequiredSelect({
   className,
 }: FilterFieldProps) {
   return (
-    <label className={`block space-y-1.5 text-sm text-[#111827] ${className ?? ""}`}>
+    <label className={`block space-y-1.5 text-sm text-foreground ${className ?? ""}`}>
       <span>
         {label}
-        <span className="text-[#e53935]">*</span>
+        <span className="text-danger">*</span>
       </span>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="h-9 bg-white" aria-label={label}>
+        <SelectTrigger className="h-9 bg-card" aria-label={label}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
@@ -128,7 +128,7 @@ export function StudentMarksCardPage() {
 
   return (
     <div className="mx-auto max-w-[1200px] space-y-5 pb-10">
-      <div className="rounded-sm border border-[#d7e3ec] bg-white p-5 shadow-sm sm:p-6">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-enterprise-sm sm:p-6">
         <div className="grid gap-4 lg:grid-cols-[repeat(5,minmax(0,1fr))_auto] lg:items-end">
           <RequiredSelect
             label="Combination"
@@ -162,7 +162,7 @@ export function StudentMarksCardPage() {
           />
           <Button
             type="button"
-            className="h-9 rounded-sm bg-[#03a9f4] px-6 text-sm font-semibold text-white hover:bg-[#0288d1]"
+            className="h-9 rounded-md bg-info px-6 text-sm font-semibold text-white hover:bg-info/90"
             onClick={handleSearch}
           >
             Search
@@ -179,7 +179,7 @@ export function StudentMarksCardPage() {
           />
           <Button
             type="button"
-            className="h-9 rounded-sm bg-[#4fc3f7] px-4 text-sm font-semibold text-white hover:bg-[#29b6f6]"
+            className="h-9 rounded-md bg-info px-4 text-sm font-semibold text-white hover:bg-info/90"
             onClick={handlePrint}
           >
             <Printer className="size-4" />
@@ -191,14 +191,14 @@ export function StudentMarksCardPage() {
       <div className="flex flex-wrap items-center gap-3">
         <Button
           type="button"
-          className="h-10 rounded-sm bg-[#9e9e9e] px-6 text-sm font-semibold text-white hover:bg-[#757575]"
+          className="h-10 rounded-md bg-muted-foreground px-6 text-sm font-semibold text-white hover:bg-foreground/70"
           onClick={() => navigate({ to: "/academic/class-allocation-report" })}
         >
           Back
         </Button>
         <Button
           type="button"
-          className="h-10 rounded-sm bg-[#03a9f4] px-6 text-sm font-semibold text-white hover:bg-[#0288d1]"
+          className="h-10 rounded-md bg-info px-6 text-sm font-semibold text-white hover:bg-info/90"
           onClick={handlePrint}
         >
           <Printer className="size-4" />

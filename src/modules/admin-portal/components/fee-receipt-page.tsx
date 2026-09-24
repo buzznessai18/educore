@@ -143,18 +143,18 @@ export function FeeReceiptPage() {
   return (
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
       <div>
-        <h2 className="text-xl font-semibold text-[#03a9f4]">Fee Receipt</h2>
-        <p className="text-sm text-[#6b7280]">
-          Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Fee Receipt
+        <h2 className="text-xl font-semibold text-info">Fee Receipt</h2>
+        <p className="text-sm text-muted-foreground">
+          Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Fee Receipt
         </p>
       </div>
 
-      <div className="rounded-sm border border-[#d7e3ec] bg-white p-5 shadow-sm">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-enterprise-sm">
         <div className="flex flex-wrap items-end justify-between gap-3">
-          <label className="block w-full max-w-[220px] space-y-1.5 text-sm text-[#111827]">
+          <label className="block w-full max-w-[220px] space-y-1.5 text-sm text-foreground">
             <span>Receipt No</span>
             <Select value={receiptNo} onValueChange={setReceiptNo}>
-              <SelectTrigger className="h-9 bg-white" aria-label="Receipt No">
+              <SelectTrigger className="h-9 bg-card" aria-label="Receipt No">
                 <SelectValue placeholder="--Select--" />
               </SelectTrigger>
               <SelectContent>
@@ -171,7 +171,7 @@ export function FeeReceiptPage() {
           <div className="flex flex-wrap gap-2">
             <Button
               type="button"
-              className="h-9 rounded-sm bg-[#9e9e9e] px-4 text-sm font-semibold text-white hover:bg-[#757575]"
+              className="h-9 rounded-md bg-muted-foreground px-4 text-sm font-semibold text-white hover:bg-foreground/70"
               onClick={() => {
                 setReceiptNo("none");
                 setStudentId("none");
@@ -188,21 +188,21 @@ export function FeeReceiptPage() {
             </Button>
             <Button
               type="button"
-              className="h-9 rounded-sm bg-[#5cb85c] px-4 text-sm font-semibold text-white hover:bg-[#4cae4c]"
+              className="h-9 rounded-md bg-success px-4 text-sm font-semibold text-white hover:bg-success/90"
               onClick={() => handlePay(false)}
             >
               Pay
             </Button>
             <Button
               type="button"
-              className="h-9 rounded-sm bg-[#5cb85c] px-4 text-sm font-semibold text-white hover:bg-[#4cae4c]"
+              className="h-9 rounded-md bg-success px-4 text-sm font-semibold text-white hover:bg-success/90"
               onClick={() => handlePay(true)}
             >
               Pay & Print
             </Button>
             <Button
               type="button"
-              className="h-9 rounded-sm bg-[#03a9f4] px-4 text-sm font-semibold text-white hover:bg-[#0288d1]"
+              className="h-9 rounded-md bg-info px-4 text-sm font-semibold text-white hover:bg-info/90"
               onClick={() =>
                 toast.info(
                   selectedStudent
@@ -219,7 +219,7 @@ export function FeeReceiptPage() {
         <div className="mt-3">
           <Button
             type="button"
-            className="h-8 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+            className="h-8 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
             onClick={() => toast.info("Transaction ready for Phase 2 wiring")}
           >
             Transaction
@@ -249,16 +249,16 @@ export function FeeReceiptPage() {
             onChange={setFinancialYear}
             options={FINANCIAL_YEAR_OPTIONS}
           />
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>Date</span>
             <Input
               type="date"
               value={date}
               onChange={(event) => setDate(event.target.value)}
-              className="h-9 bg-white"
+              className="h-9 bg-card"
               aria-label="Date"
             />
-            <span className="block text-xs text-[#6b7280]">{displayDate}</span>
+            <span className="block text-xs text-muted-foreground">{displayDate}</span>
           </label>
           <FieldSelect
             label="Next Due"
@@ -289,10 +289,10 @@ export function FeeReceiptPage() {
             options={TERM_OPTIONS}
             required
           />
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>Name</span>
             <Select value={studentId} onValueChange={handleStudentChange}>
-              <SelectTrigger className="h-9 bg-white" aria-label="Name">
+              <SelectTrigger className="h-9 bg-card" aria-label="Name">
                 <SelectValue placeholder="--Select--" />
               </SelectTrigger>
               <SelectContent>
@@ -305,10 +305,10 @@ export function FeeReceiptPage() {
               </SelectContent>
             </Select>
           </label>
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>Admission No.</span>
             <Select value={admissionNo} onValueChange={handleAdmissionChange}>
-              <SelectTrigger className="h-9 bg-white" aria-label="Admission No.">
+              <SelectTrigger className="h-9 bg-card" aria-label="Admission No.">
                 <SelectValue placeholder="--Select--" />
               </SelectTrigger>
               <SelectContent>
@@ -321,40 +321,40 @@ export function FeeReceiptPage() {
               </SelectContent>
             </Select>
           </label>
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>Fathers Name</span>
             <Input
               value={fatherName}
               onChange={(event) => setFatherName(event.target.value)}
-              className="h-9 bg-white"
+              className="h-9 bg-card"
               aria-label="Fathers Name"
             />
           </label>
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>DOB</span>
             <Input
               value={dob}
               onChange={(event) => setDob(event.target.value)}
-              className="h-9 bg-white"
+              className="h-9 bg-card"
               placeholder="--Select--"
               aria-label="DOB"
             />
           </label>
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>Fee Payable</span>
             <Input
               value={feePayable}
               readOnly
-              className="h-9 bg-[#f3f4f6] text-[#6b7280]"
+              className="h-9 bg-muted text-muted-foreground"
               aria-label="Fee Payable"
             />
           </label>
         </div>
 
-        <div className="mt-6 overflow-hidden rounded-sm border border-[#dbe3ea]">
+        <div className="mt-6 overflow-hidden rounded-xl border border-border">
           <Table>
             <TableHeader>
-              <TableRow className="bg-[#03a9f4] hover:bg-[#03a9f4]">
+              <TableRow className="bg-info hover:bg-info">
                 <TableHead className="text-xs font-bold text-white">Dr Ledger</TableHead>
                 <TableHead className="text-xs font-bold text-white">Amount</TableHead>
                 <TableHead className="text-center text-xs font-bold text-white">Add</TableHead>
@@ -365,7 +365,7 @@ export function FeeReceiptPage() {
               <TableRow>
                 <TableCell>
                   <Select value={ledgerDraft} onValueChange={setLedgerDraft}>
-                    <SelectTrigger className="h-9 bg-white" aria-label="Dr Ledger">
+                    <SelectTrigger className="h-9 bg-card" aria-label="Dr Ledger">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -381,14 +381,14 @@ export function FeeReceiptPage() {
                   <Input
                     value={amountDraft}
                     onChange={(event) => setAmountDraft(event.target.value)}
-                    className="h-9 bg-white"
+                    className="h-9 bg-card"
                     aria-label="Amount"
                   />
                 </TableCell>
                 <TableCell className="text-center">
                   <Button
                     type="button"
-                    className="h-8 rounded-sm bg-[#5cb85c] px-3 text-xs font-semibold text-white hover:bg-[#4cae4c]"
+                    className="h-8 rounded-md bg-success px-3 text-xs font-semibold text-white hover:bg-success/90"
                     onClick={handleAddLedger}
                   >
                     Add
@@ -397,7 +397,7 @@ export function FeeReceiptPage() {
                 <TableCell className="text-center">
                   <Button
                     type="button"
-                    className="h-8 rounded-sm bg-[#e53935] px-3 text-xs font-semibold text-white hover:bg-[#c62828]"
+                    className="h-8 rounded-md bg-danger px-3 text-xs font-semibold text-white hover:bg-danger/90"
                     onClick={handleRemoveLedger}
                   >
                     Remove
@@ -405,7 +405,7 @@ export function FeeReceiptPage() {
                 </TableCell>
               </TableRow>
               {ledgerLines.map((line, index) => (
-                <TableRow key={line.id} className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}>
+                <TableRow key={line.id} className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}>
                   <TableCell>{line.ledger}</TableCell>
                   <TableCell>{line.amount}</TableCell>
                   <TableCell />
@@ -438,13 +438,13 @@ function FieldSelect({
   required?: boolean;
 }) {
   return (
-    <label className="block space-y-1.5 text-sm text-[#111827]">
+    <label className="block space-y-1.5 text-sm text-foreground">
       <span>
         {label}
-        {required ? <span className="text-[#e53935]">*</span> : null}
+        {required ? <span className="text-danger">*</span> : null}
       </span>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="h-9 bg-white" aria-label={label}>
+        <SelectTrigger className="h-9 bg-card" aria-label={label}>
           <SelectValue placeholder={emptyLabel ?? "--Select--"} />
         </SelectTrigger>
         <SelectContent>

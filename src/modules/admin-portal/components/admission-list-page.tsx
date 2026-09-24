@@ -115,14 +115,14 @@ export function StudentRegistrationListPage({
   return (
     <div className="relative mx-auto max-w-[1400px] space-y-4 pb-16">
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <p className="text-sm text-[#6b7280]">
-          Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Applied &amp; Admitted Lists
+        <p className="text-sm text-muted-foreground">
+          Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Applied &amp; Admitted Lists
         </p>
         <div className="flex flex-wrap justify-end gap-2">
           {ACTION_PILLS.map((pill) => {
             const className = cn(
-              "h-8 rounded-full px-3 text-xs font-semibold text-white shadow-sm",
-              pill.tone === "green" ? "bg-[#5cb85c] hover:bg-[#4cae4c]" : "bg-[#03a9f4] hover:bg-[#0288d1]",
+              "portal-pill",
+              pill.tone === "green" ? "portal-btn-success" : "portal-btn-info",
             );
             if (pill.href) {
               return (
@@ -154,10 +154,10 @@ export function StudentRegistrationListPage({
       </div>
 
       <div className="flex flex-wrap items-end gap-4">
-        <label className="space-y-1 text-sm text-[#374151]">
+        <label className="space-y-1 text-sm text-foreground">
           <span>Semester/Class</span>
           <Select value={classId} onValueChange={setClassId}>
-            <SelectTrigger className="h-9 w-48 bg-white" aria-label="Filter by semester or class">
+            <SelectTrigger className="h-9 w-48 bg-card" aria-label="Filter by semester or class">
               <SelectValue placeholder="---Select---" />
             </SelectTrigger>
             <SelectContent>
@@ -170,10 +170,10 @@ export function StudentRegistrationListPage({
             </SelectContent>
           </Select>
         </label>
-        <label className="space-y-1 text-sm text-[#374151]">
+        <label className="space-y-1 text-sm text-foreground">
           <span>Academic Year</span>
           <Select value={academicYear} onValueChange={setAcademicYear}>
-            <SelectTrigger className="h-9 w-40 bg-white" aria-label="Filter by academic year">
+            <SelectTrigger className="h-9 w-40 bg-card" aria-label="Filter by academic year">
               <SelectValue placeholder="Academic Year" />
             </SelectTrigger>
             <SelectContent>
@@ -196,10 +196,10 @@ export function StudentRegistrationListPage({
               type="button"
               onClick={() => setActiveTab(tab.id)}
               className={cn(
-                "rounded-sm border px-4 py-2 text-sm font-semibold transition",
+                "rounded-lg border px-4 py-2 text-sm font-semibold transition",
                 isActive
-                  ? "border-[#0288d1] bg-[#03a9f4] text-white"
-                  : "border-[#03a9f4] bg-white text-[#0288d1] hover:bg-[#e1f5fe]",
+                  ? "border-info bg-info text-white"
+                  : "border-info bg-card text-info hover:bg-info-soft",
               )}
             >
               {tab.label}
@@ -217,7 +217,7 @@ export function StudentRegistrationListPage({
                 key={action}
                 type="button"
                 size="sm"
-                className="h-8 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                className="h-8 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                 onClick={() => handleExport(action)}
               >
                 <Icon className="size-3.5" />
@@ -226,36 +226,36 @@ export function StudentRegistrationListPage({
             );
           })}
         </div>
-        <label className="flex items-center gap-2 text-sm text-[#374151]">
+        <label className="flex items-center gap-2 text-sm text-foreground">
           <span>Search:</span>
           <Input
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            className="h-8 w-52 bg-white"
+            className="h-8 w-52 bg-card"
             aria-label="Search admissions"
           />
         </label>
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#dbe3ea] bg-white shadow-sm">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-enterprise-sm">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow className="border-[#dbe3ea] bg-[#f8fafc] hover:bg-[#f8fafc]">
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">SlNo.</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">Student Name</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">Semester/Class</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">Section</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">Admission No</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">Quota</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">Father No.</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">Father Name</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">UID</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">Admission Date</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">Application NO</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">Pay</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">X</TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">Edit</TableHead>
+              <TableRow className="border-border bg-muted/50 hover:bg-muted/50">
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">SlNo.</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">Student Name</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">Semester/Class</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">Section</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">Admission No</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">Quota</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">Father No.</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">Father Name</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">UID</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">Admission Date</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">Application NO</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">Pay</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">X</TableHead>
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">Edit</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -282,8 +282,8 @@ export function StudentRegistrationListPage({
                   <TableRow
                     key={row.id}
                     className={cn(
-                      "border-[#e5eaf0] text-sm",
-                      index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white",
+                      "border-border text-sm",
+                      index % 2 === 1 ? "bg-info-soft/50" : "bg-card",
                     )}
                   >
                     <TableCell>{row.slNo}</TableCell>
@@ -291,7 +291,7 @@ export function StudentRegistrationListPage({
                       <Link
                         to="/admissions/registration/$studentId"
                         params={{ studentId: row.id }}
-                        className="font-medium text-[#0288d1] hover:underline"
+                        className="font-medium text-info hover:underline"
                       >
                         {row.studentName}
                       </Link>
@@ -308,7 +308,7 @@ export function StudentRegistrationListPage({
                     <TableCell>
                       <Button
                         size="sm"
-                        className="h-7 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                        className="h-7 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                         onClick={() => setPaymentStudent(row)}
                       >
                         Pay
@@ -318,7 +318,7 @@ export function StudentRegistrationListPage({
                       <Button
                         size="icon"
                         variant="outline"
-                        className="size-7 border-[#cbd5e1] text-[#6b7280]"
+                        className="size-7 border-input text-muted-foreground"
                         onClick={() => toast.message(`Remove queued for ${row.studentName}`)}
                         aria-label={`Remove ${row.studentName}`}
                       >
@@ -329,7 +329,7 @@ export function StudentRegistrationListPage({
                       <Button
                         size="sm"
                         asChild
-                        className="h-7 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                        className="h-7 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                       >
                         <Link to="/admissions/registration/$studentId" params={{ studentId: row.id }}>
                           <Pencil className="size-3" />
@@ -353,7 +353,7 @@ export function StudentRegistrationListPage({
       <Button
         asChild
         size="icon"
-        className="fixed bottom-6 right-6 z-20 size-14 rounded-full bg-[#5cb85c] text-white shadow-lg hover:bg-[#4cae4c]"
+        className="fixed bottom-6 right-6 z-20 size-14 rounded-full bg-success text-white shadow-lg hover:bg-success/90"
         aria-label="Add student"
       >
         <Link to="/admissions/registration/new">

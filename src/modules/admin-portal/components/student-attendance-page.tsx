@@ -186,15 +186,15 @@ export function StudentAttendancePage() {
 
   return (
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
-      <p className="text-sm text-[#6b7280]">
-        Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Student Attendance
+      <p className="text-sm text-muted-foreground">
+        Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Student Attendance
       </p>
 
-      <div className="grid gap-3 rounded-sm border border-[#d7e3ec] bg-white p-4 shadow-sm md:grid-cols-[repeat(4,minmax(0,1fr))_auto] md:items-end">
-        <label className="block space-y-1.5 text-sm text-[#374151]">
+      <div className="grid gap-3 rounded-xl border border-border bg-card p-4 shadow-enterprise-sm md:grid-cols-[repeat(4,minmax(0,1fr))_auto] md:items-end">
+        <label className="block space-y-1.5 text-sm text-foreground">
           <span>Syllabus</span>
           <Select value={syllabus} onValueChange={setSyllabus}>
-            <SelectTrigger className="h-9 bg-white" aria-label="Syllabus">
+            <SelectTrigger className="h-9 bg-card" aria-label="Syllabus">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -207,10 +207,10 @@ export function StudentAttendancePage() {
           </Select>
         </label>
 
-        <label className="block space-y-1.5 text-sm text-[#374151]">
+        <label className="block space-y-1.5 text-sm text-foreground">
           <span>Level</span>
           <Select value={level} onValueChange={setLevel}>
-            <SelectTrigger className="h-9 bg-white" aria-label="Level">
+            <SelectTrigger className="h-9 bg-card" aria-label="Level">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -223,10 +223,10 @@ export function StudentAttendancePage() {
           </Select>
         </label>
 
-        <label className="block space-y-1.5 text-sm text-[#374151]">
+        <label className="block space-y-1.5 text-sm text-foreground">
           <span>Class</span>
           <Select value={classId} onValueChange={setClassId}>
-            <SelectTrigger className="h-9 bg-white" aria-label="Class">
+            <SelectTrigger className="h-9 bg-card" aria-label="Class">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -240,12 +240,12 @@ export function StudentAttendancePage() {
           </Select>
         </label>
 
-        <label className="block space-y-1.5 text-sm text-[#374151]">
+        <label className="block space-y-1.5 text-sm text-foreground">
           <span>Select Date</span>
           <Input
             value={selectedDate}
             onChange={(event) => setSelectedDate(event.target.value)}
-            className="h-9 bg-white"
+            className="h-9 bg-card"
             aria-label="Select date"
             placeholder="DD/MM/YYYY HH:mm"
           />
@@ -253,15 +253,15 @@ export function StudentAttendancePage() {
 
         <Button
           type="button"
-          className="h-9 rounded-sm bg-[#7e57c2] px-5 text-sm font-semibold text-white hover:bg-[#673ab7]"
+          className="h-9 rounded-md bg-primary px-5 text-sm font-semibold text-white hover:bg-primary-hover"
           onClick={handleSearch}
         >
           Search
         </Button>
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#dbe3ea] bg-white shadow-sm">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#dbe3ea] px-4 py-3">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-enterprise-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3">
           <div className="flex flex-wrap gap-1.5">
             {EXPORT_ACTIONS.map((action) => {
               const Icon = exportIcons[action];
@@ -270,7 +270,7 @@ export function StudentAttendancePage() {
                   key={action}
                   type="button"
                   size="sm"
-                  className="h-8 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                  className="h-8 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                   onClick={() => handleExport(action)}
                 >
                   <Icon className="size-3.5" />
@@ -279,7 +279,7 @@ export function StudentAttendancePage() {
               );
             })}
           </div>
-          <label className="flex items-center gap-2 text-sm text-[#374151]">
+          <label className="flex items-center gap-2 text-sm text-foreground">
             <span>Search:</span>
             <Input
               value={search}
@@ -287,7 +287,7 @@ export function StudentAttendancePage() {
                 setSearch(event.target.value);
                 setPage(1);
               }}
-              className="h-8 w-52 bg-white"
+              className="h-8 w-52 bg-card"
               aria-label="Search attendance table"
             />
           </label>
@@ -296,9 +296,9 @@ export function StudentAttendancePage() {
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow className="border-[#dbe3ea] bg-[#f8fafc] hover:bg-[#f8fafc]">
+              <TableRow className="border-border bg-muted/50 hover:bg-muted/50">
                 {TABLE_COLUMNS.map((column) => (
-                  <TableHead key={column} className="whitespace-nowrap text-xs font-bold text-[#374151]">
+                  <TableHead key={column} className="whitespace-nowrap text-xs font-bold text-foreground">
                     {column}
                   </TableHead>
                 ))}
@@ -307,7 +307,7 @@ export function StudentAttendancePage() {
             <TableBody>
               {pageRows.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="h-28 text-center text-sm text-[#6b7280]">
+                  <TableCell colSpan={7} className="h-28 text-center text-sm text-muted-foreground">
                     No data available in table
                   </TableCell>
                 </TableRow>
@@ -316,13 +316,13 @@ export function StudentAttendancePage() {
                   <TableRow
                     key={row.id}
                     className={cn(
-                      "border-[#e5eaf0] text-sm",
-                      index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white",
+                      "border-border text-sm",
+                      index % 2 === 1 ? "bg-info-soft/50" : "bg-card",
                     )}
                   >
                     <TableCell>{row.studentId}</TableCell>
                     <TableCell>{row.admissionNo}</TableCell>
-                    <TableCell className="font-medium text-[#0288d1]">{row.studentName}</TableCell>
+                    <TableCell className="font-medium text-info">{row.studentName}</TableCell>
                     <TableCell>{row.classSemester}</TableCell>
                     <TableCell>{row.inTime}</TableCell>
                     <TableCell>{row.outTime}</TableCell>
@@ -332,9 +332,9 @@ export function StudentAttendancePage() {
               )}
             </TableBody>
             <TableHeader>
-              <TableRow className="border-[#dbe3ea] bg-[#f8fafc] hover:bg-[#f8fafc]">
+              <TableRow className="border-border bg-muted/50 hover:bg-muted/50">
                 {TABLE_COLUMNS.map((column) => (
-                  <TableHead key={`footer-${column}`} className="whitespace-nowrap text-xs font-bold text-[#374151]">
+                  <TableHead key={`footer-${column}`} className="whitespace-nowrap text-xs font-bold text-foreground">
                     {column}
                   </TableHead>
                 ))}
@@ -343,8 +343,8 @@ export function StudentAttendancePage() {
           </Table>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#dbe3ea] px-4 py-3">
-          <p className="text-sm text-[#6b7280]">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border px-4 py-3">
+          <p className="text-sm text-muted-foreground">
             Showing {total === 0 ? 0 : startIndex + 1} to {endIndex} of {total} entries
           </p>
           <Pagination className="mx-0 w-auto justify-end">

@@ -151,20 +151,20 @@ export function FeePrintListPage() {
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[#03a9f4]">Fee Print List</h2>
-          <p className="text-sm text-[#6b7280]">
-            Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Fee Print List
+          <h2 className="text-xl font-semibold text-info">Fee Print List</h2>
+          <p className="text-sm text-muted-foreground">
+            Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Fee Print List
           </p>
         </div>
         <ActionPills items={FEE_PRINT_PILLS} />
       </div>
 
-      <div className="rounded-sm border border-[#d7e3ec] bg-white p-5 shadow-sm">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-enterprise-sm">
         <div className="grid gap-4 sm:grid-cols-2 lg:max-w-xl">
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>Receipt No</span>
             <Select value={receiptNo} onValueChange={setReceiptNo}>
-              <SelectTrigger className="h-9 bg-white" aria-label="Receipt No">
+              <SelectTrigger className="h-9 bg-card" aria-label="Receipt No">
                 <SelectValue placeholder="--Select--" />
               </SelectTrigger>
               <SelectContent>
@@ -178,10 +178,10 @@ export function FeePrintListPage() {
             </Select>
           </label>
 
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>Academic year</span>
             <Select value={academicYear} onValueChange={setAcademicYear}>
-              <SelectTrigger className="h-9 bg-white" aria-label="Academic year">
+              <SelectTrigger className="h-9 bg-card" aria-label="Academic year">
                 <SelectValue placeholder="--Select--" />
               </SelectTrigger>
               <SelectContent>
@@ -195,11 +195,11 @@ export function FeePrintListPage() {
           </label>
         </div>
 
-        <div className="mt-5 overflow-hidden rounded-sm border border-[#dbe3ea]">
+        <div className="mt-5 overflow-hidden rounded-xl border border-border">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="bg-[#f8fafc] hover:bg-[#f8fafc]">
+                <TableRow className="bg-muted/50 hover:bg-muted/50">
                   <TableHead className="text-xs font-bold">Roll No</TableHead>
                   <TableHead className="text-xs font-bold">Class/Grade</TableHead>
                   <TableHead className="text-xs font-bold">Student Name</TableHead>
@@ -215,7 +215,7 @@ export function FeePrintListPage() {
               <TableBody>
                 {filtered.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={10} className="h-24 text-center text-sm text-[#6b7280]">
+                    <TableCell colSpan={10} className="h-24 text-center text-sm text-muted-foreground">
                       No data available in table
                     </TableCell>
                   </TableRow>
@@ -223,7 +223,7 @@ export function FeePrintListPage() {
                   filtered.map((row, index) => (
                     <TableRow
                       key={row.id}
-                      className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}
+                      className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}
                     >
                       <TableCell>{row.rollNo}</TableCell>
                       <TableCell>{row.classGrade}</TableCell>
@@ -238,7 +238,7 @@ export function FeePrintListPage() {
                         <Button
                           type="button"
                           size="sm"
-                          className="h-8 rounded-full bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                          className="h-8 rounded-full bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                           onClick={() => {
                             toast.success(`Printing fee receipt ${row.feeReceiptNo}`);
                             window.print();

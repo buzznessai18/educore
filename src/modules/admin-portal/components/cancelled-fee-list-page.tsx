@@ -145,17 +145,17 @@ export function CancelledFeeListPage() {
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[#03a9f4]">Cancel Fee Print List</h2>
-          <p className="text-sm text-[#6b7280]">
-            Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Cancel Fee Print List
+          <h2 className="text-xl font-semibold text-info">Cancel Fee Print List</h2>
+          <p className="text-sm text-muted-foreground">
+            Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Cancel Fee Print List
           </p>
         </div>
         <ActionPills items={CANCELLED_FEE_PILLS} />
       </div>
 
-      <div className="rounded-sm border border-[#d7e3ec] bg-white p-5 shadow-sm">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-enterprise-sm">
         <div className="grid gap-4 sm:grid-cols-2 lg:max-w-xl">
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>Cancel Receipt No</span>
             <Select
               value={receiptNo}
@@ -164,7 +164,7 @@ export function CancelledFeeListPage() {
                 setPage(1);
               }}
             >
-              <SelectTrigger className="h-9 bg-white" aria-label="Cancel Receipt No">
+              <SelectTrigger className="h-9 bg-card" aria-label="Cancel Receipt No">
                 <SelectValue placeholder="--Select--" />
               </SelectTrigger>
               <SelectContent>
@@ -178,7 +178,7 @@ export function CancelledFeeListPage() {
             </Select>
           </label>
 
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>Academic year</span>
             <Select
               value={academicYear}
@@ -187,7 +187,7 @@ export function CancelledFeeListPage() {
                 setPage(1);
               }}
             >
-              <SelectTrigger className="h-9 bg-white" aria-label="Academic year">
+              <SelectTrigger className="h-9 bg-card" aria-label="Academic year">
                 <SelectValue placeholder="--Select--" />
               </SelectTrigger>
               <SelectContent>
@@ -210,7 +210,7 @@ export function CancelledFeeListPage() {
                   key={action}
                   type="button"
                   size="sm"
-                  className="h-8 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                  className="h-8 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                   onClick={() => handleExport(action)}
                 >
                   <Icon className="size-3.5" />
@@ -219,7 +219,7 @@ export function CancelledFeeListPage() {
               );
             })}
           </div>
-          <label className="flex items-center gap-2 text-sm text-[#374151]">
+          <label className="flex items-center gap-2 text-sm text-foreground">
             <span>Search:</span>
             <Input
               value={search}
@@ -227,17 +227,17 @@ export function CancelledFeeListPage() {
                 setSearch(event.target.value);
                 setPage(1);
               }}
-              className="h-8 w-44 bg-white"
+              className="h-8 w-44 bg-card"
               aria-label="Search cancelled fees"
             />
           </label>
         </div>
 
-        <div className="mt-4 overflow-hidden rounded-sm border border-[#dbe3ea]">
+        <div className="mt-4 overflow-hidden rounded-xl border border-border">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="bg-[#f8fafc] hover:bg-[#f8fafc]">
+                <TableRow className="bg-muted/50 hover:bg-muted/50">
                   <TableHead className="text-xs font-bold">Roll No</TableHead>
                   <TableHead className="text-xs font-bold">Student Name</TableHead>
                   <TableHead className="text-xs font-bold">Father&apos;s Name</TableHead>
@@ -250,7 +250,7 @@ export function CancelledFeeListPage() {
               <TableBody>
                 {pageRows.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={7} className="h-24 text-center text-sm text-[#6b7280]">
+                    <TableCell colSpan={7} className="h-24 text-center text-sm text-muted-foreground">
                       No data available in table
                     </TableCell>
                   </TableRow>
@@ -258,7 +258,7 @@ export function CancelledFeeListPage() {
                   pageRows.map((row, index) => (
                     <TableRow
                       key={row.id}
-                      className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}
+                      className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}
                     >
                       <TableCell>{row.rollNo}</TableCell>
                       <TableCell className="font-medium">{row.studentName}</TableCell>
@@ -270,7 +270,7 @@ export function CancelledFeeListPage() {
                         <Button
                           type="button"
                           size="sm"
-                          className="h-8 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                          className="h-8 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                           onClick={() => {
                             toast.success(`Printing cancelled receipt ${row.feeReceiptNo}`);
                             window.print();
@@ -287,7 +287,7 @@ export function CancelledFeeListPage() {
           </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-[#6b7280]">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
           <p>
             Showing {from} to {to} of {filtered.length} entries
           </p>

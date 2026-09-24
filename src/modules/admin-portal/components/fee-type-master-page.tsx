@@ -168,56 +168,56 @@ export function FeeTypeMasterPage() {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-[360px_minmax(0,1fr)]">
-        <section className="rounded-sm border border-[#d7e3ec] bg-white p-5 shadow-sm">
+        <section className="rounded-xl border border-border bg-card p-5 shadow-enterprise-sm">
           <div className="space-y-1">
-            <h2 className="text-lg font-semibold text-[#111827]">
+            <h2 className="text-lg font-semibold text-foreground">
               {editingId ? "Edit FeeType" : "Add FeeType"}
             </h2>
-            <p className="text-sm text-[#6b7280]">
-              Home <span className="mx-1 text-[#9ca3af]">&gt;</span>{" "}
+            <p className="text-sm text-muted-foreground">
+              Home <span className="mx-1 text-muted-foreground/70">&gt;</span>{" "}
               {editingId ? "Edit FeeType" : "Add FeeType"}
             </p>
           </div>
 
           <div className="mt-5 space-y-4">
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>
-                FeeType Name<span className="text-[#e53935]">*</span>
+                FeeType Name<span className="text-danger">*</span>
               </span>
               <Input
                 value={name}
                 onChange={(event) => setName(event.target.value)}
-                className="h-9 bg-white"
+                className="h-9 bg-card"
                 aria-label="FeeType Name"
               />
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>
-                FeeType Description<span className="text-[#e53935]">*</span>
+                FeeType Description<span className="text-danger">*</span>
               </span>
               <Input
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
-                className="h-9 bg-white"
+                className="h-9 bg-card"
                 aria-label="FeeType Description"
               />
             </label>
 
-            <label className="flex items-center justify-between gap-3 text-sm text-[#111827]">
+            <label className="flex items-center justify-between gap-3 text-sm text-foreground">
               <span>Don&apos;t Show on Dashboard</span>
               <Switch
                 checked={hideOnDashboard}
                 onCheckedChange={setHideOnDashboard}
                 aria-label="Don't show on dashboard"
-                className="data-[state=checked]:bg-[#03a9f4]"
+                className="data-[state=checked]:bg-info"
               />
             </label>
 
             <div className="flex flex-wrap gap-2 pt-1">
               <Button
                 type="button"
-                className="h-9 rounded-sm bg-[#03a9f4] px-5 text-sm font-semibold text-white hover:bg-[#0288d1]"
+                className="h-9 rounded-md bg-info px-5 text-sm font-semibold text-white hover:bg-info/90"
                 onClick={handleSave}
               >
                 Save
@@ -236,8 +236,8 @@ export function FeeTypeMasterPage() {
           </div>
         </section>
 
-        <section className="rounded-sm border border-[#d7e3ec] bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-semibold text-[#111827]">FeeType List</h2>
+        <section className="rounded-xl border border-border bg-card p-5 shadow-enterprise-sm">
+          <h2 className="text-lg font-semibold text-foreground">FeeType List</h2>
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap gap-1.5">
@@ -248,7 +248,7 @@ export function FeeTypeMasterPage() {
                     key={action}
                     type="button"
                     size="sm"
-                    className="h-8 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                    className="h-8 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                     onClick={() => handleExport(action)}
                   >
                     <Icon className="size-3.5" />
@@ -257,7 +257,7 @@ export function FeeTypeMasterPage() {
                 );
               })}
             </div>
-            <label className="flex items-center gap-2 text-sm text-[#374151]">
+            <label className="flex items-center gap-2 text-sm text-foreground">
               <span>Search:</span>
               <Input
                 value={search}
@@ -265,17 +265,17 @@ export function FeeTypeMasterPage() {
                   setSearch(event.target.value);
                   setPage(1);
                 }}
-                className="h-8 w-44 bg-white"
+                className="h-8 w-44 bg-card"
                 aria-label="Search fee types"
               />
             </label>
           </div>
 
-          <div className="mt-4 overflow-hidden rounded-sm border border-[#dbe3ea]">
+          <div className="mt-4 overflow-hidden rounded-xl border border-border">
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-[#f8fafc] hover:bg-[#f8fafc]">
+                  <TableRow className="bg-muted/50 hover:bg-muted/50">
                     <TableHead className="text-xs font-bold">FeeType Name</TableHead>
                     <TableHead className="text-xs font-bold">FeeType Description</TableHead>
                     <TableHead className="text-center text-xs font-bold">Edit</TableHead>
@@ -285,7 +285,7 @@ export function FeeTypeMasterPage() {
                 <TableBody>
                   {pageRows.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={4} className="h-24 text-center text-sm text-[#6b7280]">
+                      <TableCell colSpan={4} className="h-24 text-center text-sm text-muted-foreground">
                         No data available in table
                       </TableCell>
                     </TableRow>
@@ -293,7 +293,7 @@ export function FeeTypeMasterPage() {
                     pageRows.map((row, index) => (
                       <TableRow
                         key={row.id}
-                        className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}
+                        className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}
                       >
                         <TableCell className="font-medium">{row.name}</TableCell>
                         <TableCell>{row.description}</TableCell>
@@ -301,7 +301,7 @@ export function FeeTypeMasterPage() {
                           <Button
                             type="button"
                             size="icon"
-                            className="size-8 rounded-full bg-[#03a9f4] text-white hover:bg-[#0288d1]"
+                            className="size-8 rounded-full bg-info text-white hover:bg-info/90"
                             aria-label={`Edit ${row.name}`}
                             onClick={() => handleEdit(row)}
                           >
@@ -312,7 +312,7 @@ export function FeeTypeMasterPage() {
                           <Button
                             type="button"
                             size="icon"
-                            className="size-8 rounded-full bg-[#e53935] text-white hover:bg-[#c62828]"
+                            className="size-8 rounded-full bg-danger text-white hover:bg-danger/90"
                             aria-label={`Delete ${row.name}`}
                             onClick={() => handleDelete(row.id)}
                           >
@@ -327,7 +327,7 @@ export function FeeTypeMasterPage() {
             </div>
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-[#6b7280]">
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
             <p>
               Showing {from} to {to} of {filtered.length} entries
             </p>

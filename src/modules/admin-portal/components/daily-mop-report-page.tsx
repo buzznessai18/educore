@@ -103,22 +103,22 @@ export function DailyMopReportPage() {
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[#03a9f4]">Mode of Payment Report</h2>
-          <p className="text-sm text-[#6b7280]">
-            Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Mode of Payment Report
+          <h2 className="text-xl font-semibold text-info">Mode of Payment Report</h2>
+          <p className="text-sm text-muted-foreground">
+            Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Mode of Payment Report
           </p>
         </div>
         <ActionPills items={DAILY_MOP_PILLS} />
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#d7e3ec] bg-white shadow-sm">
-        <div className="bg-[#03a9f4] px-4 py-2.5">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-enterprise-sm">
+        <div className="bg-info px-4 py-2.5">
           <h3 className="text-sm font-semibold text-white">Mode of Payment Report</h3>
         </div>
 
         <div className="space-y-5 p-5">
           <div className="space-y-2">
-            <p className="text-sm font-medium text-[#111827]">Report Type</p>
+            <p className="text-sm font-medium text-foreground">Report Type</p>
             <RadioGroup
               value={reportType}
               onValueChange={(value) => setReportType(value as "receipt" | "payment")}
@@ -140,35 +140,35 @@ export function DailyMopReportPage() {
           </div>
 
           <div className="flex flex-wrap items-end gap-3">
-            <label className="block min-w-[200px] space-y-1.5 text-sm text-[#111827]">
+            <label className="block min-w-[200px] space-y-1.5 text-sm text-foreground">
               <span>
-                From Date<span className="text-[#e53935]">*</span>
+                From Date<span className="text-danger">*</span>
               </span>
               <Input
                 type="date"
                 value={fromDate}
                 onChange={(event) => setFromDate(event.target.value)}
-                className="h-9 bg-white"
+                className="h-9 bg-card"
                 aria-label="From Date"
               />
             </label>
 
-            <label className="block min-w-[200px] space-y-1.5 text-sm text-[#111827]">
+            <label className="block min-w-[200px] space-y-1.5 text-sm text-foreground">
               <span>
-                To Date<span className="text-[#e53935]">*</span>
+                To Date<span className="text-danger">*</span>
               </span>
               <Input
                 type="date"
                 value={toDate}
                 onChange={(event) => setToDate(event.target.value)}
-                className="h-9 bg-white"
+                className="h-9 bg-card"
                 aria-label="To Date"
               />
             </label>
 
             <Button
               type="button"
-              className="h-9 rounded-sm bg-[#03a9f4] px-5 text-sm font-semibold text-white hover:bg-[#0288d1]"
+              className="h-9 rounded-md bg-info px-5 text-sm font-semibold text-white hover:bg-info/90"
               onClick={handleSearch}
             >
               <Search className="size-4" />
@@ -177,11 +177,11 @@ export function DailyMopReportPage() {
           </div>
 
           {hasSearched ? (
-            <div className="overflow-hidden rounded-sm border border-[#dbe3ea]">
+            <div className="overflow-hidden rounded-xl border border-border">
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow className="bg-[#f8fafc] hover:bg-[#f8fafc]">
+                    <TableRow className="bg-muted/50 hover:bg-muted/50">
                       {["Date", "Cash", "UPI", "Card", "Cheque", "Online", "Total"].map(
                         (heading) => (
                           <TableHead key={heading} className="text-xs font-bold">
@@ -194,7 +194,7 @@ export function DailyMopReportPage() {
                   <TableBody>
                     {rows.length === 0 ? (
                       <TableRow>
-                        <TableCell colSpan={7} className="h-24 text-center text-sm text-[#6b7280]">
+                        <TableCell colSpan={7} className="h-24 text-center text-sm text-muted-foreground">
                           No data available in table
                         </TableCell>
                       </TableRow>
@@ -202,7 +202,7 @@ export function DailyMopReportPage() {
                       rows.map((row, index) => (
                         <TableRow
                           key={row.id}
-                          className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}
+                          className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}
                         >
                           <TableCell>{row.date}</TableCell>
                           <TableCell>{row.cash}</TableCell>

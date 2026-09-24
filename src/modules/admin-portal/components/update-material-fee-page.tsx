@@ -233,16 +233,16 @@ export function UpdateMaterialFeePage() {
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[#03a9f4]">Update Material Fee</h2>
-          <p className="text-sm text-[#6b7280]">
-            Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Update Material Fee
+          <h2 className="text-xl font-semibold text-info">Update Material Fee</h2>
+          <p className="text-sm text-muted-foreground">
+            Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Update Material Fee
           </p>
         </div>
         <ActionPills items={UPDATE_MATERIAL_FEE_PILLS} />
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#d7e3ec] bg-white shadow-sm">
-        <div className="bg-[#03a9f4] px-4 py-2.5">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-enterprise-sm">
+        <div className="bg-info px-4 py-2.5">
           <h3 className="text-sm font-semibold text-white">Update Material Fee</h3>
         </div>
         <div className="space-y-4 p-5">
@@ -254,10 +254,10 @@ export function UpdateMaterialFeePage() {
               onChange={setFinancialYear}
               options={FINANCIAL_YEAR_OPTIONS}
             />
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>Quota</span>
               <Select value={quota} onValueChange={setQuota}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Quota">
+                <SelectTrigger className="h-9 bg-card" aria-label="Quota">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -269,12 +269,12 @@ export function UpdateMaterialFeePage() {
                 </SelectContent>
               </Select>
             </label>
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>
-                Class/Semester<span className="text-[#e53935]">*</span>
+                Class/Semester<span className="text-danger">*</span>
               </span>
               <Select value={classId} onValueChange={setClassId}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Class/Semester">
+                <SelectTrigger className="h-9 bg-card" aria-label="Class/Semester">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -302,7 +302,7 @@ export function UpdateMaterialFeePage() {
             />
             <Button
               type="button"
-              className="h-9 rounded-sm bg-[#03a9f4] px-4 text-sm font-semibold text-white hover:bg-[#0288d1]"
+              className="h-9 rounded-md bg-info px-4 text-sm font-semibold text-white hover:bg-info/90"
               onClick={handleGetResult}
             >
               Get Result
@@ -312,12 +312,12 @@ export function UpdateMaterialFeePage() {
       </div>
 
       <div className="space-y-4">
-        <p className="text-sm font-semibold text-[#374151]">Result:</p>
+        <p className="text-sm font-semibold text-foreground">Result:</p>
 
-        <div className="overflow-hidden rounded-sm border border-[#dbe3ea] bg-white">
+        <div className="overflow-hidden rounded-xl border border-border bg-card">
           <Table>
             <TableHeader>
-              <TableRow className="bg-[#03a9f4] hover:bg-[#03a9f4]">
+              <TableRow className="bg-info hover:bg-info">
                 {["Add", "Class", "Term", "Fee Amount", "Reg. Type", "Category", "Quota"].map(
                   (heading) => (
                     <TableHead key={heading} className="text-xs font-bold text-white">
@@ -330,13 +330,13 @@ export function UpdateMaterialFeePage() {
             <TableBody>
               {!hasResult ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="h-16 text-center text-sm text-[#9ca3af]">
+                  <TableCell colSpan={7} className="h-16 text-center text-sm text-muted-foreground/70">
                     Fee Master
                   </TableCell>
                 </TableRow>
               ) : feeRows.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="h-16 text-center text-sm text-[#6b7280]">
+                  <TableCell colSpan={7} className="h-16 text-center text-sm text-muted-foreground">
                     No material fee master records found
                   </TableCell>
                 </TableRow>
@@ -344,7 +344,7 @@ export function UpdateMaterialFeePage() {
                 feeRows.map((row, index) => (
                   <TableRow
                     key={row.id}
-                    className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}
+                    className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}
                   >
                     <TableCell>
                       <Checkbox
@@ -367,7 +367,7 @@ export function UpdateMaterialFeePage() {
         </div>
 
         <div className="space-y-2">
-          <label className="flex items-center gap-2 text-sm text-[#111827]">
+          <label className="flex items-center gap-2 text-sm text-foreground">
             <Checkbox
               checked={allStudentsSelected}
               onCheckedChange={(checked) => toggleAllStudents(Boolean(checked))}
@@ -377,10 +377,10 @@ export function UpdateMaterialFeePage() {
             <span>Select / Deselect All</span>
           </label>
 
-          <div className="overflow-hidden rounded-sm border border-[#dbe3ea] bg-white">
+          <div className="overflow-hidden rounded-xl border border-border bg-card">
             <Table>
               <TableHeader>
-                <TableRow className="bg-[#03a9f4] hover:bg-[#03a9f4]">
+                <TableRow className="bg-info hover:bg-info">
                   {[
                     "Add",
                     "Name",
@@ -399,13 +399,13 @@ export function UpdateMaterialFeePage() {
               <TableBody>
                 {!hasResult ? (
                   <TableRow>
-                    <TableCell colSpan={7} className="h-16 text-center text-sm text-[#9ca3af]">
+                    <TableCell colSpan={7} className="h-16 text-center text-sm text-muted-foreground/70">
                       Student Master
                     </TableCell>
                   </TableRow>
                 ) : studentRows.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={7} className="h-16 text-center text-sm text-[#6b7280]">
+                    <TableCell colSpan={7} className="h-16 text-center text-sm text-muted-foreground">
                       No student master records found
                     </TableCell>
                   </TableRow>
@@ -413,7 +413,7 @@ export function UpdateMaterialFeePage() {
                   studentRows.map((row, index) => (
                     <TableRow
                       key={row.id}
-                      className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}
+                      className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}
                     >
                       <TableCell>
                         <Checkbox
@@ -439,14 +439,14 @@ export function UpdateMaterialFeePage() {
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <Button
             type="button"
-            className="h-10 rounded-sm bg-[#03a9f4] px-6 text-sm font-semibold text-white hover:bg-[#0288d1]"
+            className="h-10 rounded-md bg-info px-6 text-sm font-semibold text-white hover:bg-info/90"
             onClick={handleSubmit}
           >
             Submit
           </Button>
           <Button
             type="button"
-            className="h-10 rounded-sm bg-[#9e9e9e] px-6 text-sm font-semibold text-white hover:bg-[#757575]"
+            className="h-10 rounded-md bg-muted-foreground px-6 text-sm font-semibold text-white hover:bg-foreground/70"
             onClick={() => navigate({ to: "/fms/update-student-fee" })}
           >
             Exit
@@ -471,13 +471,13 @@ function FilterSelect({
   required?: boolean;
 }) {
   return (
-    <label className="block space-y-1.5 text-sm text-[#111827]">
+    <label className="block space-y-1.5 text-sm text-foreground">
       <span>
         {label.replace(/\*$/, "")}
-        {required || label.endsWith("*") ? <span className="text-[#e53935]">*</span> : null}
+        {required || label.endsWith("*") ? <span className="text-danger">*</span> : null}
       </span>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="h-9 bg-white" aria-label={label}>
+        <SelectTrigger className="h-9 bg-card" aria-label={label}>
           <SelectValue />
         </SelectTrigger>
         <SelectContent>

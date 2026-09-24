@@ -104,23 +104,23 @@ export function StudentFeedbackReportPage() {
   return (
     <div className="mx-auto max-w-[1100px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <p className="text-sm text-[#6b7280]">
-          Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Student FeedBack Report
+        <p className="text-sm text-muted-foreground">
+          Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Student FeedBack Report
         </p>
         <AcademicActionPills />
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#d7e3ec] bg-white shadow-sm">
-        <div className="bg-[#03a9f4] px-4 py-2.5">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-enterprise-sm">
+        <div className="bg-info px-4 py-2.5">
           <h2 className="text-sm font-semibold text-white">Student FeedBack Report</h2>
         </div>
 
         <div className="space-y-5 p-5">
           <div className="grid gap-4 md:grid-cols-[140px_auto_minmax(0,260px)_auto] md:items-end">
-            <label className="block space-y-1.5 text-sm text-[#374151]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>Year</span>
               <Select value={year} onValueChange={setYear}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Year">
+                <SelectTrigger className="h-9 bg-card" aria-label="Year">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -133,7 +133,7 @@ export function StudentFeedbackReportPage() {
               </Select>
             </label>
 
-            <label className="flex h-9 items-center gap-2 self-end text-sm text-[#374151]">
+            <label className="flex h-9 items-center gap-2 self-end text-sm text-foreground">
               <Checkbox
                 checked={showComments}
                 onCheckedChange={(value) => setShowComments(value === true)}
@@ -142,12 +142,12 @@ export function StudentFeedbackReportPage() {
               <span>Show Comments</span>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#374151]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>
-                Faculty<span className="text-[#e53935]">*</span>
+                Faculty<span className="text-danger">*</span>
               </span>
               <Select value={faculty} onValueChange={setFaculty}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Faculty">
+                <SelectTrigger className="h-9 bg-card" aria-label="Faculty">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -163,7 +163,7 @@ export function StudentFeedbackReportPage() {
 
             <Button
               type="button"
-              className="h-9 rounded-sm bg-[#03a9f4] px-5 text-sm font-semibold text-white hover:bg-[#0288d1]"
+              className="h-9 rounded-md bg-info px-5 text-sm font-semibold text-white hover:bg-info/90"
               onClick={handleSearch}
             >
               Search
@@ -171,15 +171,15 @@ export function StudentFeedbackReportPage() {
           </div>
 
           {!hasSearched || rows.length === 0 ? (
-            <div className="grid min-h-40 place-items-center text-sm text-[#6b7280]">
+            <div className="grid min-h-40 place-items-center text-sm text-muted-foreground">
               No feedback Recorded
             </div>
           ) : (
-            <div className="overflow-hidden rounded-sm border border-[#dbe3ea]">
+            <div className="overflow-hidden rounded-xl border border-border">
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow className="bg-[#f8fafc] hover:bg-[#f8fafc]">
+                    <TableRow className="bg-muted/50 hover:bg-muted/50">
                       <TableHead className="text-xs font-bold">SlNo.</TableHead>
                       <TableHead className="text-xs font-bold">Student</TableHead>
                       <TableHead className="text-xs font-bold">Class</TableHead>
@@ -195,10 +195,10 @@ export function StudentFeedbackReportPage() {
                     {rows.map((row, index) => (
                       <TableRow
                         key={row.id}
-                        className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}
+                        className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}
                       >
                         <TableCell>{index + 1}</TableCell>
-                        <TableCell className="font-medium text-[#0288d1]">{row.student}</TableCell>
+                        <TableCell className="font-medium text-info">{row.student}</TableCell>
                         <TableCell>{row.className}</TableCell>
                         <TableCell>{row.faculty}</TableCell>
                         <TableCell>{row.rating}</TableCell>

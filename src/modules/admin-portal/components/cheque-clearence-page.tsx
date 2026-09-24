@@ -129,27 +129,27 @@ export function ChequeClearencePage() {
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[#03a9f4]">Accept Bank Transactions</h2>
-          <p className="text-sm text-[#6b7280]">
-            Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Accept Bank Transactions
+          <h2 className="text-xl font-semibold text-info">Accept Bank Transactions</h2>
+          <p className="text-sm text-muted-foreground">
+            Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Accept Bank Transactions
           </p>
         </div>
         <ActionPills items={CHEQUE_CLEARANCE_PILLS} />
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#d7e3ec] bg-white shadow-sm">
-        <div className="bg-[#03a9f4] px-4 py-2.5">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-enterprise-sm">
+        <div className="bg-info px-4 py-2.5">
           <h3 className="text-sm font-semibold text-white">Accept Receipts/Payments</h3>
         </div>
 
         <div className="space-y-5 p-5">
           <div className="flex flex-wrap items-end gap-3">
-            <label className="block min-w-[180px] space-y-1.5 text-sm text-[#111827]">
+            <label className="block min-w-[180px] space-y-1.5 text-sm text-foreground">
               <span>
-                Mode of Payment<span className="text-[#e53935]">*</span>
+                Mode of Payment<span className="text-danger">*</span>
               </span>
               <Select value={mop} onValueChange={setMop}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Mode of Payment">
+                <SelectTrigger className="h-9 bg-card" aria-label="Mode of Payment">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -162,35 +162,35 @@ export function ChequeClearencePage() {
               </Select>
             </label>
 
-            <label className="block min-w-[180px] space-y-1.5 text-sm text-[#111827]">
+            <label className="block min-w-[180px] space-y-1.5 text-sm text-foreground">
               <span>
-                From Date<span className="text-[#e53935]">*</span>
+                From Date<span className="text-danger">*</span>
               </span>
               <Input
                 type="date"
                 value={fromDate}
                 onChange={(event) => setFromDate(event.target.value)}
-                className="h-9 bg-white"
+                className="h-9 bg-card"
                 aria-label="From Date"
               />
             </label>
 
-            <label className="block min-w-[180px] space-y-1.5 text-sm text-[#111827]">
+            <label className="block min-w-[180px] space-y-1.5 text-sm text-foreground">
               <span>
-                To Date<span className="text-[#e53935]">*</span>
+                To Date<span className="text-danger">*</span>
               </span>
               <Input
                 type="date"
                 value={toDate}
                 onChange={(event) => setToDate(event.target.value)}
-                className="h-9 bg-white"
+                className="h-9 bg-card"
                 aria-label="To Date"
               />
             </label>
 
             <Button
               type="button"
-              className="h-9 rounded-sm bg-[#03a9f4] px-4 text-sm font-semibold text-white hover:bg-[#0288d1]"
+              className="h-9 rounded-md bg-info px-4 text-sm font-semibold text-white hover:bg-info/90"
               onClick={handleSearch}
             >
               <Search className="size-4" />
@@ -198,7 +198,7 @@ export function ChequeClearencePage() {
             </Button>
           </div>
 
-          <div className="flex flex-wrap gap-2 border-b border-[#dbe3ea] pb-0">
+          <div className="flex flex-wrap gap-2 border-b border-border pb-0">
             {TABS.map((tab) => (
               <button
                 key={tab.id}
@@ -206,8 +206,8 @@ export function ChequeClearencePage() {
                 className={cn(
                   "rounded-t-sm px-4 py-2 text-sm font-semibold",
                   activeTab === tab.id
-                    ? "bg-[#03a9f4] text-white"
-                    : "bg-[#eef2f7] text-[#374151] hover:bg-[#e2e8f0]",
+                    ? "bg-info text-white"
+                    : "bg-muted text-foreground hover:bg-muted/80",
                 )}
                 onClick={() => setActiveTab(tab.id)}
               >
@@ -217,15 +217,15 @@ export function ChequeClearencePage() {
           </div>
 
           {!hasSearched || rows.length === 0 ? (
-            <p className="py-10 text-center text-sm font-medium text-[#5cb85c]">
+            <p className="py-10 text-center text-sm font-medium text-success">
               No records found to Accept!
             </p>
           ) : (
-            <div className="overflow-hidden rounded-sm border border-[#dbe3ea]">
+            <div className="overflow-hidden rounded-xl border border-border">
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow className="bg-[#f8fafc] hover:bg-[#f8fafc]">
+                    <TableRow className="bg-muted/50 hover:bg-muted/50">
                       {[
                         "Receipt/Payment No",
                         "Name",
@@ -246,7 +246,7 @@ export function ChequeClearencePage() {
                     {rows.map((row, index) => (
                       <TableRow
                         key={row.id}
-                        className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}
+                        className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}
                       >
                         <TableCell>{row.receiptNo}</TableCell>
                         <TableCell className="font-medium">{row.studentName}</TableCell>
@@ -259,7 +259,7 @@ export function ChequeClearencePage() {
                           <Button
                             type="button"
                             size="sm"
-                            className="h-8 rounded-sm bg-[#5cb85c] px-3 text-xs font-semibold text-white hover:bg-[#4cae4c]"
+                            className="h-8 rounded-md bg-success px-3 text-xs font-semibold text-white hover:bg-success/90"
                             onClick={() => handleAccept(row)}
                           >
                             Accept

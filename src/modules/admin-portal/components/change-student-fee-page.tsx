@@ -64,27 +64,27 @@ export function ChangeStudentFeePage() {
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[#03a9f4]">Change/Upgrade Fees</h2>
-          <p className="text-sm text-[#6b7280]">
-            Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Change/Upgrade Fees
+          <h2 className="text-xl font-semibold text-info">Change/Upgrade Fees</h2>
+          <p className="text-sm text-muted-foreground">
+            Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Change/Upgrade Fees
           </p>
         </div>
         <ActionPills items={CHANGE_STUDENT_FEE_PILLS} />
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#d7e3ec] bg-white shadow-sm">
-        <div className="bg-[#03a9f4] px-4 py-2.5">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-enterprise-sm">
+        <div className="bg-info px-4 py-2.5">
           <h3 className="text-sm font-semibold text-white">Change/Upgrade Fees</h3>
         </div>
 
         <div className="space-y-5 p-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>
-                Year<span className="text-[#e53935]">*</span>
+                Year<span className="text-danger">*</span>
               </span>
               <Select value={year} onValueChange={setYear}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Year">
+                <SelectTrigger className="h-9 bg-card" aria-label="Year">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -98,12 +98,12 @@ export function ChangeStudentFeePage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>
-                Academic Year<span className="text-[#e53935]">*</span>
+                Academic Year<span className="text-danger">*</span>
               </span>
               <Select value={academicYear} onValueChange={setAcademicYear}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Academic Year">
+                <SelectTrigger className="h-9 bg-card" aria-label="Academic Year">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -117,12 +117,12 @@ export function ChangeStudentFeePage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>
-                Class<span className="text-[#e53935]">*</span>
+                Class<span className="text-danger">*</span>
               </span>
               <Select value={classId} onValueChange={handleClassChange}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Class">
+                <SelectTrigger className="h-9 bg-card" aria-label="Class">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -136,12 +136,12 @@ export function ChangeStudentFeePage() {
               </Select>
             </label>
 
-            <label className="block space-y-1.5 text-sm text-[#111827]">
+            <label className="block space-y-1.5 text-sm text-foreground">
               <span>
-                Student<span className="text-[#e53935]">*</span>
+                Student<span className="text-danger">*</span>
               </span>
               <Select value={studentId} onValueChange={setStudentId}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Student">
+                <SelectTrigger className="h-9 bg-card" aria-label="Student">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -158,7 +158,7 @@ export function ChangeStudentFeePage() {
 
           <Button
             type="button"
-            className="h-9 rounded-sm bg-[#03a9f4] px-5 text-sm font-semibold text-white hover:bg-[#0288d1]"
+            className="h-9 rounded-md bg-info px-5 text-sm font-semibold text-white hover:bg-info/90"
             onClick={handleProceed}
           >
             Proceed

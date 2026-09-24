@@ -48,14 +48,14 @@ export function StudentAdmissionPage() {
   return (
     <div className="mx-auto max-w-[1100px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <p className="text-sm text-[#6b7280]">
-          Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Student Admission
+        <p className="text-sm text-muted-foreground">
+          Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Student Admission
         </p>
         <AdmissionActionPills />
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#d7e3ec] bg-white shadow-sm">
-        <div className="bg-[#03a9f4] px-4 py-2.5">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-enterprise-sm">
+        <div className="bg-info px-4 py-2.5">
           <h2 className="text-sm font-semibold text-white">Student Admission</h2>
         </div>
 
@@ -63,7 +63,7 @@ export function StudentAdmissionPage() {
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             <Field label="Year">
               <Select value={year} onValueChange={setYear}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Year">
+                <SelectTrigger className="h-9 bg-card" aria-label="Year">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -78,7 +78,7 @@ export function StudentAdmissionPage() {
 
             <Field label="Financial Year">
               <Select value={financialYear} onValueChange={setFinancialYear}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Financial Year">
+                <SelectTrigger className="h-9 bg-card" aria-label="Financial Year">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -93,7 +93,7 @@ export function StudentAdmissionPage() {
 
             <Field label="Class/Semester" required>
               <Select value={classId} onValueChange={setClassId}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Class or Semester">
+                <SelectTrigger className="h-9 bg-card" aria-label="Class or Semester">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -109,7 +109,7 @@ export function StudentAdmissionPage() {
 
             <Field label="Quota" required>
               <Select value={quota} onValueChange={setQuota}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Quota">
+                <SelectTrigger className="h-9 bg-card" aria-label="Quota">
                   <SelectValue placeholder="--Select--" />
                 </SelectTrigger>
                 <SelectContent>
@@ -127,7 +127,7 @@ export function StudentAdmissionPage() {
           <div className="grid gap-4 md:grid-cols-[minmax(0,280px)_auto] md:items-end">
             <Field label="AdmissionType" required>
               <Select value={admissionType} onValueChange={setAdmissionType}>
-                <SelectTrigger className="h-9 bg-white" aria-label="Admission Type">
+                <SelectTrigger className="h-9 bg-card" aria-label="Admission Type">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -142,7 +142,7 @@ export function StudentAdmissionPage() {
 
             <Button
               type="button"
-              className="h-9 rounded-sm bg-[#03a9f4] px-5 text-sm font-semibold text-white hover:bg-[#0288d1]"
+              className="h-9 rounded-md bg-info px-5 text-sm font-semibold text-white hover:bg-info/90"
               onClick={handleGetResult}
             >
               Get Result
@@ -164,10 +164,10 @@ function Field({
   children: ReactNode;
 }) {
   return (
-    <label className="block space-y-1.5 text-sm text-[#374151]">
+    <label className="block space-y-1.5 text-sm text-foreground">
       <span>
         {label}
-        {required ? <span className="text-[#e53935]">*</span> : null}
+        {required ? <span className="text-danger">*</span> : null}
       </span>
       {children}
     </label>

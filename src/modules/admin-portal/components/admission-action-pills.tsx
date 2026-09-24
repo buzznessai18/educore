@@ -3,6 +3,7 @@ import { ChevronDown } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { portalTone } from "@/modules/admin-portal/components/portal-ui";
 import { cn } from "@/lib/utils";
 
 export type ActionPill = {
@@ -16,16 +17,7 @@ export function ActionPills({ items }: { items: ActionPill[] }) {
   return (
     <div className="flex flex-wrap justify-end gap-2">
       {items.map((pill) => {
-        const className = cn(
-          "h-8 rounded-full px-3 text-xs font-semibold text-white shadow-sm",
-          pill.tone === "green"
-            ? "bg-[#5cb85c] hover:bg-[#4cae4c]"
-            : pill.tone === "light-green"
-              ? "bg-[#8bc34a] hover:bg-[#7cb342]"
-              : pill.tone === "red"
-                ? "bg-[#e53935] hover:bg-[#c62828]"
-                : "bg-[#03a9f4] hover:bg-[#0288d1]",
-        );
+        const className = cn(portalTone[pill.tone]);
 
         if (pill.href) {
           return (

@@ -204,20 +204,20 @@ export function FeeConcessionReportPage() {
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[#03a9f4]">Fee Concession Details</h2>
-          <p className="text-sm text-[#6b7280]">
-            Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Fee Concession Details
+          <h2 className="text-xl font-semibold text-info">Fee Concession Details</h2>
+          <p className="text-sm text-muted-foreground">
+            Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Fee Concession Details
           </p>
         </div>
         <ActionPills items={FEE_CONCESSION_PILLS} />
       </div>
 
-      <div className="rounded-sm border border-[#d7e3ec] bg-white p-5 shadow-sm">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-enterprise-sm">
         <div className="grid gap-4 md:grid-cols-[150px_180px_180px_180px_auto] md:items-end">
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>Year</span>
             <Select value={year} onValueChange={setYear}>
-              <SelectTrigger className="h-9 bg-white" aria-label="Year">
+              <SelectTrigger className="h-9 bg-card" aria-label="Year">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -230,12 +230,12 @@ export function FeeConcessionReportPage() {
             </Select>
           </label>
 
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>
-              Branch<span className="text-[#e53935]">*</span>
+              Branch<span className="text-danger">*</span>
             </span>
             <Select value={branch} onValueChange={setBranch}>
-              <SelectTrigger className="h-9 bg-white" aria-label="Branch">
+              <SelectTrigger className="h-9 bg-card" aria-label="Branch">
                 <SelectValue placeholder="--ALL--" />
               </SelectTrigger>
               <SelectContent>
@@ -248,12 +248,12 @@ export function FeeConcessionReportPage() {
             </Select>
           </label>
 
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>
-              Class<span className="text-[#e53935]">*</span>
+              Class<span className="text-danger">*</span>
             </span>
             <Select value={classId} onValueChange={setClassId}>
-              <SelectTrigger className="h-9 bg-white" aria-label="Class">
+              <SelectTrigger className="h-9 bg-card" aria-label="Class">
                 <SelectValue placeholder="--ALL--" />
               </SelectTrigger>
               <SelectContent>
@@ -267,10 +267,10 @@ export function FeeConcessionReportPage() {
             </Select>
           </label>
 
-          <label className="block space-y-1.5 text-sm text-[#111827]">
+          <label className="block space-y-1.5 text-sm text-foreground">
             <span>Section</span>
             <Select value={sectionId} onValueChange={setSectionId}>
-              <SelectTrigger className="h-9 bg-white" aria-label="Section">
+              <SelectTrigger className="h-9 bg-card" aria-label="Section">
                 <SelectValue placeholder="All" />
               </SelectTrigger>
               <SelectContent>
@@ -286,7 +286,7 @@ export function FeeConcessionReportPage() {
 
           <Button
             type="button"
-            className="h-9 rounded-sm bg-[#03a9f4] px-5 text-sm font-semibold text-white hover:bg-[#0288d1]"
+            className="h-9 rounded-md bg-info px-5 text-sm font-semibold text-white hover:bg-info/90"
             onClick={handleShow}
           >
             Show
@@ -302,7 +302,7 @@ export function FeeConcessionReportPage() {
                   key={action}
                   type="button"
                   size="sm"
-                  className="h-8 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                  className="h-8 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                   onClick={() => handleExport(action)}
                 >
                   <Icon className="size-3.5" />
@@ -311,22 +311,22 @@ export function FeeConcessionReportPage() {
               );
             })}
           </div>
-          <label className="flex items-center gap-2 text-sm text-[#374151]">
+          <label className="flex items-center gap-2 text-sm text-foreground">
             <span>Search:</span>
             <Input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              className="h-8 w-44 bg-white"
+              className="h-8 w-44 bg-card"
               aria-label="Search fee concession details"
             />
           </label>
         </div>
 
-        <div className="mt-4 overflow-hidden rounded-sm border border-[#dbe3ea]">
+        <div className="mt-4 overflow-hidden rounded-xl border border-border">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="bg-[#f8fafc] hover:bg-[#f8fafc]">
+                <TableRow className="bg-muted/50 hover:bg-muted/50">
                   {[
                     "Roll No",
                     "Admission No",
@@ -350,7 +350,7 @@ export function FeeConcessionReportPage() {
               <TableBody>
                 {!hasShown || filtered.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={12} className="h-24 text-center text-sm text-[#6b7280]">
+                    <TableCell colSpan={12} className="h-24 text-center text-sm text-muted-foreground">
                       {hasShown ? "No data available in table" : "Click Show to load concession details."}
                     </TableCell>
                   </TableRow>
@@ -358,7 +358,7 @@ export function FeeConcessionReportPage() {
                   filtered.map((row, index) => (
                     <TableRow
                       key={row.id}
-                      className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}
+                      className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}
                     >
                       <TableCell>{row.rollNo}</TableCell>
                       <TableCell>{row.admissionNo}</TableCell>
@@ -370,7 +370,7 @@ export function FeeConcessionReportPage() {
                       <TableCell>{row.date}</TableCell>
                       <TableCell>{row.totalFee}</TableCell>
                       <TableCell>{row.paidAmount}</TableCell>
-                      <TableCell className="font-semibold text-[#0288d1]">{row.concession}</TableCell>
+                      <TableCell className="font-semibold text-info">{row.concession}</TableCell>
                       <TableCell>{row.balance}</TableCell>
                     </TableRow>
                   ))

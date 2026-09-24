@@ -154,10 +154,10 @@ function FilterSelect({
   placeholder = "--Select--",
 }: FilterSelectProps) {
   return (
-    <label className="block space-y-1.5 text-sm text-[#111827]">
+    <label className="block space-y-1.5 text-sm text-foreground">
       <span>{label}</span>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="h-9 bg-white" aria-label={label}>
+        <SelectTrigger className="h-9 bg-card" aria-label={label}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
@@ -338,15 +338,15 @@ export function FeeMasterListPage() {
     <div className="relative mx-auto max-w-[1200px] space-y-4 pb-16">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[#03a9f4]">Fee List</h2>
-          <p className="text-sm text-[#6b7280]">
-            Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Fee List
+          <h2 className="text-xl font-semibold text-info">Fee List</h2>
+          <p className="text-sm text-muted-foreground">
+            Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Fee List
           </p>
         </div>
         <ActionPills items={FEE_MASTER_PILLS} />
       </div>
 
-      <div className="rounded-sm border border-[#d7e3ec] bg-white p-5 shadow-sm">
+      <div className="rounded-xl border border-border bg-card p-5 shadow-enterprise-sm">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           <FilterSelect
             label="Year"
@@ -400,7 +400,7 @@ export function FeeMasterListPage() {
           </div>
           <Button
             type="button"
-            className="h-9 rounded-sm bg-[#03a9f4] px-5 text-sm font-semibold text-white hover:bg-[#0288d1]"
+            className="h-9 rounded-md bg-info px-5 text-sm font-semibold text-white hover:bg-info/90"
             onClick={() => {
               setApplied(true);
               toast.success("Fee list filtered");
@@ -419,7 +419,7 @@ export function FeeMasterListPage() {
                   key={action}
                   type="button"
                   size="sm"
-                  className="h-8 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                  className="h-8 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                   onClick={() => handleExport(action)}
                 >
                   <Icon className="size-3.5" />
@@ -428,22 +428,22 @@ export function FeeMasterListPage() {
               );
             })}
           </div>
-          <label className="flex items-center gap-2 text-sm text-[#374151]">
+          <label className="flex items-center gap-2 text-sm text-foreground">
             <span>Search:</span>
             <Input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              className="h-8 w-44 bg-white"
+              className="h-8 w-44 bg-card"
               aria-label="Search fee list"
             />
           </label>
         </div>
 
-        <div className="mt-4 overflow-hidden rounded-sm border border-[#dbe3ea]">
+        <div className="mt-4 overflow-hidden rounded-xl border border-border">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="bg-[#f8fafc] hover:bg-[#f8fafc]">
+                <TableRow className="bg-muted/50 hover:bg-muted/50">
                   <TableHead className="text-xs font-bold">Sl.No</TableHead>
                   <TableHead className="text-xs font-bold">Admission Type</TableHead>
                   <TableHead className="text-xs font-bold">Fee Type</TableHead>
@@ -459,7 +459,7 @@ export function FeeMasterListPage() {
               <TableBody>
                 {filtered.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={10} className="h-24 text-center text-sm text-[#6b7280]">
+                    <TableCell colSpan={10} className="h-24 text-center text-sm text-muted-foreground">
                       No data available in table
                     </TableCell>
                   </TableRow>
@@ -467,7 +467,7 @@ export function FeeMasterListPage() {
                   filtered.map((row, index) => (
                     <TableRow
                       key={row.id}
-                      className={cn(index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white")}
+                      className={cn(index % 2 === 1 ? "bg-info-soft/50" : "bg-card")}
                     >
                       <TableCell>{index + 1}</TableCell>
                       <TableCell>{row.admissionType}</TableCell>
@@ -481,7 +481,7 @@ export function FeeMasterListPage() {
                         <Button
                           type="button"
                           size="sm"
-                          className="h-8 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                          className="h-8 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                           onClick={() => openEdit(row)}
                         >
                           Edit
@@ -491,7 +491,7 @@ export function FeeMasterListPage() {
                         <Button
                           type="button"
                           size="icon"
-                          className="size-8 rounded-full bg-[#e53935] text-white hover:bg-[#c62828]"
+                          className="size-8 rounded-full bg-danger text-white hover:bg-danger/90"
                           aria-label={`Delete fee ${row.classLabel}`}
                           onClick={() => handleDelete(row.id)}
                         >
@@ -510,7 +510,7 @@ export function FeeMasterListPage() {
       <Button
         type="button"
         size="icon"
-        className="fixed bottom-8 right-8 z-20 size-12 rounded-full bg-[#5cb85c] text-white shadow-lg hover:bg-[#4cae4c]"
+        className="fixed bottom-8 right-8 z-20 size-12 rounded-full bg-success text-white shadow-lg hover:bg-success/90"
         aria-label="Add fee master"
         onClick={openAdd}
       >
@@ -651,7 +651,7 @@ export function FeeMasterListPage() {
             </label>
             <label className="block space-y-1.5 text-sm">
               <span>
-                Fee Amount<span className="text-[#e53935]">*</span>
+                Fee Amount<span className="text-danger">*</span>
               </span>
               <Input
                 value={form.feeAmount}
@@ -668,7 +668,7 @@ export function FeeMasterListPage() {
             </Button>
             <Button
               type="button"
-              className="bg-[#03a9f4] text-white hover:bg-[#0288d1]"
+              className="bg-info text-white hover:bg-info/90"
               onClick={handleSave}
             >
               Save

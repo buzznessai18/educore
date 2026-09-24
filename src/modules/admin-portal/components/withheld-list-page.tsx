@@ -123,8 +123,8 @@ export function WithheldListPage() {
   return (
     <div className="mx-auto max-w-[1200px] space-y-4 pb-10">
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <p className="text-sm text-[#6b7280]">
-          Home <span className="mx-1 text-[#9ca3af]">&gt;</span> Applicable for WithHold List
+        <p className="text-sm text-muted-foreground">
+          Home <span className="mx-1 text-muted-foreground/70">&gt;</span> Applicable for WithHold List
         </p>
         <StudentTcActionPills />
       </div>
@@ -138,7 +138,7 @@ export function WithheldListPage() {
                 key={action}
                 type="button"
                 size="sm"
-                className="h-8 rounded-sm bg-[#03a9f4] px-3 text-xs font-semibold text-white hover:bg-[#0288d1]"
+                className="h-8 rounded-md bg-info px-3 text-xs font-semibold text-white hover:bg-info/90"
                 onClick={() => handleExport(action)}
               >
                 <Icon className="size-3.5" />
@@ -162,7 +162,7 @@ export function WithheldListPage() {
             </Button>
           ) : null}
         </div>
-        <label className="flex items-center gap-2 text-sm text-[#374151]">
+        <label className="flex items-center gap-2 text-sm text-foreground">
           <span>Search:</span>
           <Input
             value={search}
@@ -170,30 +170,30 @@ export function WithheldListPage() {
               setSearch(event.target.value);
               setPage(1);
             }}
-            className="h-8 w-52 bg-white"
+            className="h-8 w-52 bg-card"
             aria-label="Search withhold list"
           />
         </label>
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#dbe3ea] bg-white shadow-sm">
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-enterprise-sm">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow className="border-[#dbe3ea] bg-[#f8fafc] hover:bg-[#f8fafc]">
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">
+              <TableRow className="border-border bg-muted/50 hover:bg-muted/50">
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">
                   Student Name
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">
                   Father/husband Name
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">
                   Father/Husband No.
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">
                   Course
                 </TableHead>
-                <TableHead className="whitespace-nowrap text-xs font-bold text-[#374151]">
+                <TableHead className="whitespace-nowrap text-xs font-bold text-foreground">
                   Semester
                 </TableHead>
               </TableRow>
@@ -201,7 +201,7 @@ export function WithheldListPage() {
             <TableBody>
               {pageRows.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="h-28 text-center text-sm text-[#6b7280]">
+                  <TableCell colSpan={5} className="h-28 text-center text-sm text-muted-foreground">
                     No data available in table
                   </TableCell>
                 </TableRow>
@@ -210,14 +210,14 @@ export function WithheldListPage() {
                   <TableRow
                     key={row.id}
                     className={cn(
-                      "border-[#e5eaf0] text-sm",
-                      index % 2 === 1 ? "bg-[#f3f9fc]" : "bg-white",
+                      "border-border text-sm",
+                      index % 2 === 1 ? "bg-info-soft/50" : "bg-card",
                     )}
                   >
                     <TableCell>
                       <button
                         type="button"
-                        className="font-medium text-[#0288d1] hover:underline"
+                        className="font-medium text-info hover:underline"
                         onClick={() => toast.info(`Open profile: ${row.studentName}`)}
                       >
                         {row.studentName}
@@ -234,8 +234,8 @@ export function WithheldListPage() {
           </Table>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#dbe3ea] px-4 py-3">
-          <p className="text-sm text-[#6b7280]">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border px-4 py-3">
+          <p className="text-sm text-muted-foreground">
             Showing {total === 0 ? 0 : startIndex + 1} to {endIndex} of {total} entries
           </p>
           <Pagination className="mx-0 w-auto justify-end">
