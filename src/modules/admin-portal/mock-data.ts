@@ -11,14 +11,36 @@ function fullName(first: string, middle: string, last: string) {
 
 function classLabel(classId: string, sectionId: string) {
   const classMap: Record<string, string> = {
+    nursery: "NURSERY",
+    lkg: "LKG",
+    ukg: "UKG",
     "class-8": "Class 8",
     "class-9": "Class 9",
     "class-10": "Class 10",
     "class-11": "Class 11",
     "class-12": "Class 12",
   };
-  const section = sectionId ? sectionId.toUpperCase() : "-";
-  return `${classMap[classId] ?? classId} / ${section}`;
+  const sectionMap: Record<string, string> = {
+    a: "A Section",
+    b: "B Section",
+    c: "C Section",
+    nursery_a: "NURSERY A Section",
+    lkg_a: "LKG A Section",
+    ukg_a: "UKG A Section",
+  };
+  const className = classMap[classId] ?? classId;
+  const section = sectionMap[sectionId] ?? (sectionId ? `${sectionId.toUpperCase()} Section` : "—");
+  return { className, section, combined: `${className} / ${section}` };
+}
+
+function formatDisplayDate(value: string) {
+  if (!value) return "—";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
 }
 
 const seedForms = [
@@ -100,24 +122,59 @@ const seedForms = [
     applicationDate: "2026-07-02",
     child: {
       ...createEmptyAdmissionForm().child,
-      firstName: "Meera",
-      lastName: "Iyer",
-      classId: "class-11",
-      sectionId: "a",
-      admissionNo: "ADM-2026-0041",
-      rollNo: "11A-12",
+      firstName: "Umme Ariba",
+      lastName: "Dharwadkar",
+      classId: "nursery",
+      sectionId: "nursery_a",
+      admissionNo: "468",
+      rollNo: "N-01",
       quota: "general",
-      uidNumber: "UID-87110",
+      uidNumber: "260726468",
       studentStatus: "regular" as const,
       registrationDate: "2026-07-02",
-      admissionStartDate: "2026-07-15",
+      admissionStartDate: "2026-07-02",
+      state: "karnataka",
+      boardUniversity: "cbse",
+      studentCategory: "general",
+      feesCategory: "full",
+      gender: "female" as const,
+      dateOfBirth: "2022-03-12",
+    },
+    family: {
+      ...createEmptyAdmissionForm().family,
+      father: {
+        ...createEmptyAdmissionForm().family.father,
+        firstName: "Fida Hussain",
+        lastName: "Dharwadkar",
+        mobileNo: "9739672909",
+      },
+      smsNumber: "9739672909",
+      homeAddress: "Dharwad",
+    },
+  },
+  {
+    ...createEmptyAdmissionForm(),
+    listStatus: "admitted" as const,
+    applicationDate: "2026-07-02",
+    child: {
+      ...createEmptyAdmissionForm().child,
+      firstName: "Meera",
+      lastName: "Iyer",
+      classId: "lkg",
+      sectionId: "lkg_a",
+      admissionNo: "466",
+      rollNo: "L-02",
+      quota: "general",
+      uidNumber: "260726466",
+      studentStatus: "regular" as const,
+      registrationDate: "2026-07-02",
+      admissionStartDate: "2026-07-02",
       state: "karnataka",
       boardUniversity: "cbse",
       studentCategory: "general",
       feesCategory: "scholarship",
       gender: "female" as const,
-      dateOfBirth: "2010-11-22",
-      email: "meera.iyer@student.educore.school",
+      dateOfBirth: "2021-11-22",
     },
     family: {
       ...createEmptyAdmissionForm().family,
@@ -146,12 +203,12 @@ const seedForms = [
       ...createEmptyAdmissionForm().child,
       firstName: "Arjun",
       lastName: "Reddy",
-      classId: "class-8",
-      sectionId: "c",
-      admissionNo: "ADM-2026-0028",
-      rollNo: "8C-05",
-      quota: "sports",
-      uidNumber: "UID-86990",
+      classId: "ukg",
+      sectionId: "ukg_a",
+      admissionNo: "455",
+      rollNo: "U-05",
+      quota: "general",
+      uidNumber: "260621455",
       studentStatus: "regular" as const,
       registrationDate: "2026-06-21",
       admissionStartDate: "2026-07-01",
@@ -160,7 +217,7 @@ const seedForms = [
       studentCategory: "obc",
       feesCategory: "concession",
       gender: "male" as const,
-      dateOfBirth: "2013-03-14",
+      dateOfBirth: "2020-03-14",
     },
     family: {
       ...createEmptyAdmissionForm().family,
@@ -184,10 +241,10 @@ const seedForms = [
       lastName: "Khan",
       classId: "class-12",
       sectionId: "b",
-      admissionNo: "ADM-2026-0015",
+      admissionNo: "441",
       rollNo: "12B-03",
-      quota: "rte",
-      uidNumber: "UID-86001",
+      quota: "general",
+      uidNumber: "260610441",
       studentStatus: "regular" as const,
       registrationDate: "2026-06-10",
       admissionStartDate: "2026-06-20",
@@ -233,20 +290,27 @@ export function toAdmissionListRow(
   record: StudentAdmissionRecord,
   slNo: number,
 ): AdmissionListRow {
+  const labels = classLabel(record.child.classId, record.child.sectionId);
+  const admissionDate = record.child.admissionStartDate || record.applicationDate;
   return {
     id: record.id,
     slNo,
-    studentName: fullName(record.child.firstName, record.child.middleName, record.child.lastName),
-    semesterClassSection: classLabel(record.child.classId, record.child.sectionId),
+    studentName: fullName(record.child.firstName, record.child.middleName, record.child.lastName).toUpperCase(),
+    semesterClass: labels.className,
+    section: labels.section,
+    semesterClassSection: labels.combined,
     admissionNo: record.child.admissionNo,
-    quota: record.child.quota,
+    quota: (record.child.quota || "general").toUpperCase(),
+    fatherNo: record.family.father.mobileNo || "—",
     fatherName: fullName(
       record.family.father.firstName,
       record.family.father.middleName,
       record.family.father.lastName,
-    ),
+    ).toUpperCase(),
     uid: record.child.uidNumber || "—",
-    applicationDate: record.applicationDate,
+    admissionDate: formatDisplayDate(admissionDate),
+    applicationNo: record.child.admissionNo,
+    applicationDate: formatDisplayDate(record.applicationDate),
     listStatus: record.listStatus,
   };
 }
@@ -254,23 +318,27 @@ export function toAdmissionListRow(
 export const mockDashboardOverview: AdminDashboardOverview = {
   academicYear: "2026-27",
   metrics: {
-    totalStudents: 2450,
-    totalFeeReceivable: 18450000,
-    totalBillsPayable: 3260000,
-    totalBillsPaid: 15190000,
+    totalStudents: 307,
+    totalFeeReceivable: 4021000,
+    totalFeeReceived: 1415000,
+    totalBalanceFee: 2599000,
+    totalBillsPayable: 0,
+    totalBillsPaid: 0,
+    pendingBills: 0,
+    bankBalance: 0,
   },
   incomeVsExpenses: [
-    { month: "Apr", income: 2100000, expenses: 980000 },
-    { month: "May", income: 1850000, expenses: 1020000 },
-    { month: "Jun", income: 2400000, expenses: 1100000 },
-    { month: "Jul", income: 2650000, expenses: 1250000 },
-    { month: "Aug", income: 2280000, expenses: 1180000 },
-    { month: "Sep", income: 2520000, expenses: 1210000 },
-    { month: "Oct", income: 1980000, expenses: 1050000 },
-    { month: "Nov", income: 1750000, expenses: 990000 },
-    { month: "Dec", income: 1620000, expenses: 940000 },
-    { month: "Jan", income: 2050000, expenses: 1080000 },
-    { month: "Feb", income: 1890000, expenses: 1010000 },
-    { month: "Mar", income: 2360000, expenses: 1140000 },
+    { month: "Jan", income: 0, expenses: 0 },
+    { month: "Feb", income: 0, expenses: 0 },
+    { month: "Mar", income: 0, expenses: 0 },
+    { month: "Apr", income: 80000, expenses: 45000 },
+    { month: "May", income: 320000, expenses: 120000 },
+    { month: "Jun", income: 1350000, expenses: 280000 },
+    { month: "Jul", income: 150000, expenses: 95000 },
+    { month: "Aug", income: 20000, expenses: 40000 },
+    { month: "Sep", income: 0, expenses: 0 },
+    { month: "Oct", income: 0, expenses: 0 },
+    { month: "Nov", income: 0, expenses: 0 },
+    { month: "Dec", income: 0, expenses: 0 },
   ],
 };

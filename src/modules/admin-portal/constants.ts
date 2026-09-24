@@ -49,6 +49,9 @@ export const REFERRAL_OPTIONS: { value: ReferralSource; label: string }[] = [
 ];
 
 export const CLASS_OPTIONS: LookupOption[] = [
+  { value: "nursery", label: "NURSERY" },
+  { value: "lkg", label: "LKG" },
+  { value: "ukg", label: "UKG" },
   { value: "class-8", label: "Class 8" },
   { value: "class-9", label: "Class 9" },
   { value: "class-10", label: "Class 10" },
@@ -57,14 +60,18 @@ export const CLASS_OPTIONS: LookupOption[] = [
 ];
 
 export const SECTION_OPTIONS: LookupOption[] = [
+  { value: "nursery_a", label: "NURSERY A Section" },
+  { value: "lkg_a", label: "LKG A Section" },
+  { value: "ukg_a", label: "UKG A Section" },
   { value: "a", label: "Section A" },
   { value: "b", label: "Section B" },
   { value: "c", label: "Section C" },
 ];
 
 export const ACADEMIC_YEAR_OPTIONS: LookupOption[] = [
-  { value: "2024-25", label: "2024-25" },
-  { value: "2025-26", label: "2025-26" },
+  { value: "2024", label: "2024" },
+  { value: "2025", label: "2025" },
+  { value: "2026", label: "2026" },
   { value: "2026-27", label: "2026-27" },
 ];
 

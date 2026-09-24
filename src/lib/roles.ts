@@ -36,6 +36,14 @@ const ROLE_ROUTE_ACCESS: Record<AppRole, readonly EduRoutePath[] | "all"> = {
     "/academic/subjects",
     "/academic/timetable",
     "/academic/attendance",
+    "/academic/feedback-report",
+    "/academic/student-tc",
+    "/academic/withheld-list",
+    "/academic/class-allocation-report",
+    "/academic/sms-report",
+    "/academic/marks-card",
+    "/academic/marks-report",
+    "/academic/summatative-report",
     "/admissions/portal",
     "/admissions/applied",
     "/admissions/admitted",
@@ -43,6 +51,29 @@ const ROLE_ROUTE_ACCESS: Record<AppRole, readonly EduRoutePath[] | "all"> = {
     "/admissions/applications",
     "/admissions/enquiries",
     "/admissions/process",
+    "/admissions/report",
+    "/fms/fee-type-master",
+    "/fms/bank",
+    "/fms/fee-description",
+    "/fms/pickup-point",
+    "/fms/fee-master",
+    "/fms/fee-receipt",
+    "/fms/fee-print-list",
+    "/fms/cancelled-fee-list",
+    "/fms/update-student-fee",
+    "/fms/update-material-fee",
+    "/fms/student-concession",
+    "/fms/change-student-fee",
+    "/fms/rte-report",
+    "/fms/fee-concession-report",
+    "/fms/fee-pending-report",
+    "/fms/fee-description-pending-report",
+    "/fms/fee-due-list-pending-report",
+    "/fms/transport-fee-due-list-pending-report",
+    "/fms/day-book-report",
+    "/fms/cheque-clearence",
+    "/fms/mop-report",
+    "/fms/daily-mop-report",
     "/learning/courses",
     "/learning/lessons",
     "/learning/assignments",
@@ -68,6 +99,14 @@ const ROLE_ROUTE_ACCESS: Record<AppRole, readonly EduRoutePath[] | "all"> = {
     "/academic/examinations",
     "/academic/results",
     "/academic/report-cards",
+    "/academic/feedback-report",
+    "/academic/student-tc",
+    "/academic/withheld-list",
+    "/academic/class-allocation-report",
+    "/academic/sms-report",
+    "/academic/marks-card",
+    "/academic/marks-report",
+    "/academic/summatative-report",
     "/learning/courses",
     "/learning/lessons",
     "/learning/assignments",
@@ -228,14 +267,21 @@ export function getNavigationForRole(role: AppRole): NavSection[] {
   if (access === "all") return navigationSections;
 
   return navigationSections
-    .map((section) => ({
-      ...section,
-      items: section.items.filter((item) => access.includes(item.path)),
-    }))
-    .filter((section) => section.items.length > 0);
+    .map((section) => {
+      const items = section.items.filter((item) => access.includes(item.path));
+      const sectionPathAllowed = section.path ? access.includes(section.path) : false;
+      const nextPath = sectionPathAllowed ? section.path : items[0]?.path;
+      const { path: _ignored, ...rest } = section;
+      return {
+        ...rest,
+        items,
+        ...(nextPath ? { path: nextPath } : {}),
+      };
+    })
+    .filter((section) => section.items.length > 0 || (section.path != null && access.includes(section.path)));
 }
 
 export function getDefaultRouteForRole(role: AppRole): EduRoutePath {
   const sections = getNavigationForRole(role);
-  return sections[0]?.items[0]?.path ?? "/dashboard";
+  return sections[0]?.path ?? sections[0]?.items[0]?.path ?? "/dashboard";
 }

@@ -1,13 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { EduCoreRoutePage } from "@/components/educore/app-shell";
+import { EduCoreAppShell } from "@/components/educore/app-shell";
 import { educoreHead } from "@/lib/educore-seo";
+import { StudentAttendancePage } from "@/modules/admin-portal/components/student-attendance-page";
 
 export const Route = createFileRoute("/academic/attendance")({
-  head: () => educoreHead("EduCore Academic Attendance", "EduCore education ERP workspace with static Phase 1 screens for school operations."),
+  head: () =>
+    educoreHead(
+      "EduCore Student Attendance",
+      "Student attendance report with filters, export, and punch time details.",
+    ),
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return <EduCoreRoutePage path="/academic/attendance" />;
+  return (
+    <EduCoreAppShell path="/academic/attendance">
+      <StudentAttendancePage />
+    </EduCoreAppShell>
+  );
 }

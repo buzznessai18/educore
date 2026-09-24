@@ -2,13 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { EduCoreAppShell } from "@/components/educore/app-shell";
 import { educoreHead } from "@/lib/educore-seo";
-import { StudentRegistrationListPage } from "@/modules/admin-portal/components/admission-list-page";
+import { AdmissionRegistrationForm } from "@/modules/admin-portal/components/admission-registration-form";
 
-export const Route = createFileRoute("/admissions/registration")({
+export const Route = createFileRoute("/admissions/registration/new")({
   head: () =>
     educoreHead(
-      "EduCore Applied & Admitted Lists",
-      "Student registration applied and admitted lists for EduCore admin portal.",
+      "EduCore Add Student",
+      "Create a new student registration and admission record.",
     ),
   component: RouteComponent,
 });
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/admissions/registration")({
 function RouteComponent() {
   return (
     <EduCoreAppShell path="/admissions/registration">
-      <StudentRegistrationListPage initialTab="admitted" />
+      <AdmissionRegistrationForm />
     </EduCoreAppShell>
   );
 }

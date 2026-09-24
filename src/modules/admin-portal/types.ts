@@ -148,11 +148,16 @@ export type AdmissionListRow = {
   id: string;
   slNo: number;
   studentName: string;
+  semesterClass: string;
+  section: string;
   semesterClassSection: string;
   admissionNo: string;
   quota: string;
+  fatherNo: string;
   fatherName: string;
   uid: string;
+  admissionDate: string;
+  applicationNo: string;
   applicationDate: string;
   listStatus: AdmissionListStatus;
 };
@@ -160,8 +165,12 @@ export type AdmissionListRow = {
 export type AdminDashboardMetrics = {
   totalStudents: number;
   totalFeeReceivable: number;
+  totalFeeReceived: number;
+  totalBalanceFee: number;
   totalBillsPayable: number;
   totalBillsPaid: number;
+  pendingBills: number;
+  bankBalance: number;
 };
 
 export type IncomeExpensePoint = {

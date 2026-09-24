@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { adminPortalApi, recordToFormValues } from "./api";
+import { mockDashboardOverview } from "./mock-data";
 import type { AdmissionFormValues } from "./schemas";
 import type { AdmissionListFilters, FeePaymentPayload, UpsertAdmissionPayload } from "./types";
 
@@ -16,6 +17,8 @@ export function useAdminDashboard() {
   return useQuery({
     queryKey: adminPortalKeys.dashboard(),
     queryFn: () => adminPortalApi.getDashboardOverview(),
+    // Keep first paint aligned with mock so values don't flash to a different set.
+    placeholderData: mockDashboardOverview,
   });
 }
 

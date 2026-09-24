@@ -217,6 +217,9 @@ export function apiPayloadToDb(payload: Record<string, unknown>) {
 }
 
 const classMap: Record<string, string> = {
+  nursery: "NURSERY",
+  lkg: "LKG",
+  ukg: "UKG",
   "class-8": "Class 8",
   "class-9": "Class 9",
   "class-10": "Class 10",
@@ -224,18 +227,52 @@ const classMap: Record<string, string> = {
   "class-12": "Class 12",
 };
 
+const sectionMap: Record<string, string> = {
+  a: "A Section",
+  b: "B Section",
+  c: "C Section",
+  nursery_a: "NURSERY A Section",
+  lkg_a: "LKG A Section",
+  ukg_a: "UKG A Section",
+};
+
+function formatDisplayDate(value: string | null | undefined) {
+  if (!value) return "—";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
 export function toListRow(row: DbAdmission, slNo: number) {
   const father = (row.father ?? {}) as Record<string, string>;
+  const className = classMap[row.class_id] ?? row.class_id;
+  const section = sectionMap[row.section_id] ??
+    (row.section_id ? `${row.section_id.toUpperCase()} Section` : "—");
+  const studentName = [row.first_name, row.middle_name, row.last_name].filter(Boolean).join(" ").toUpperCase();
+  const fatherName = [father.firstName, father.middleName, father.lastName]
+    .filter(Boolean)
+    .join(" ")
+    .toUpperCase() || "—";
+  const admissionDate = row.registration_date || row.application_date;
+
   return {
     id: row.id,
     slNo,
-    studentName: [row.first_name, row.middle_name, row.last_name].filter(Boolean).join(" "),
-    semesterClassSection: `${classMap[row.class_id] ?? row.class_id} / ${(row.section_id || "-").toUpperCase()}`,
+    studentName,
+    semesterClass: className,
+    section,
+    semesterClassSection: `${className} / ${section}`,
     admissionNo: row.admission_no,
-    quota: row.quota,
-    fatherName: [father.firstName, father.middleName, father.lastName].filter(Boolean).join(" ") || "—",
+    quota: (row.quota || "general").toUpperCase(),
+    fatherNo: father.mobileNo || "—",
+    fatherName,
     uid: row.uid_number || "—",
-    applicationDate: row.application_date,
+    admissionDate: formatDisplayDate(admissionDate),
+    applicationNo: row.admission_no,
+    applicationDate: formatDisplayDate(row.application_date),
     listStatus: row.list_status,
   };
 }

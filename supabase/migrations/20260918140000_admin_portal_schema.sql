@@ -366,10 +366,10 @@ insert into public.dashboard_metrics (
   total_bills_paid
 ) values (
   '2026-27',
-  2450,
-  18450000,
-  3260000,
-  15190000
+  307,
+  4021000,
+  0,
+  0
 )
 on conflict (academic_year) do update set
   total_students = excluded.total_students,
@@ -380,18 +380,18 @@ on conflict (academic_year) do update set
 
 insert into public.financial_monthly_stats (academic_year, month_label, month_order, income, expenses)
 values
-  ('2026-27', 'Apr', 1, 2100000, 980000),
-  ('2026-27', 'May', 2, 1850000, 1020000),
-  ('2026-27', 'Jun', 3, 2400000, 1100000),
-  ('2026-27', 'Jul', 4, 2650000, 1250000),
-  ('2026-27', 'Aug', 5, 2280000, 1180000),
-  ('2026-27', 'Sep', 6, 2520000, 1210000),
-  ('2026-27', 'Oct', 7, 1980000, 1050000),
-  ('2026-27', 'Nov', 8, 1750000, 990000),
-  ('2026-27', 'Dec', 9, 1620000, 940000),
-  ('2026-27', 'Jan', 10, 2050000, 1080000),
-  ('2026-27', 'Feb', 11, 1890000, 1010000),
-  ('2026-27', 'Mar', 12, 2360000, 1140000)
+  ('2026-27', 'Jan', 1, 0, 0),
+  ('2026-27', 'Feb', 2, 0, 0),
+  ('2026-27', 'Mar', 3, 0, 0),
+  ('2026-27', 'Apr', 4, 80000, 45000),
+  ('2026-27', 'May', 5, 320000, 120000),
+  ('2026-27', 'Jun', 6, 1350000, 280000),
+  ('2026-27', 'Jul', 7, 150000, 95000),
+  ('2026-27', 'Aug', 8, 20000, 40000),
+  ('2026-27', 'Sep', 9, 0, 0),
+  ('2026-27', 'Oct', 10, 0, 0),
+  ('2026-27', 'Nov', 11, 0, 0),
+  ('2026-27', 'Dec', 12, 0, 0)
 on conflict (academic_year, month_order) do update set
   income = excluded.income,
   expenses = excluded.expenses,

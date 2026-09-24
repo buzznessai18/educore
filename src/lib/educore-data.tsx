@@ -2,38 +2,38 @@ import {
   Award,
   Banknote,
   BookCopy,
-  BookOpen,
   BriefcaseBusiness,
+  Building2,
   BusFront,
+  Calculator,
   CalendarCheck,
   CalendarClock,
   CalendarDays,
-  ChartColumnIncreasing,
   ClipboardCheck,
   ClipboardList,
   CreditCard,
+  Database,
   FileBarChart2,
   FileCheck2,
   FilePenLine,
   FileStack,
   FileText,
-  FolderKanban,
   GraduationCap,
-  LayoutDashboard,
+  Home,
   LibraryBig,
-  Megaphone,
+  LogIn,
+  MessageSquareText,
   MonitorPlay,
-  PackageSearch,
+  Package,
+  Printer,
   ScrollText,
-  Settings,
-  ShieldCheck,
-  SquareLibrary,
+  ShoppingCart,
   Trophy,
-  UserCheck,
+  UserCog,
   UserRoundCheck,
   Users,
+  UsersRound,
   WalletCards,
-  Workflow,
   type LucideIcon,
 } from "lucide-react";
 
@@ -49,6 +49,14 @@ export type EduRoutePath =
   | "/academic/examinations"
   | "/academic/results"
   | "/academic/report-cards"
+  | "/academic/feedback-report"
+  | "/academic/student-tc"
+  | "/academic/withheld-list"
+  | "/academic/class-allocation-report"
+  | "/academic/sms-report"
+  | "/academic/marks-card"
+  | "/academic/marks-report"
+  | "/academic/summatative-report"
   | "/admissions/portal"
   | "/admissions/applied"
   | "/admissions/admitted"
@@ -56,11 +64,34 @@ export type EduRoutePath =
   | "/admissions/applications"
   | "/admissions/enquiries"
   | "/admissions/process"
+  | "/admissions/report"
   | "/finance/fees"
   | "/finance/fee-structure"
   | "/finance/payments"
   | "/finance/expenses"
   | "/finance/reports"
+  | "/fms/fee-type-master"
+  | "/fms/bank"
+  | "/fms/fee-description"
+  | "/fms/pickup-point"
+  | "/fms/fee-master"
+  | "/fms/fee-receipt"
+  | "/fms/fee-print-list"
+  | "/fms/cancelled-fee-list"
+  | "/fms/update-student-fee"
+  | "/fms/update-material-fee"
+  | "/fms/student-concession"
+  | "/fms/change-student-fee"
+  | "/fms/rte-report"
+  | "/fms/fee-concession-report"
+  | "/fms/fee-pending-report"
+  | "/fms/fee-description-pending-report"
+  | "/fms/fee-due-list-pending-report"
+  | "/fms/transport-fee-due-list-pending-report"
+  | "/fms/day-book-report"
+  | "/fms/cheque-clearence"
+  | "/fms/mop-report"
+  | "/fms/daily-mop-report"
   | "/learning/courses"
   | "/learning/lessons"
   | "/learning/assignments"
@@ -88,49 +119,223 @@ export type NavItem = {
 };
 
 export type NavSection = {
+  /** Stable id for expand state / duplicate labels */
+  id: string;
   label: string;
   icon: LucideIcon;
+  /** When true, row shows a chevron and can expand children */
+  expandable: boolean;
+  /** Optional direct path when the row itself is a link (e.g. Home) or default landing */
+  path?: EduRoutePath;
+  pageKey?: string;
   items: NavItem[];
+  /** Sidebar group — "extra" renders under EXTRA COMPONENTS */
+  group?: "main" | "extra";
 };
 
 export const navigationSections: NavSection[] = [
   {
-    label: "Workspace",
-    icon: LayoutDashboard,
-    items: [{ title: "Dashboard", path: "/dashboard", icon: LayoutDashboard, pageKey: "dashboard" }],
+    id: "home",
+    label: "Home",
+    icon: Home,
+    expandable: false,
+    path: "/dashboard",
+    pageKey: "dashboard",
+    items: [{ title: "Home", path: "/dashboard", icon: Home, pageKey: "dashboard" }],
   },
   {
+    id: "settings",
+    label: "Settings",
+    icon: Database,
+    expandable: true,
+    path: "/settings",
+    pageKey: "settings",
+    items: [{ title: "Settings", path: "/settings", icon: Database, pageKey: "settings" }],
+  },
+  {
+    id: "reports",
+    label: "Reports",
+    icon: UsersRound,
+    expandable: true,
+    items: [
+      { title: "Academic Reports", path: "/reports/academic", icon: Award, pageKey: "academic-reports" },
+      { title: "Attendance Reports", path: "/reports/attendance", icon: ClipboardCheck, pageKey: "attendance-reports" },
+      { title: "Fee Reports", path: "/reports/fees", icon: WalletCards, pageKey: "fee-reports" },
+      { title: "Student Reports", path: "/reports/students", icon: Users, pageKey: "student-reports" },
+    ],
+  },
+  {
+    id: "printables",
+    label: "Printables",
+    icon: Database,
+    expandable: true,
+    items: [],
+  },
+  {
+    id: "fms",
+    label: "FMS",
+    icon: Building2,
+    expandable: true,
+    items: [
+      { title: "Fee Type Master", path: "/fms/fee-type-master", icon: WalletCards, pageKey: "fee-type-master" },
+      { title: "Bank", path: "/fms/bank", icon: Building2, pageKey: "fms-bank" },
+      { title: "Fee Description", path: "/fms/fee-description", icon: FileText, pageKey: "fee-description" },
+      { title: "PickUp Point", path: "/fms/pickup-point", icon: BusFront, pageKey: "pickup-point" },
+      { title: "Fee Master", path: "/fms/fee-master", icon: Database, pageKey: "fee-master" },
+      { title: "Fee Receipt", path: "/fms/fee-receipt", icon: CreditCard, pageKey: "fee-receipt" },
+      { title: "Fee Print List", path: "/fms/fee-print-list", icon: Printer, pageKey: "fee-print-list" },
+      { title: "Cancelled Fee List", path: "/fms/cancelled-fee-list", icon: ClipboardList, pageKey: "cancelled-fee-list" },
+      { title: "Update Student Fee", path: "/fms/update-student-fee", icon: FilePenLine, pageKey: "update-student-fee" },
+      { title: "Update Material Fee", path: "/fms/update-material-fee", icon: Package, pageKey: "update-material-fee" },
+      { title: "Student Concession", path: "/fms/student-concession", icon: Trophy, pageKey: "student-concession" },
+      { title: "Change Student Fee", path: "/fms/change-student-fee", icon: Banknote, pageKey: "change-student-fee" },
+      { title: "RTE Report", path: "/fms/rte-report", icon: FileBarChart2, pageKey: "rte-report" },
+      { title: "Fee Concession Report", path: "/fms/fee-concession-report", icon: FileBarChart2, pageKey: "fee-concession-report" },
+      { title: "Fee Pending Report", path: "/fms/fee-pending-report", icon: FileBarChart2, pageKey: "fee-pending-report" },
+      {
+        title: "Fee Description Pending Report",
+        path: "/fms/fee-description-pending-report",
+        icon: FileBarChart2,
+        pageKey: "fee-description-pending-report",
+      },
+      {
+        title: "Fee Due list Pending Report",
+        path: "/fms/fee-due-list-pending-report",
+        icon: FileBarChart2,
+        pageKey: "fee-due-list-pending-report",
+      },
+      {
+        title: "Transport Fee due List Pending Report",
+        path: "/fms/transport-fee-due-list-pending-report",
+        icon: BusFront,
+        pageKey: "transport-fee-due-list-pending-report",
+      },
+      { title: "Day Book Report", path: "/fms/day-book-report", icon: ScrollText, pageKey: "day-book-report" },
+      { title: "Cheque Clearence", path: "/fms/cheque-clearence", icon: Banknote, pageKey: "cheque-clearence" },
+      { title: "MOP Report", path: "/fms/mop-report", icon: FileBarChart2, pageKey: "mop-report" },
+      { title: "Daily MOP Report", path: "/fms/daily-mop-report", icon: CalendarDays, pageKey: "daily-mop-report" },
+    ],
+  },
+  {
+    id: "admissions",
+    label: "Admissions",
+    icon: UserRoundCheck,
+    expandable: true,
+    items: [
+      {
+        title: "Student Registration",
+        path: "/admissions/registration",
+        icon: FilePenLine,
+        pageKey: "registration",
+      },
+      {
+        title: "Admission",
+        path: "/admissions/applied",
+        icon: ClipboardList,
+        pageKey: "applied",
+      },
+      {
+        title: "Admission Report",
+        path: "/admissions/report",
+        icon: FileBarChart2,
+        pageKey: "admission-report",
+      },
+    ],
+  },
+  {
+    id: "academic",
     label: "Academic",
     icon: GraduationCap,
+    expandable: true,
     items: [
-      { title: "Students", path: "/academic/students", icon: Users, pageKey: "students" },
-      { title: "Teachers", path: "/academic/teachers", icon: UserRoundCheck, pageKey: "teachers" },
-      { title: "Classes", path: "/academic/classes", icon: GraduationCap, pageKey: "classes" },
-      { title: "Sections", path: "/academic/sections", icon: SquareLibrary, pageKey: "sections" },
-      { title: "Subjects", path: "/academic/subjects", icon: BookOpen, pageKey: "subjects" },
-      { title: "Timetable", path: "/academic/timetable", icon: CalendarClock, pageKey: "timetable" },
-      { title: "Attendance", path: "/academic/attendance", icon: ClipboardCheck, pageKey: "attendance" },
-      { title: "Examinations", path: "/academic/examinations", icon: FilePenLine, pageKey: "examinations" },
-      { title: "Results", path: "/academic/results", icon: Trophy, pageKey: "results" },
-      { title: "Report Cards", path: "/academic/report-cards", icon: FileCheck2, pageKey: "report-cards" },
+      {
+        title: "Student FeedBack Report",
+        path: "/academic/feedback-report",
+        icon: MessageSquareText,
+        pageKey: "feedback-report",
+      },
+      {
+        title: "Student TC",
+        path: "/academic/student-tc",
+        icon: FileText,
+        pageKey: "student-tc",
+      },
+      {
+        title: "With Held List",
+        path: "/academic/withheld-list",
+        icon: ClipboardList,
+        pageKey: "withheld-list",
+      },
+      {
+        title: "Student Attendance",
+        path: "/academic/attendance",
+        icon: ClipboardCheck,
+        pageKey: "attendance",
+      },
+      {
+        title: "Class Allocation Report",
+        path: "/academic/class-allocation-report",
+        icon: GraduationCap,
+        pageKey: "class-allocation-report",
+      },
+      {
+        title: "SMS Report",
+        path: "/academic/sms-report",
+        icon: MessageSquareText,
+        pageKey: "sms-report",
+      },
+      {
+        title: "Student MarksCard",
+        path: "/academic/marks-card",
+        icon: FileCheck2,
+        pageKey: "marks-card",
+      },
+      {
+        title: "Marks Report",
+        path: "/academic/marks-report",
+        icon: FileBarChart2,
+        pageKey: "marks-report",
+      },
+      {
+        title: "Summatative Report",
+        path: "/academic/summatative-report",
+        icon: Award,
+        pageKey: "summatative-report",
+      },
     ],
   },
   {
-    label: "Admissions",
-    icon: ClipboardList,
+    id: "faculty",
+    label: "Faculty",
+    icon: Users,
+    expandable: true,
+    path: "/academic/teachers",
+    items: [{ title: "Teachers", path: "/academic/teachers", icon: UserRoundCheck, pageKey: "teachers" }],
+  },
+  {
+    id: "lms",
+    label: "LMS",
+    icon: Calculator,
+    expandable: true,
     items: [
-      { title: "Admin Portal", path: "/admissions/portal", icon: LayoutDashboard, pageKey: "admin-portal" },
-      { title: "Applied", path: "/admissions/applied", icon: ClipboardList, pageKey: "applied" },
-      { title: "Admitted", path: "/admissions/admitted", icon: UserCheck, pageKey: "admitted" },
-      { title: "Registration", path: "/admissions/registration", icon: FilePenLine, pageKey: "registration" },
-      { title: "Applications", path: "/admissions/applications", icon: ClipboardList, pageKey: "applications" },
-      { title: "Admission Enquiries", path: "/admissions/enquiries", icon: Megaphone, pageKey: "admission-enquiries" },
-      { title: "Admission Process", path: "/admissions/process", icon: Workflow, pageKey: "admission-process" },
+      { title: "Courses", path: "/learning/courses", icon: BookCopy, pageKey: "courses" },
+      { title: "Lessons", path: "/learning/lessons", icon: ScrollText, pageKey: "lessons" },
+      { title: "Assignments", path: "/learning/assignments", icon: FileStack, pageKey: "assignments" },
+      { title: "Online Classes", path: "/learning/online-classes", icon: MonitorPlay, pageKey: "online-classes" },
     ],
   },
   {
+    id: "ocm",
+    label: "OCM",
+    icon: Calculator,
+    expandable: true,
+    items: [],
+  },
+  {
+    id: "finance",
     label: "Finance",
-    icon: WalletCards,
+    icon: Calculator,
+    expandable: true,
     items: [
       { title: "Fees", path: "/finance/fees", icon: WalletCards, pageKey: "fees" },
       { title: "Fee Structure", path: "/finance/fee-structure", icon: FileText, pageKey: "fee-structure" },
@@ -140,50 +345,207 @@ export const navigationSections: NavSection[] = [
     ],
   },
   {
-    label: "Learning",
-    icon: BookCopy,
+    id: "student",
+    label: "Student",
+    icon: Calculator,
+    expandable: true,
+    path: "/academic/students",
+    items: [{ title: "Students", path: "/academic/students", icon: Users, pageKey: "students" }],
+  },
+  {
+    id: "timetable",
+    label: "TimeTable",
+    icon: Calculator,
+    expandable: true,
+    path: "/academic/timetable",
+    items: [{ title: "Timetable", path: "/academic/timetable", icon: CalendarClock, pageKey: "timetable" }],
+  },
+  {
+    id: "exam",
+    label: "Exam",
+    icon: Calculator,
+    expandable: true,
     items: [
-      { title: "Courses", path: "/learning/courses", icon: BookCopy, pageKey: "courses" },
-      { title: "Lessons", path: "/learning/lessons", icon: ScrollText, pageKey: "lessons" },
-      { title: "Assignments", path: "/learning/assignments", icon: FileStack, pageKey: "assignments" },
-      { title: "Online Classes", path: "/learning/online-classes", icon: MonitorPlay, pageKey: "online-classes" },
+      { title: "Examinations", path: "/academic/examinations", icon: FilePenLine, pageKey: "examinations" },
+      { title: "Results", path: "/academic/results", icon: Trophy, pageKey: "results" },
+      { title: "Report Cards", path: "/academic/report-cards", icon: FileCheck2, pageKey: "report-cards" },
     ],
   },
   {
-    label: "Administration",
-    icon: ShieldCheck,
-    items: [
-      { title: "Library", path: "/administration/library", icon: LibraryBig, pageKey: "library" },
-      { title: "Inventory", path: "/administration/inventory", icon: PackageSearch, pageKey: "inventory" },
-      { title: "Transport", path: "/administration/transport", icon: BusFront, pageKey: "transport" },
-      { title: "Communication", path: "/administration/communication", icon: Megaphone, pageKey: "communication" },
-      { title: "Events", path: "/administration/events", icon: CalendarDays, pageKey: "events" },
-      { title: "Documents", path: "/administration/documents", icon: FolderKanban, pageKey: "documents" },
-    ],
+    id: "library",
+    label: "Library",
+    icon: Calculator,
+    expandable: true,
+    path: "/administration/library",
+    items: [{ title: "Library", path: "/administration/library", icon: LibraryBig, pageKey: "library" }],
   },
   {
-    label: "HR",
-    icon: BriefcaseBusiness,
+    id: "hrms",
+    label: "HRMS",
+    icon: UserCog,
+    expandable: true,
     items: [
       { title: "Staff", path: "/hr/staff", icon: BriefcaseBusiness, pageKey: "staff" },
       { title: "Leave Management", path: "/hr/leave-management", icon: CalendarCheck, pageKey: "leave-management" },
-      { title: "Payroll", path: "/hr/payroll", icon: WalletCards, pageKey: "payroll" },
     ],
   },
   {
-    label: "Reports",
-    icon: ChartColumnIncreasing,
+    id: "payroll",
+    label: "Payroll",
+    icon: Calculator,
+    expandable: true,
+    path: "/hr/payroll",
+    items: [{ title: "Payroll", path: "/hr/payroll", icon: WalletCards, pageKey: "payroll" }],
+  },
+  {
+    id: "visitor-management",
+    label: "Visitor Management",
+    icon: Building2,
+    expandable: true,
+    items: [],
+  },
+  {
+    id: "inventory",
+    label: "Inventory",
+    icon: ShoppingCart,
+    expandable: true,
+    path: "/administration/inventory",
+    items: [{ title: "Inventory", path: "/administration/inventory", icon: ShoppingCart, pageKey: "inventory" }],
+  },
+  {
+    id: "product",
+    label: "Product",
+    icon: Package,
+    expandable: true,
+    items: [],
+  },
+  {
+    id: "hostel",
+    label: "Hostel",
+    icon: Building2,
+    expandable: true,
+    items: [],
+  },
+  {
+    id: "transport",
+    label: "Transport",
+    icon: Package,
+    expandable: true,
+    path: "/administration/transport",
+    items: [{ title: "Transport", path: "/administration/transport", icon: BusFront, pageKey: "transport" }],
+  },
+  {
+    id: "login",
+    label: "Login",
+    icon: LogIn,
+    expandable: true,
+    items: [],
+  },
+  {
+    id: "notification",
+    label: "Notification",
+    icon: MessageSquareText,
+    expandable: true,
+    path: "/administration/communication",
     items: [
-      { title: "Academic Reports", path: "/reports/academic", icon: Award, pageKey: "academic-reports" },
-      { title: "Attendance Reports", path: "/reports/attendance", icon: ClipboardCheck, pageKey: "attendance-reports" },
-      { title: "Fee Reports", path: "/reports/fees", icon: WalletCards, pageKey: "fee-reports" },
-      { title: "Student Reports", path: "/reports/students", icon: Users, pageKey: "student-reports" },
+      {
+        title: "Communication",
+        path: "/administration/communication",
+        icon: MessageSquareText,
+        pageKey: "communication",
+      },
     ],
   },
   {
-    label: "System",
-    icon: Settings,
-    items: [{ title: "Settings", path: "/settings", icon: Settings, pageKey: "settings" }],
+    id: "internal-mngment",
+    label: "Internal Mngment",
+    icon: UsersRound,
+    expandable: true,
+    path: "/administration/documents",
+    items: [
+      {
+        title: "Documents",
+        path: "/administration/documents",
+        icon: FileText,
+        pageKey: "documents",
+      },
+    ],
+  },
+  {
+    id: "enquiry-management",
+    label: "Enquiry Management",
+    icon: UsersRound,
+    expandable: true,
+    path: "/admissions/enquiries",
+    items: [
+      {
+        title: "Admission Enquiries",
+        path: "/admissions/enquiries",
+        icon: MessageSquareText,
+        pageKey: "admission-enquiries",
+      },
+    ],
+  },
+  {
+    id: "customer-management",
+    label: "Customer Management",
+    icon: UsersRound,
+    expandable: true,
+    items: [],
+  },
+  {
+    id: "scheduler",
+    label: "Scheduler",
+    icon: UsersRound,
+    expandable: true,
+    items: [],
+  },
+  {
+    id: "internal-mngment-secondary",
+    label: "Internal Mngment",
+    icon: UsersRound,
+    expandable: true,
+    items: [],
+  },
+  {
+    id: "events",
+    label: "Events",
+    icon: CalendarDays,
+    expandable: true,
+    path: "/administration/events",
+    items: [{ title: "Events", path: "/administration/events", icon: CalendarDays, pageKey: "events" }],
+  },
+  {
+    id: "sms",
+    label: "SMS",
+    icon: MessageSquareText,
+    expandable: true,
+    group: "extra",
+    items: [],
+  },
+  {
+    id: "notification-extra",
+    label: "Notification",
+    icon: MessageSquareText,
+    expandable: true,
+    group: "extra",
+    path: "/administration/communication",
+    items: [
+      {
+        title: "Communication",
+        path: "/administration/communication",
+        icon: MessageSquareText,
+        pageKey: "communication",
+      },
+    ],
+  },
+  {
+    id: "login-extra",
+    label: "Login",
+    icon: LogIn,
+    expandable: true,
+    group: "extra",
+    items: [],
   },
 ];
 
@@ -192,7 +554,26 @@ export const flatNavigation = navigationSections.flatMap((section) =>
 );
 
 export function getNavigationItem(pathname: string) {
-  return flatNavigation.find((item) => item.path === pathname) ?? flatNavigation[0];
+  const fromItems = flatNavigation.find((item) => item.path === pathname);
+  if (fromItems) return fromItems;
+
+  const sectionMatch = navigationSections.find((section) => section.path === pathname);
+  if (sectionMatch?.path && sectionMatch.pageKey) {
+    return {
+      title: sectionMatch.label,
+      path: sectionMatch.path,
+      icon: sectionMatch.icon,
+      pageKey: sectionMatch.pageKey,
+      section: sectionMatch.label,
+    };
+  }
+
+  return flatNavigation[0];
+}
+
+export function isSectionActive(section: NavSection, pathname: string) {
+  if (section.path === pathname) return true;
+  return section.items.some((item) => item.path === pathname);
 }
 
 export type MetricTone = "primary" | "success" | "warning" | "danger" | "info" | "neutral";
@@ -384,6 +765,110 @@ export const pageConfigs: Record<string, PageConfig> = {
     { class: "9-C", term: "Term 1", generated: "34", pending: "2", reviewer: "Meera Kapoor", status: "In Review" },
     { class: "11-B", term: "Term 1", generated: "29", pending: "4", reviewer: "Ananya Rao", status: "Draft" },
   ]),
+  "feedback-report": makeAcademicPage(
+    "feedback-report",
+    "Student FeedBack Report",
+    "Feedback",
+    "Review student feedback submissions, ratings, and counselor follow-ups.",
+    "Export Feedback",
+    ["student", "class", "topic", "rating", "submitted", "status"],
+    [
+      { student: "Aarav Mehta", class: "10-A", topic: "Classroom Experience", rating: "4.5", submitted: "20 Sep", status: "Reviewed" },
+      { student: "Maya Iyer", class: "9-C", topic: "Transport", rating: "3.8", submitted: "19 Sep", status: "Open" },
+      { student: "Rehan Thomas", class: "11-B", topic: "Lab Facilities", rating: "4.2", submitted: "18 Sep", status: "Follow-up" },
+    ],
+  ),
+  "student-tc": makeAcademicPage(
+    "student-tc",
+    "Student TC",
+    "TC",
+    "Track transfer certificate requests, approvals, and issued documents.",
+    "Issue TC",
+    ["student", "class", "requestDate", "reason", "issuedOn", "status"],
+    [
+      { student: "Kabir Patel", class: "9-B", requestDate: "12 Sep", reason: "Relocation", issuedOn: "18 Sep", status: "Issued" },
+      { student: "Sara Khan", class: "12-B", requestDate: "15 Sep", reason: "Parent Transfer", issuedOn: "—", status: "Pending" },
+      { student: "Arjun Reddy", class: "UKG", requestDate: "10 Sep", reason: "School Change", issuedOn: "16 Sep", status: "Issued" },
+    ],
+  ),
+  "withheld-list": makeAcademicPage(
+    "withheld-list",
+    "With Held List",
+    "Record",
+    "Monitor withheld students for fees, documents, or disciplinary reasons.",
+    "Add Withheld",
+    ["student", "class", "reason", "since", "owner", "status"],
+    [
+      { student: "Nisha Paul", class: "9-C", reason: "Fee Pending", since: "01 Sep", owner: "Accounts", status: "Active" },
+      { student: "Rehan Thomas", class: "11-B", reason: "Documents", since: "08 Sep", owner: "Admin Desk", status: "Review" },
+      { student: "Zara Khan", class: "8-A", reason: "Library Dues", since: "14 Sep", owner: "Library", status: "Active" },
+    ],
+  ),
+  "class-allocation-report": makeAcademicPage(
+    "class-allocation-report",
+    "Class Allocation Report",
+    "Allocation",
+    "View class and section allocation across students and academic year.",
+    "Export Allocation",
+    ["class", "section", "capacity", "allocated", "vacancy", "status"],
+    [
+      { class: "NURSERY", section: "A", capacity: "30", allocated: "28", vacancy: "2", status: "On Track" },
+      { class: "LKG", section: "A", capacity: "35", allocated: "35", vacancy: "0", status: "Full" },
+      { class: "Class 10", section: "A", capacity: "40", allocated: "38", vacancy: "2", status: "On Track" },
+    ],
+  ),
+  "sms-report": makeAcademicPage(
+    "sms-report",
+    "SMS Report",
+    "SMS",
+    "Track SMS broadcasts sent to parents, delivery counts, and failures.",
+    "Export SMS Report",
+    ["campaign", "audience", "sent", "delivered", "failed", "status"],
+    [
+      { campaign: "Fee Reminder", audience: "Parents", sent: "420", delivered: "401", failed: "19", status: "Completed" },
+      { campaign: "PTM Notice", audience: "Class 10", sent: "86", delivered: "86", failed: "0", status: "Completed" },
+      { campaign: "Holiday Alert", audience: "All", sent: "1200", delivered: "1184", failed: "16", status: "Completed" },
+    ],
+  ),
+  "marks-card": makeAcademicPage(
+    "marks-card",
+    "Student MarksCard",
+    "Marks card",
+    "Generate and distribute student markscards for term assessments.",
+    "Generate MarksCard",
+    ["student", "class", "term", "percentage", "grade", "status"],
+    [
+      { student: "Aarav Mehta", class: "10-A", term: "Term 1", percentage: "91%", grade: "A", status: "Ready" },
+      { student: "Maya Iyer", class: "9-C", term: "Term 1", percentage: "84%", grade: "B+", status: "Ready" },
+      { student: "Rehan Thomas", class: "11-B", term: "Term 1", percentage: "88%", grade: "A-", status: "Draft" },
+    ],
+  ),
+  "marks-report": makeAcademicPage(
+    "marks-report",
+    "Marks Report",
+    "Marks",
+    "Analyze subject-wise marks, averages, and class performance.",
+    "Export Marks Report",
+    ["class", "subject", "average", "highest", "lowest", "status"],
+    [
+      { class: "10-A", subject: "Mathematics", average: "78%", highest: "98%", lowest: "42%", status: "Published" },
+      { class: "9-C", subject: "English", average: "81%", highest: "95%", lowest: "55%", status: "Published" },
+      { class: "11-B", subject: "Physics", average: "74%", highest: "92%", lowest: "48%", status: "Review" },
+    ],
+  ),
+  "summatative-report": makeAcademicPage(
+    "summatative-report",
+    "Summatative Report",
+    "Report",
+    "Consolidate summative assessment outcomes across terms and classes.",
+    "Export Summatative Report",
+    ["class", "term", "passPercent", "average", "topper", "status"],
+    [
+      { class: "10-A", term: "Term 1", passPercent: "96%", average: "79%", topper: "Aarav Mehta", status: "Published" },
+      { class: "9-C", term: "Term 1", passPercent: "94%", average: "76%", topper: "Maya Iyer", status: "Published" },
+      { class: "11-B", term: "Term 1", passPercent: "91%", average: "73%", topper: "Rehan Thomas", status: "Draft" },
+    ],
+  ),
   applications: makeAdmissionsPage("applications", "Applications", "Application", "Track candidate applications, interview status, documents, and counselor ownership.", "Add Application", ["candidate", "grade", "parent", "submitted", "counselor", "status"], [
     { candidate: "Ishaan Verma", grade: "Class 6", parent: "Neha Verma", submitted: "16 Sep", counselor: "Priya Menon", status: "Interview" },
     { candidate: "Zara Khan", grade: "Class 9", parent: "Aamir Khan", submitted: "15 Sep", counselor: "Rahul Bose", status: "Documents" },
@@ -399,6 +884,20 @@ export const pageConfigs: Record<string, PageConfig> = {
     { stage: "Assessment", owner: "Rahul Bose", candidates: "31", sla: "2.1 days", conversion: "61%", status: "Watchlist" },
     { stage: "Fee Confirmation", owner: "Finance Desk", candidates: "18", sla: "0.8 days", conversion: "89%", status: "On Track" },
   ]),
+  "admission-report": makeAdmissionsPage(
+    "admission-report",
+    "Admission Report",
+    "Report",
+    "Track admission conversions, class-wise intake, and counselor performance across the current cycle.",
+    "Export Report",
+    ["class", "applied", "admitted", "conversion", "counselor", "status"],
+    [
+      { class: "Class 1", applied: "86", admitted: "62", conversion: "72%", counselor: "Priya Menon", status: "On Track" },
+      { class: "Class 5", applied: "54", admitted: "41", conversion: "76%", counselor: "Rahul Bose", status: "On Track" },
+      { class: "Class 8", applied: "39", admitted: "24", conversion: "62%", counselor: "Neha Kapoor", status: "Watchlist" },
+      { class: "Class 11", applied: "47", admitted: "29", conversion: "62%", counselor: "Finance Desk", status: "Review" },
+    ],
+  ),
   fees: {
     key: "fees",
     title: "Fees",
@@ -449,6 +948,124 @@ export const pageConfigs: Record<string, PageConfig> = {
     { report: "Fee Aging", period: "Sep 2026", owner: "Finance Desk", records: "412", lastRun: "Today", status: "Ready" },
     { report: "Expense Variance", period: "Q2", owner: "Operations", records: "128", lastRun: "Yesterday", status: "Ready" },
     { report: "Concession Summary", period: "Term 1", owner: "Accounts", records: "76", lastRun: "15 Sep", status: "Draft" },
+  ]),
+  "fee-type-master": makeFmsPage("fee-type-master", "Fee Type Master", "Fee type", "Maintain fee type codes used across fee master and receipts.", "Add Fee Type", ["code", "name", "category", "billing", "status"], [
+    { code: "TUITION", name: "Tuition Fee", category: "Academic", billing: "Term", status: "Active" },
+    { code: "TRANSPORT", name: "Transport Fee", category: "Transport", billing: "Monthly", status: "Active" },
+    { code: "MATERIAL", name: "Material Fee", category: "Academic", billing: "Annual", status: "Active" },
+  ]),
+  "fms-bank": makeFmsPage("fms-bank", "Bank", "Bank", "Manage school bank accounts used for fee collection and cheque clearance.", "Add Bank", ["bank", "accountNo", "branch", "ifsc", "status"], [
+    { bank: "State Bank of India", accountNo: "****4521", branch: "Dharwad", ifsc: "SBIN0001234", status: "Active" },
+    { bank: "HDFC Bank", accountNo: "****8832", branch: "Hubli", ifsc: "HDFC0009876", status: "Active" },
+    { bank: "Canara Bank", accountNo: "****2209", branch: "Dharwad", ifsc: "CNRB0004567", status: "Inactive" },
+  ]),
+  "fee-description": makeFmsPage("fee-description", "Fee Description", "Description", "Define fee description labels linked to fee types and masters.", "Add Description", ["description", "feeType", "amount", "year", "status"], [
+    { description: "Term 1 Tuition", feeType: "Tuition Fee", amount: "₹18,000", year: "2026", status: "Active" },
+    { description: "Bus Route North", feeType: "Transport Fee", amount: "₹2,400", year: "2026", status: "Active" },
+    { description: "Lab Kit", feeType: "Material Fee", amount: "₹3,500", year: "2026", status: "Draft" },
+  ]),
+  "pickup-point": makeFmsPage("pickup-point", "PickUp Point", "Pickup", "Maintain transport pickup points mapped to routes and fees.", "Add Pickup Point", ["point", "route", "distance", "fee", "status"], [
+    { point: "City Center", route: "Route 1", distance: "4.2 km", fee: "₹2,400", status: "Active" },
+    { point: "North Campus Gate", route: "Route 2", distance: "1.1 km", fee: "₹1,200", status: "Active" },
+    { point: "Railway Station", route: "Route 3", distance: "6.8 km", fee: "₹3,000", status: "Active" },
+  ]),
+  "fee-master": makeFmsPage("fee-master", "Fee Master", "Fee plan", "Configure class-wise fee masters for the academic year.", "Add Fee Master", ["class", "feeType", "amount", "year", "status"], [
+    { class: "Class 10", feeType: "Tuition Fee", amount: "₹42,500", year: "2026", status: "Active" },
+    { class: "NURSERY", feeType: "Tuition Fee", amount: "₹28,000", year: "2026", status: "Active" },
+    { class: "Class 11", feeType: "Material Fee", amount: "₹5,500", year: "2026", status: "Draft" },
+  ]),
+  "fee-receipt": makeFmsPage("fee-receipt", "Fee Receipt", "Receipt", "Collect and issue fee receipts against student dues.", "Create Receipt", ["receipt", "student", "amount", "mode", "status"], [
+    { receipt: "RCPT-9101", student: "Aarav Mehta", amount: "₹12,500", mode: "UPI", status: "Paid" },
+    { receipt: "RCPT-9102", student: "Maya Iyer", amount: "₹8,000", mode: "Cash", status: "Paid" },
+    { receipt: "RCPT-9103", student: "Rehan Thomas", amount: "₹15,200", mode: "Cheque", status: "Pending" },
+  ]),
+  "fee-print-list": makeFmsPage("fee-print-list", "Fee Print List", "Receipt", "Search and reprint issued fee receipts.", "Print Selected", ["receipt", "student", "class", "amount", "date", "status"], [
+    { receipt: "RCPT-9101", student: "Aarav Mehta", class: "10-A", amount: "₹12,500", date: "20 Sep", status: "Printed" },
+    { receipt: "RCPT-9102", student: "Maya Iyer", class: "9-C", amount: "₹8,000", date: "21 Sep", status: "Ready" },
+    { receipt: "RCPT-9098", student: "Sara D'Souza", class: "8-A", amount: "₹9,400", date: "18 Sep", status: "Printed" },
+  ]),
+  "cancelled-fee-list": makeFmsPage("cancelled-fee-list", "Cancelled Fee List", "Cancellation", "Review cancelled fee receipts and reversal reasons.", "Export List", ["receipt", "student", "amount", "cancelledOn", "reason", "status"], [
+    { receipt: "RCPT-8811", student: "Nisha Paul", amount: "₹6,200", cancelledOn: "12 Sep", reason: "Duplicate", status: "Cancelled" },
+    { receipt: "RCPT-8790", student: "Kabir Shah", amount: "₹4,800", cancelledOn: "08 Sep", reason: "Wrong amount", status: "Cancelled" },
+    { receipt: "RCPT-8755", student: "Zara Khan", amount: "₹3,100", cancelledOn: "02 Sep", reason: "Cheque bounce", status: "Cancelled" },
+  ]),
+  "update-student-fee": makeFmsPage("update-student-fee", "Update Student Fee", "Update", "Adjust student-wise fee allocations for the selected year.", "Update Fee", ["student", "class", "feeType", "amount", "status"], [
+    { student: "Aarav Mehta", class: "10-A", feeType: "Tuition Fee", amount: "₹42,500", status: "Updated" },
+    { student: "Maya Iyer", class: "9-C", feeType: "Transport Fee", amount: "₹2,400", status: "Pending" },
+    { student: "Rehan Thomas", class: "11-B", feeType: "Tuition Fee", amount: "₹51,200", status: "Updated" },
+  ]),
+  "update-material-fee": makeFmsPage("update-material-fee", "Update Material Fee", "Material fee", "Manage material and kit fee updates by class or student.", "Update Material Fee", ["student", "class", "material", "amount", "status"], [
+    { student: "Sara D'Souza", class: "8-A", material: "Lab Kit", amount: "₹3,500", status: "Updated" },
+    { student: "Aanya Jain", class: "1-A", material: "Books Pack", amount: "₹4,200", status: "Pending" },
+    { student: "Evan George", class: "8-B", material: "Uniform Kit", amount: "₹2,800", status: "Updated" },
+  ]),
+  "student-concession": makeFmsPage("student-concession", "Student Concession", "Concession", "Apply and track student fee concessions and scholarships.", "Add Concession", ["student", "class", "concession", "amount", "status"], [
+    { student: "Nisha Paul", class: "9-C", concession: "Sibling", amount: "₹5,000", status: "Approved" },
+    { student: "Kabir Shah", class: "3-A", concession: "Staff Child", amount: "₹12,000", status: "Approved" },
+    { student: "Zara Khan", class: "9-A", concession: "Merit", amount: "₹8,000", status: "Review" },
+  ]),
+  "change-student-fee": makeFmsPage("change-student-fee", "Change Student Fee", "Change", "Change assigned fee plans for individual students.", "Change Fee", ["student", "fromPlan", "toPlan", "effective", "status"], [
+    { student: "Aarav Mehta", fromPlan: "Standard", toPlan: "With Transport", effective: "01 Oct", status: "Applied" },
+    { student: "Maya Iyer", fromPlan: "With Transport", toPlan: "Standard", effective: "01 Oct", status: "Pending" },
+    { student: "Rehan Thomas", fromPlan: "Standard", toPlan: "Hostel", effective: "15 Oct", status: "Review" },
+  ]),
+  "rte-report": makeFmsPage("rte-report", "RTE Report", "RTE", "Generate RTE student fee and reimbursement reports.", "Export RTE Report", ["student", "class", "quota", "amount", "status"], [
+    { student: "Ishaan Verma", class: "6-A", quota: "RTE", amount: "₹0", status: "Exempt" },
+    { student: "Aanya Jain", class: "1-A", quota: "RTE", amount: "₹0", status: "Exempt" },
+    { student: "Samir Ali", class: "5-B", quota: "RTE", amount: "₹0", status: "Pending Docs" },
+  ]),
+  "fee-concession-report": makeFmsPage("fee-concession-report", "Fee Concession Report", "Report", "Summarize concessions granted across classes and fee types.", "Export Report", ["class", "concession", "students", "amount", "status"], [
+    { class: "Class 10", concession: "Merit", students: "12", amount: "₹96,000", status: "Ready" },
+    { class: "Class 9", concession: "Sibling", students: "18", amount: "₹90,000", status: "Ready" },
+    { class: "Class 3", concession: "Staff Child", students: "6", amount: "₹72,000", status: "Draft" },
+  ]),
+  "fee-pending-report": makeFmsPage("fee-pending-report", "Fee Pending Report", "Report", "List students with overall pending fee balances.", "Export Report", ["student", "class", "pending", "dueDate", "status"], [
+    { student: "Maya Iyer", class: "9-C", pending: "₹18,000", dueDate: "30 Sep", status: "Pending" },
+    { student: "Rehan Thomas", class: "11-B", pending: "₹25,400", dueDate: "28 Sep", status: "Overdue" },
+    { student: "Nisha Paul", class: "9-C", pending: "₹7,200", dueDate: "05 Oct", status: "Pending" },
+  ]),
+  "fee-description-pending-report": makeFmsPage("fee-description-pending-report", "Fee Description Pending Report", "Report", "Track pending amounts by fee description.", "Export Report", ["description", "class", "pending", "students", "status"], [
+    { description: "Term 1 Tuition", class: "10-A", pending: "₹1,24,000", students: "8", status: "Open" },
+    { description: "Bus Route North", class: "All", pending: "₹36,000", students: "15", status: "Open" },
+    { description: "Lab Kit", class: "11-B", pending: "₹14,000", students: "4", status: "Review" },
+  ]),
+  "fee-due-list-pending-report": makeFmsPage("fee-due-list-pending-report", "Fee Due list Pending Report", "Report", "Generate due-list pending fee reports by class and section.", "Export Report", ["student", "admissionNo", "class", "due", "status"], [
+    { student: "Maya Iyer", admissionNo: "466", class: "9-C", due: "₹18,000", status: "Due" },
+    { student: "Rehan Thomas", admissionNo: "412", class: "11-B", due: "₹25,400", status: "Due" },
+    { student: "Nisha Paul", admissionNo: "501", class: "9-C", due: "₹7,200", status: "Due" },
+  ]),
+  "transport-fee-due-list-pending-report": makeFmsPage(
+    "transport-fee-due-list-pending-report",
+    "Transport Fee due List Pending Report",
+    "Report",
+    "Track pending transport fee dues by route and pickup point.",
+    "Export Report",
+    ["student", "route", "pickup", "due", "status"],
+    [
+      { student: "Aarav Mehta", route: "Route 1", pickup: "City Center", due: "₹2,400", status: "Due" },
+      { student: "Sara D'Souza", route: "Route 2", pickup: "North Campus Gate", due: "₹1,200", status: "Due" },
+      { student: "Evan George", route: "Route 3", pickup: "Railway Station", due: "₹3,000", status: "Overdue" },
+    ],
+  ),
+  "day-book-report": makeFmsPage("day-book-report", "Day Book Report", "Report", "View daily fee collection day-book entries.", "Export Day Book", ["date", "receipts", "cash", "bank", "total"], [
+    { date: "24 Sep 2026", receipts: "42", cash: "₹38,400", bank: "₹1,12,600", total: "₹1,51,000" },
+    { date: "23 Sep 2026", receipts: "36", cash: "₹22,100", bank: "₹98,500", total: "₹1,20,600" },
+    { date: "22 Sep 2026", receipts: "51", cash: "₹44,800", bank: "₹1,36,200", total: "₹1,81,000" },
+  ]),
+  "cheque-clearence": makeFmsPage("cheque-clearence", "Cheque Clearence", "Cheque", "Track cheque deposits and clearance status for fee payments.", "Update Clearance", ["chequeNo", "student", "amount", "bank", "status"], [
+    { chequeNo: "CHQ-2291", student: "Rehan Thomas", amount: "₹15,200", bank: "HDFC", status: "Pending" },
+    { chequeNo: "CHQ-2284", student: "Kabir Shah", amount: "₹8,500", bank: "SBI", status: "Cleared" },
+    { chequeNo: "CHQ-2270", student: "Zara Khan", amount: "₹6,000", bank: "Canara", status: "Bounced" },
+  ]),
+  "mop-report": makeFmsPage("mop-report", "MOP Report", "Report", "Summarize fee collections by mode of payment.", "Export MOP Report", ["mode", "receipts", "amount", "period", "status"], [
+    { mode: "UPI", receipts: "186", amount: "₹6,42,000", period: "Sep 2026", status: "Ready" },
+    { mode: "Cash", receipts: "94", amount: "₹2,18,400", period: "Sep 2026", status: "Ready" },
+    { mode: "Cheque", receipts: "28", amount: "₹1,05,600", period: "Sep 2026", status: "Review" },
+  ]),
+  "daily-mop-report": makeFmsPage("daily-mop-report", "Daily MOP Report", "Report", "Daily breakdown of collections by mode of payment.", "Export Daily MOP", ["date", "cash", "upi", "card", "cheque", "total"], [
+    { date: "24 Sep 2026", cash: "₹38,400", upi: "₹82,100", card: "₹18,500", cheque: "₹12,000", total: "₹1,51,000" },
+    { date: "23 Sep 2026", cash: "₹22,100", upi: "₹71,000", card: "₹15,500", cheque: "₹12,000", total: "₹1,20,600" },
+    { date: "22 Sep 2026", cash: "₹44,800", upi: "₹96,200", card: "₹22,000", cheque: "₹18,000", total: "₹1,81,000" },
   ]),
   courses: makeLearningPage("courses", "Courses", "Course", "Manage digital courses, instructors, enrollment, completion, and content progress.", "Create Course", ["course", "instructor", "students", "progress", "updated", "status"], [
     { course: "Physics Lab Foundations", instructor: "Ananya Rao", students: "186", progress: "78%", updated: "Today", status: "Active" },
@@ -669,6 +1286,23 @@ function makeFinancePage(
     { label: "Pending Review", value: "18", helper: "Finance queue", tone: "warning" },
     { label: "Exceptions", value: "6", helper: "Needs approval", tone: "danger" },
     { label: "Reconciled", value: "96%", helper: "Month to date", tone: "primary" },
+  ]);
+}
+
+function makeFmsPage(
+  key: string,
+  title: string,
+  noun: string,
+  description: string,
+  primaryAction: string,
+  columnKeys: string[],
+  rows: DataRow[],
+): PageConfig {
+  return makePage(key, title, "FMS", noun, description, primaryAction, columnKeys, rows, [
+    { label: "Collections MTD", value: "₹48.2L", helper: "Fee receipts", tone: "success" },
+    { label: "Pending Dues", value: "₹12.6L", helper: "Open balances", tone: "warning" },
+    { label: "Concessions", value: "86", helper: "Active this term", tone: "info" },
+    { label: "Reconciled", value: "94%", helper: "Bank + MOP", tone: "primary" },
   ]);
 }
 

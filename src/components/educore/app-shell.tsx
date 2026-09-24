@@ -1,26 +1,8 @@
 import {
-  Area,
-  AreaChart,
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import {
   Bell,
-  BookOpen,
   CheckCircle2,
   ChevronDown,
-  ChevronLeft,
   ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
   Download,
   Eye,
   EyeOff,
@@ -78,7 +60,6 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Progress } from "@/components/ui/progress";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
@@ -91,19 +72,15 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  attendanceData,
-  dashboardKpis,
   EduRoutePath,
-  enrollmentData,
-  feeCollectionData,
   flatNavigation,
   getNavigationItem,
+  isSectionActive,
   pageConfigs,
   pendingApprovals,
-  recentActivities,
   SummaryMetric,
-  upcomingEvents,
   type DataRow,
+  type NavSection,
   type PageConfig,
 } from "@/lib/educore-data";
 import {
@@ -120,6 +97,7 @@ import {
   type AppRole,
   type DemoSession,
 } from "@/lib/roles";
+import { AdminHomeDashboard } from "@/modules/admin-portal/components/admin-home-dashboard";
 import { cn } from "@/lib/utils";
 
 const fallbackRoute: EduRoutePath = "/dashboard";
@@ -397,8 +375,192 @@ function EduCoreShell({
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [locationPath, setLocationPath] = useState<string>(currentPath);
   const activeItem = getNavigationItem(currentPath);
-  const breadcrumbs = activeItem ? [activeItem.section, activeItem.title] : ["Workspace", "Dashboard"];
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setLocationPath(window.location.pathname);
+  }, [currentPath, children]);
+
+  const isRegistrationList = locationPath === "/admissions/registration";
+  const isRegistrationForm = locationPath.startsWith("/admissions/registration/");
+  const isStudentAdmission = locationPath === "/admissions/applied";
+  const isAdmissionReport = locationPath === "/admissions/report";
+  const isFeedbackReport = locationPath === "/academic/feedback-report";
+  const isStudentTc = locationPath === "/academic/student-tc";
+  const isWithheldList = locationPath === "/academic/withheld-list";
+  const isStudentAttendance = locationPath === "/academic/attendance";
+  const isClassAllocation = locationPath === "/academic/class-allocation-report";
+  const isMarksCard = locationPath === "/academic/marks-card";
+  const isMarksReport = locationPath === "/academic/marks-report";
+  const isSummatativeReport = locationPath === "/academic/summatative-report";
+  const isFeeTypeMaster = locationPath === "/fms/fee-type-master";
+  const isBankList = locationPath === "/fms/bank";
+  const isFeeDescription = locationPath === "/fms/fee-description";
+  const isPickupPoint = locationPath === "/fms/pickup-point";
+  const isFeeMaster = locationPath === "/fms/fee-master";
+  const isFeeReceipt = locationPath === "/fms/fee-receipt";
+  const isFeePrintList = locationPath === "/fms/fee-print-list";
+  const isCancelledFeeList = locationPath === "/fms/cancelled-fee-list";
+  const isUpdateStudentFee = locationPath === "/fms/update-student-fee";
+  const isUpdateMaterialFee = locationPath === "/fms/update-material-fee";
+  const isStudentConcession = locationPath === "/fms/student-concession";
+  const isChangeStudentFee = locationPath === "/fms/change-student-fee";
+  const isRteReport = locationPath === "/fms/rte-report";
+  const isFeeConcessionReport = locationPath === "/fms/fee-concession-report";
+  const isFeePendingReport = locationPath === "/fms/fee-pending-report";
+  const isFeeDueListPendingReport = locationPath === "/fms/fee-due-list-pending-report";
+  const isDayBookReport = locationPath === "/fms/day-book-report";
+  const isTransportFeeDueListPendingReport =
+    locationPath === "/fms/transport-fee-due-list-pending-report";
+  const isChequeClearence = locationPath === "/fms/cheque-clearence";
+  const isMopReport = locationPath === "/fms/mop-report";
+  const isDailyMopReport = locationPath === "/fms/daily-mop-report";
+  const breadcrumbs =
+    currentPath === "/dashboard"
+      ? ["Home", "Dashboard"]
+      : isRegistrationList
+        ? ["Home", "Applied & Admitted Lists"]
+        : isRegistrationForm
+          ? ["Admissions", "Student Registration"]
+          : isStudentAdmission
+            ? ["Home", "Student Admission"]
+            : isAdmissionReport
+              ? ["Home", "Student Admission Report"]
+              : isFeedbackReport
+                ? ["Home", "Student FeedBack Report"]
+                : isStudentTc
+                  ? ["Home", "Applicable for TC List"]
+                  : isWithheldList
+                    ? ["Home", "Applicable for WithHold List"]
+                    : isStudentAttendance
+                      ? ["Home", "Student Attendance"]
+                      : isClassAllocation
+                        ? ["Home", "Subject Faculty Info"]
+                        : isMarksCard
+                          ? ["Home", "Student MarksCard"]
+                          : isMarksReport
+                            ? ["Home", "Marks Report"]
+                            : isSummatativeReport
+                              ? ["Home", "Summatative Report"]
+                              : isFeeTypeMaster
+                                ? ["Home", "Add FeeType"]
+                                : isBankList
+                                  ? ["Home", "Bank List"]
+                                  : isFeeDescription
+                                    ? ["Home", "Fee Description List"]
+                                    : isPickupPoint
+                                      ? ["Home", "Pick Up Point List"]
+                                      : isFeeMaster
+                                        ? ["Home", "Fee List"]
+                                        : isFeeReceipt
+                                          ? ["Home", "Fee Receipt"]
+                                          : isFeePrintList
+                                            ? ["Home", "Fee Print List"]
+                                            : isCancelledFeeList
+                                              ? ["Home", "Cancel Fee Print List"]
+                                              : isUpdateStudentFee
+                                                ? ["Home", "Update Student Fee"]
+                                                : isUpdateMaterialFee
+                                                  ? ["Home", "Update Material Fee"]
+                                                  : isStudentConcession
+                                                    ? ["Home", "Student Concession"]
+                                                    : isChangeStudentFee
+                                                      ? ["Home", "Change/Upgrade Fees"]
+                                                      : isRteReport
+                                                        ? ["Home", "RTE Report"]
+                                                        : isFeeConcessionReport
+                                                          ? ["Home", "Fee Concession Details"]
+                                                          : isFeePendingReport
+                                                            ? ["Home", "Pending Fee- Details"]
+                                                            : isFeeDueListPendingReport
+                                                              ? ["Home", "Pending Fee-Descriptions"]
+                                                              : isDayBookReport
+                                                                ? ["Home", "Day Book Report"]
+                                                                : isTransportFeeDueListPendingReport
+                                                                  ? ["Home", "Pending Fee-Descriptions"]
+                                                                  : isChequeClearence
+                                                                    ? ["Home", "Accept Bank Transactions"]
+                                                                    : isMopReport
+                                                                      ? ["Home", "Mode of Payment Report"]
+                                                                      : isDailyMopReport
+                                                                        ? ["Home", "Mode of Payment Report"]
+                                                                        : activeItem
+                                                                          ? [activeItem.section, activeItem.title]
+                                                                          : ["Workspace", "Dashboard"];
+  const pageTitle =
+    currentPath === "/dashboard"
+      ? "Admin Dashboard"
+      : isRegistrationList
+        ? "Applied & Admitted Lists"
+        : locationPath.endsWith("/new")
+          ? "Add Student"
+          : isRegistrationForm
+            ? "Edit Student Admission"
+            : isStudentAdmission
+              ? "Student Admission"
+              : isAdmissionReport
+                ? "Student Admission Report"
+                : isFeedbackReport
+                  ? "Student FeedBack Report"
+                  : isStudentTc
+                    ? "Transfer Certificate List"
+                    : isWithheldList
+                      ? "WithHoldStatus List"
+                      : isStudentAttendance
+                        ? "Student Attendance"
+                        : isClassAllocation
+                          ? "Subject Faculty Info"
+                          : isMarksCard
+                            ? "Student MarksCard"
+                            : isMarksReport
+                              ? "Marks Report"
+                              : isSummatativeReport
+                                ? "Summatative Report"
+                                : isFeeTypeMaster
+                                  ? "Fee Type Master"
+                                  : isBankList
+                                    ? "Bank List"
+                                    : isFeeDescription
+                                      ? "Fee Description List"
+                                      : isPickupPoint
+                                        ? "Pickup Point List"
+                                        : isFeeMaster
+                                          ? "Fee List"
+                                          : isFeeReceipt
+                                            ? "Fee Receipt"
+                                            : isFeePrintList
+                                              ? "Fee Print List"
+                                              : isCancelledFeeList
+                                                ? "Cancel Fee Print List"
+                                                : isUpdateStudentFee
+                                                  ? "Update Student Fee"
+                                                  : isUpdateMaterialFee
+                                                    ? "Update Material Fee"
+                                                    : isStudentConcession
+                                                      ? "Student Concession"
+                                                      : isChangeStudentFee
+                                                        ? "Change/Upgrade Fees"
+                                                        : isRteReport
+                                                          ? "RTE Report"
+                                                          : isFeeConcessionReport
+                                                            ? "Fee Concession Details"
+                                                            : isFeePendingReport
+                                                              ? "Pending Fee- Details"
+                                                              : isFeeDueListPendingReport
+                                                                ? "Pending Fee-Descriptions"
+                                                                : isDayBookReport
+                                                                  ? "Day Book Report"
+                                                                  : isTransportFeeDueListPendingReport
+                                                                    ? "Transport Fee due List Pending Report"
+                                                                    : isChequeClearence
+                                                                      ? "Accept Bank Transactions"
+                                                                      : isMopReport
+                                                                        ? "Mode of Payment Report"
+                                                                        : isDailyMopReport
+                                                                          ? "Daily MOP Report"
+                                                                          : breadcrumbs[1];
   const sections = useMemo(() => getNavigationForRole(role), [role]);
 
   useEffect(() => {
@@ -443,7 +605,43 @@ function EduCoreShell({
               </div>
               <div className="min-w-0">
                 <Breadcrumbs items={breadcrumbs} />
-                <h1 className="truncate text-xl font-semibold tracking-normal text-foreground sm:text-2xl">{breadcrumbs[1]}</h1>
+                <h1 className={cn(
+                  "truncate text-xl font-semibold tracking-normal sm:text-2xl",
+                  currentPath === "/dashboard" ||
+                  isStudentAdmission ||
+                  isAdmissionReport ||
+                  isFeedbackReport ||
+                  isStudentTc ||
+                  isWithheldList ||
+                  isStudentAttendance ||
+                  isClassAllocation ||
+                  isMarksCard ||
+                  isMarksReport ||
+                  isSummatativeReport ||
+                  isFeeTypeMaster ||
+                  isBankList ||
+                  isFeeDescription ||
+                  isPickupPoint ||
+                  isFeeMaster ||
+                  isFeeReceipt ||
+                  isFeePrintList ||
+                  isCancelledFeeList ||
+                  isUpdateStudentFee ||
+                  isUpdateMaterialFee ||
+                  isStudentConcession ||
+                  isChangeStudentFee ||
+                  isRteReport ||
+                  isFeeConcessionReport ||
+                  isFeePendingReport ||
+                  isFeeDueListPendingReport ||
+                  isDayBookReport ||
+                  isTransportFeeDueListPendingReport ||
+                  isChequeClearence ||
+                  isMopReport ||
+                  isDailyMopReport
+                    ? "text-sky-500"
+                    : "text-foreground",
+                )}>{pageTitle}</h1>
               </div>
               <div className="flex min-w-0 items-center justify-end gap-2">
                 <GlobalSearch />
@@ -478,43 +676,160 @@ function SidebarContent({
   sections: ReturnType<typeof getNavigationForRole>;
   onNavigate: () => void;
 }) {
+  const [expandedIds, setExpandedIds] = useState<string[]>(() =>
+    sections.filter((section) => isSectionActive(section, currentPath)).map((section) => section.id),
+  );
+
+  useEffect(() => {
+    const activeIds = sections.filter((section) => isSectionActive(section, currentPath)).map((section) => section.id);
+    if (activeIds.length === 0) return;
+    setExpandedIds((current) => Array.from(new Set([...current, ...activeIds])));
+  }, [currentPath, sections]);
+
+  const mainSections = sections.filter((section) => section.group !== "extra");
+  const extraSections = sections.filter((section) => section.group === "extra");
+
+  const toggleExpanded = (id: string) => {
+    setExpandedIds((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]));
+  };
+
   return (
-    <div className="flex h-screen min-h-0 flex-col">
+    <div className="flex h-screen min-h-0 flex-col bg-sidebar">
       <div className="border-b border-sidebar-border p-4">
         <BrandMark expanded={!collapsed} />
       </div>
-      <ScrollArea className="min-h-0 flex-1 px-3 py-4">
-        <nav className="space-y-5">
-          {sections.map((section) => (
-            <div key={section.label} className="space-y-1">
-              {!collapsed && <p className="px-3 text-xs font-semibold uppercase text-muted-foreground">{section.label}</p>}
-              {section.items.map((item) => {
-                const isActive = item.path === currentPath;
-                return (
-                  <a
-                    key={item.path}
-                    href={item.path}
-                    onClick={onNavigate}
-                    className={cn(
-                      "group grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
-                      isActive
-                        ? "bg-primary text-primary-foreground shadow-enterprise-sm"
-                        : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                      collapsed && "grid-cols-1 justify-items-center px-2",
-                    )}
-                    aria-current={isActive ? "page" : undefined}
-                    title={collapsed ? item.title : undefined}
-                  >
-                    <item.icon className="size-4 shrink-0" />
-                    {!collapsed && <span className="truncate">{item.title}</span>}
-                    {!collapsed && section.items.length > 1 && <ChevronRight className="size-3 text-current opacity-40" />}
-                  </a>
-                );
-              })}
-            </div>
+      <ScrollArea className="min-h-0 flex-1">
+        <nav className="py-2">
+          {mainSections.map((section) => (
+            <SidebarNavRow
+              key={section.id}
+              section={section}
+              currentPath={currentPath}
+              collapsed={collapsed}
+              expanded={expandedIds.includes(section.id)}
+              onToggle={() => toggleExpanded(section.id)}
+              onNavigate={onNavigate}
+            />
           ))}
+          {extraSections.length > 0 && (
+            <>
+              <div className="mx-4 my-3 border-t border-sidebar-border" />
+              {!collapsed && (
+                <p className="px-4 pb-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  Extra Components
+                </p>
+              )}
+              {extraSections.map((section) => (
+                <SidebarNavRow
+                  key={section.id}
+                  section={section}
+                  currentPath={currentPath}
+                  collapsed={collapsed}
+                  expanded={expandedIds.includes(section.id)}
+                  onToggle={() => toggleExpanded(section.id)}
+                  onNavigate={onNavigate}
+                />
+              ))}
+            </>
+          )}
         </nav>
       </ScrollArea>
+    </div>
+  );
+}
+
+function SidebarNavRow({
+  section,
+  currentPath,
+  collapsed,
+  expanded,
+  onToggle,
+  onNavigate,
+}: {
+  section: NavSection;
+  currentPath: EduRoutePath;
+  collapsed: boolean;
+  expanded: boolean;
+  onToggle: () => void;
+  onNavigate: () => void;
+}) {
+  const isActive = isSectionActive(section, currentPath);
+  const href = section.path ?? section.items[0]?.path;
+  const hasChildren = section.expandable && section.items.length > 1;
+
+  const rowClassName = cn(
+    "relative flex w-full items-center gap-3 px-4 py-3 text-sm font-semibold transition-colors",
+    isActive
+      ? "bg-primary/5 text-primary before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:bg-primary"
+      : "text-slate-600 hover:bg-muted/60 hover:text-foreground",
+    collapsed && "justify-center px-2",
+  );
+
+  const labelClassName = cn("truncate", isActive && "underline underline-offset-4");
+
+  const content = (
+    <>
+      <section.icon className={cn("size-[18px] shrink-0", isActive ? "text-primary" : "text-slate-500")} />
+      {!collapsed && <span className={cn("min-w-0 flex-1 text-left", labelClassName)}>{section.label}</span>}
+      {!collapsed && section.expandable && (
+        expanded && hasChildren ? (
+          <ChevronDown className={cn("size-3.5 shrink-0", isActive ? "text-primary" : "text-slate-400")} />
+        ) : (
+          <ChevronRight className={cn("size-3.5 shrink-0", isActive ? "text-primary" : "text-slate-400")} />
+        )
+      )}
+    </>
+  );
+
+  return (
+    <div>
+      {section.expandable && hasChildren ? (
+        <button
+          type="button"
+          className={rowClassName}
+          onClick={onToggle}
+          title={collapsed ? section.label : undefined}
+          aria-expanded={expanded}
+        >
+          {content}
+        </button>
+      ) : href ? (
+        <a
+          href={href}
+          onClick={onNavigate}
+          className={rowClassName}
+          aria-current={isActive ? "page" : undefined}
+          title={collapsed ? section.label : undefined}
+        >
+          {content}
+        </a>
+      ) : (
+        <button type="button" className={rowClassName} onClick={onToggle} title={collapsed ? section.label : undefined}>
+          {content}
+        </button>
+      )}
+
+      {!collapsed && hasChildren && expanded && (
+        <div className="pb-1 pl-11">
+          {section.items.map((item) => {
+            const childActive = item.path === currentPath;
+            return (
+              <a
+                key={`${section.id}-${item.path}`}
+                href={item.path}
+                onClick={onNavigate}
+                className={cn(
+                  "block py-2.5 text-sm font-medium transition-colors",
+                  childActive ? "text-primary underline underline-offset-4" : "text-slate-600 hover:text-foreground",
+                )}
+                aria-current={childActive ? "page" : undefined}
+              >
+                {item.title}
+              </a>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
@@ -622,131 +937,7 @@ function ProfileMenu({ session }: { session: DemoSession | null }) {
 }
 
 function DashboardPage() {
-  return (
-    <div className="mx-auto max-w-7xl space-y-6">
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-6">
-        {dashboardKpis.map((metric) => <MetricCard key={metric.label} metric={metric} />)}
-      </div>
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1.4fr)_minmax(360px,0.8fr)]">
-        <Card className="rounded-lg border-border shadow-enterprise-sm">
-          <CardHeader className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 p-5">
-            <div className="min-w-0">
-              <CardTitle className="truncate text-base">Student Enrollment</CardTitle>
-              <p className="mt-1 text-sm text-muted-foreground">Monthly campus growth across active academic year.</p>
-            </div>
-            <Badge variant="outline" className="border-success-soft bg-success-soft text-success">+7.4%</Badge>
-          </CardHeader>
-          <CardContent className="h-80 p-5 pt-0">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={enrollmentData} margin={{ left: -18, right: 8, top: 12, bottom: 0 }}>
-                <defs>
-                  <linearGradient id="enrollmentFill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--color-primary)" stopOpacity={0.26} />
-                    <stop offset="95%" stopColor="var(--color-primary)" stopOpacity={0.02} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid stroke="var(--color-border)" vertical={false} />
-                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: "var(--color-muted-foreground)", fontSize: 12 }} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fill: "var(--color-muted-foreground)", fontSize: 12 }} />
-                <Tooltip content={<ChartTooltip suffix=" students" />} />
-                <Area type="monotone" dataKey="students" stroke="var(--color-primary)" strokeWidth={3} fill="url(#enrollmentFill)" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-        <Card className="rounded-lg border-border shadow-enterprise-sm">
-          <CardHeader className="p-5">
-            <CardTitle className="text-base">Pending Approvals</CardTitle>
-            <p className="text-sm text-muted-foreground">Operational items waiting on admin action.</p>
-          </CardHeader>
-          <CardContent className="space-y-3 p-5 pt-0">
-            {pendingApprovals.map((approval) => (
-              <div key={approval.title} className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-lg border border-border bg-muted/40 p-3">
-                <div className={cn("grid size-9 place-items-center rounded-md border", toneStyles[approval.tone as SummaryMetric["tone"]])}>
-                  <Bell className="size-4" />
-                </div>
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-foreground">{approval.title}</p>
-                  <p className="truncate text-xs text-muted-foreground">{approval.detail}</p>
-                </div>
-                <Button variant="outline" size="sm">{approval.action}</Button>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      </div>
-      <div className="grid gap-5 xl:grid-cols-2">
-        <Card className="rounded-lg border-border shadow-enterprise-sm">
-          <CardHeader className="p-5">
-            <CardTitle className="text-base">Attendance by Class</CardTitle>
-            <p className="text-sm text-muted-foreground">Today’s marked attendance percentage.</p>
-          </CardHeader>
-          <CardContent className="h-72 p-5 pt-0">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={attendanceData} margin={{ left: -18, right: 8, top: 12, bottom: 0 }}>
-                <CartesianGrid stroke="var(--color-border)" vertical={false} />
-                <XAxis dataKey="className" axisLine={false} tickLine={false} tick={{ fill: "var(--color-muted-foreground)", fontSize: 12 }} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fill: "var(--color-muted-foreground)", fontSize: 12 }} domain={[75, 100]} />
-                <Tooltip content={<ChartTooltip suffix="%" />} />
-                <Bar dataKey="value" radius={[4, 4, 0, 0]} fill="var(--color-info)" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-        <Card className="rounded-lg border-border shadow-enterprise-sm">
-          <CardHeader className="p-5">
-            <CardTitle className="text-base">Fee Collection</CardTitle>
-            <p className="text-sm text-muted-foreground">Term-wise receivables snapshot.</p>
-          </CardHeader>
-          <CardContent className="grid gap-4 p-5 pt-0 md:grid-cols-[220px_minmax(0,1fr)]">
-            <div className="h-60">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie data={feeCollectionData} dataKey="value" nameKey="label" innerRadius={54} outerRadius={86} paddingAngle={4}>
-                    {feeCollectionData.map((entry, index) => (
-                      <Cell key={entry.label} fill={["var(--color-success)", "var(--color-warning)", "var(--color-danger)"][index] ?? "var(--color-primary)"} />
-                    ))}
-                  </Pie>
-                  <Tooltip content={<ChartTooltip suffix="L" prefix="₹" />} />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="space-y-4 self-center">
-              {feeCollectionData.map((item) => (
-                <div key={item.label}>
-                  <div className="mb-1 flex items-center justify-between text-sm">
-                    <span className="font-medium text-foreground">{item.label}</span>
-                    <span className="text-muted-foreground">₹{item.value}L</span>
-                  </div>
-                  <Progress value={item.value} />
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.75fr)]">
-        <RecentActivityTable />
-        <Card className="rounded-lg border-border shadow-enterprise-sm">
-          <CardHeader className="p-5">
-            <CardTitle className="text-base">Upcoming Events</CardTitle>
-            <p className="text-sm text-muted-foreground">Events and academic dates in the next two weeks.</p>
-          </CardHeader>
-          <CardContent className="space-y-3 p-5 pt-0">
-            {upcomingEvents.map((event) => (
-              <div key={event.title} className="rounded-lg border border-border bg-card p-4">
-                <div className="flex items-center gap-2">
-                  <Badge variant="outline" className={cn("border", toneStyles[event.tone as SummaryMetric["tone"]])}>{event.tone}</Badge>
-                  <p className="font-medium text-foreground">{event.title}</p>
-                </div>
-                <p className="mt-2 text-sm text-muted-foreground">{event.detail}</p>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
+  return <AdminHomeDashboard />;
 }
 
 function ModulePage({ config }: { config: PageConfig | undefined }) {
@@ -982,67 +1173,6 @@ function LoadingRows() {
   return (
     <div className="space-y-3 rounded-lg border border-border p-4">
       {["one", "two", "three", "four"].map((item) => <Skeleton key={item} className="h-12 w-full" />)}
-    </div>
-  );
-}
-
-function RecentActivityTable() {
-  return (
-    <Card className="rounded-lg border-border shadow-enterprise-sm">
-      <CardHeader className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 p-5">
-        <div className="min-w-0">
-          <CardTitle className="truncate text-base">Recent Activities</CardTitle>
-          <p className="mt-1 text-sm text-muted-foreground">Latest records touched by admin teams.</p>
-        </div>
-        <Button variant="outline" size="sm">View all</Button>
-      </CardHeader>
-      <CardContent className="p-5 pt-0">
-        <div className="overflow-hidden rounded-lg border border-border">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[680px] border-collapse bg-card text-sm">
-              <thead className="bg-table-header text-xs uppercase text-muted-foreground">
-                <tr>
-                  <th className="px-4 py-3 text-left font-semibold">Type</th>
-                  <th className="px-4 py-3 text-left font-semibold">Activity</th>
-                  <th className="px-4 py-3 text-left font-semibold">By</th>
-                  <th className="px-4 py-3 text-left font-semibold">Time</th>
-                  <th className="px-4 py-3 text-left font-semibold">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentActivities.map((activity) => (
-                  <tr key={activity.title} className="border-t border-border">
-                    <td className="px-4 py-3"><Badge variant="secondary">{activity.type}</Badge></td>
-                    <td className="px-4 py-3 font-medium text-foreground">{activity.title}</td>
-                    <td className="px-4 py-3 text-muted-foreground">{activity.owner}</td>
-                    <td className="px-4 py-3 text-muted-foreground">{activity.time}</td>
-                    <td className="px-4 py-3"><StatusBadge status={activity.status} /></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
-type TooltipProps = {
-  active?: boolean;
-  payload?: Array<{ value?: number | string; name?: string }>;
-  label?: string;
-  suffix?: string;
-  prefix?: string;
-};
-
-function ChartTooltip({ active, payload, label, suffix = "", prefix = "" }: TooltipProps) {
-  const firstPayload = payload?.[0];
-  if (!active || !firstPayload) return null;
-  return (
-    <div className="rounded-md border border-border bg-popover px-3 py-2 text-sm text-popover-foreground shadow-enterprise-sm">
-      <p className="font-medium">{label ?? firstPayload.name}</p>
-      <p className="text-muted-foreground">{prefix}{firstPayload.value}{suffix}</p>
     </div>
   );
 }

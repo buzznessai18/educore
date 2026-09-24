@@ -13,15 +13,23 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as AcademicAttendanceRouteImport } from './routes/academic.attendance'
+import { Route as AcademicClassAllocationReportRouteImport } from './routes/academic.class-allocation-report'
 import { Route as AcademicClassesRouteImport } from './routes/academic.classes'
 import { Route as AcademicExaminationsRouteImport } from './routes/academic.examinations'
+import { Route as AcademicFeedbackReportRouteImport } from './routes/academic.feedback-report'
+import { Route as AcademicMarksCardRouteImport } from './routes/academic.marks-card'
+import { Route as AcademicMarksReportRouteImport } from './routes/academic.marks-report'
 import { Route as AcademicReportCardsRouteImport } from './routes/academic.report-cards'
 import { Route as AcademicResultsRouteImport } from './routes/academic.results'
 import { Route as AcademicSectionsRouteImport } from './routes/academic.sections'
+import { Route as AcademicSmsReportRouteImport } from './routes/academic.sms-report'
+import { Route as AcademicStudentTcRouteImport } from './routes/academic.student-tc'
 import { Route as AcademicStudentsRouteImport } from './routes/academic.students'
 import { Route as AcademicSubjectsRouteImport } from './routes/academic.subjects'
+import { Route as AcademicSummatativeReportRouteImport } from './routes/academic.summatative-report'
 import { Route as AcademicTeachersRouteImport } from './routes/academic.teachers'
 import { Route as AcademicTimetableRouteImport } from './routes/academic.timetable'
+import { Route as AcademicWithheldListRouteImport } from './routes/academic.withheld-list'
 import { Route as AdministrationCommunicationRouteImport } from './routes/administration.communication'
 import { Route as AdministrationDocumentsRouteImport } from './routes/administration.documents'
 import { Route as AdministrationEventsRouteImport } from './routes/administration.events'
@@ -35,11 +43,34 @@ import { Route as AdmissionsEnquiriesRouteImport } from './routes/admissions.enq
 import { Route as AdmissionsPortalRouteImport } from './routes/admissions.portal'
 import { Route as AdmissionsProcessRouteImport } from './routes/admissions.process'
 import { Route as AdmissionsRegistrationRouteImport } from './routes/admissions.registration'
+import { Route as AdmissionsReportRouteImport } from './routes/admissions.report'
 import { Route as FinanceExpensesRouteImport } from './routes/finance.expenses'
 import { Route as FinanceFeeStructureRouteImport } from './routes/finance.fee-structure'
 import { Route as FinanceFeesRouteImport } from './routes/finance.fees'
 import { Route as FinancePaymentsRouteImport } from './routes/finance.payments'
 import { Route as FinanceReportsRouteImport } from './routes/finance.reports'
+import { Route as FmsBankRouteImport } from './routes/fms.bank'
+import { Route as FmsCancelledFeeListRouteImport } from './routes/fms.cancelled-fee-list'
+import { Route as FmsChangeStudentFeeRouteImport } from './routes/fms.change-student-fee'
+import { Route as FmsChequeClearenceRouteImport } from './routes/fms.cheque-clearence'
+import { Route as FmsDailyMopReportRouteImport } from './routes/fms.daily-mop-report'
+import { Route as FmsDayBookReportRouteImport } from './routes/fms.day-book-report'
+import { Route as FmsFeeConcessionReportRouteImport } from './routes/fms.fee-concession-report'
+import { Route as FmsFeeDescriptionRouteImport } from './routes/fms.fee-description'
+import { Route as FmsFeeDescriptionPendingReportRouteImport } from './routes/fms.fee-description-pending-report'
+import { Route as FmsFeeDueListPendingReportRouteImport } from './routes/fms.fee-due-list-pending-report'
+import { Route as FmsFeeMasterRouteImport } from './routes/fms.fee-master'
+import { Route as FmsFeePendingReportRouteImport } from './routes/fms.fee-pending-report'
+import { Route as FmsFeePrintListRouteImport } from './routes/fms.fee-print-list'
+import { Route as FmsFeeReceiptRouteImport } from './routes/fms.fee-receipt'
+import { Route as FmsFeeTypeMasterRouteImport } from './routes/fms.fee-type-master'
+import { Route as FmsMopReportRouteImport } from './routes/fms.mop-report'
+import { Route as FmsPickupPointRouteImport } from './routes/fms.pickup-point'
+import { Route as FmsRteReportRouteImport } from './routes/fms.rte-report'
+import { Route as FmsStudentConcessionRouteImport } from './routes/fms.student-concession'
+import { Route as FmsTransportFeeDueListPendingReportRouteImport } from './routes/fms.transport-fee-due-list-pending-report'
+import { Route as FmsUpdateMaterialFeeRouteImport } from './routes/fms.update-material-fee'
+import { Route as FmsUpdateStudentFeeRouteImport } from './routes/fms.update-student-fee'
 import { Route as HrLeaveManagementRouteImport } from './routes/hr.leave-management'
 import { Route as HrPayrollRouteImport } from './routes/hr.payroll'
 import { Route as HrStaffRouteImport } from './routes/hr.staff'
@@ -52,6 +83,7 @@ import { Route as ReportsAttendanceRouteImport } from './routes/reports.attendan
 import { Route as ReportsFeesRouteImport } from './routes/reports.fees'
 import { Route as ReportsStudentsRouteImport } from './routes/reports.students'
 import { Route as AdmissionsRegistrationStudentIdRouteImport } from './routes/admissions.registration.$studentId'
+import { Route as AdmissionsRegistrationNewRouteImport } from './routes/admissions.registration.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -73,6 +105,12 @@ const AcademicAttendanceRoute = AcademicAttendanceRouteImport.update({
   path: '/academic/attendance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AcademicClassAllocationReportRoute =
+  AcademicClassAllocationReportRouteImport.update({
+    id: '/academic/class-allocation-report',
+    path: '/academic/class-allocation-report',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AcademicClassesRoute = AcademicClassesRouteImport.update({
   id: '/academic/classes',
   path: '/academic/classes',
@@ -81,6 +119,21 @@ const AcademicClassesRoute = AcademicClassesRouteImport.update({
 const AcademicExaminationsRoute = AcademicExaminationsRouteImport.update({
   id: '/academic/examinations',
   path: '/academic/examinations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademicFeedbackReportRoute = AcademicFeedbackReportRouteImport.update({
+  id: '/academic/feedback-report',
+  path: '/academic/feedback-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademicMarksCardRoute = AcademicMarksCardRouteImport.update({
+  id: '/academic/marks-card',
+  path: '/academic/marks-card',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademicMarksReportRoute = AcademicMarksReportRouteImport.update({
+  id: '/academic/marks-report',
+  path: '/academic/marks-report',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AcademicReportCardsRoute = AcademicReportCardsRouteImport.update({
@@ -98,6 +151,16 @@ const AcademicSectionsRoute = AcademicSectionsRouteImport.update({
   path: '/academic/sections',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AcademicSmsReportRoute = AcademicSmsReportRouteImport.update({
+  id: '/academic/sms-report',
+  path: '/academic/sms-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademicStudentTcRoute = AcademicStudentTcRouteImport.update({
+  id: '/academic/student-tc',
+  path: '/academic/student-tc',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AcademicStudentsRoute = AcademicStudentsRouteImport.update({
   id: '/academic/students',
   path: '/academic/students',
@@ -108,6 +171,12 @@ const AcademicSubjectsRoute = AcademicSubjectsRouteImport.update({
   path: '/academic/subjects',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AcademicSummatativeReportRoute =
+  AcademicSummatativeReportRouteImport.update({
+    id: '/academic/summatative-report',
+    path: '/academic/summatative-report',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AcademicTeachersRoute = AcademicTeachersRouteImport.update({
   id: '/academic/teachers',
   path: '/academic/teachers',
@@ -116,6 +185,11 @@ const AcademicTeachersRoute = AcademicTeachersRouteImport.update({
 const AcademicTimetableRoute = AcademicTimetableRouteImport.update({
   id: '/academic/timetable',
   path: '/academic/timetable',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademicWithheldListRoute = AcademicWithheldListRouteImport.update({
+  id: '/academic/withheld-list',
+  path: '/academic/withheld-list',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdministrationCommunicationRoute =
@@ -184,6 +258,11 @@ const AdmissionsRegistrationRoute = AdmissionsRegistrationRouteImport.update({
   path: '/admissions/registration',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdmissionsReportRoute = AdmissionsReportRouteImport.update({
+  id: '/admissions/report',
+  path: '/admissions/report',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FinanceExpensesRoute = FinanceExpensesRouteImport.update({
   id: '/finance/expenses',
   path: '/finance/expenses',
@@ -207,6 +286,119 @@ const FinancePaymentsRoute = FinancePaymentsRouteImport.update({
 const FinanceReportsRoute = FinanceReportsRouteImport.update({
   id: '/finance/reports',
   path: '/finance/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsBankRoute = FmsBankRouteImport.update({
+  id: '/fms/bank',
+  path: '/fms/bank',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsCancelledFeeListRoute = FmsCancelledFeeListRouteImport.update({
+  id: '/fms/cancelled-fee-list',
+  path: '/fms/cancelled-fee-list',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsChangeStudentFeeRoute = FmsChangeStudentFeeRouteImport.update({
+  id: '/fms/change-student-fee',
+  path: '/fms/change-student-fee',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsChequeClearenceRoute = FmsChequeClearenceRouteImport.update({
+  id: '/fms/cheque-clearence',
+  path: '/fms/cheque-clearence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsDailyMopReportRoute = FmsDailyMopReportRouteImport.update({
+  id: '/fms/daily-mop-report',
+  path: '/fms/daily-mop-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsDayBookReportRoute = FmsDayBookReportRouteImport.update({
+  id: '/fms/day-book-report',
+  path: '/fms/day-book-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsFeeConcessionReportRoute = FmsFeeConcessionReportRouteImport.update({
+  id: '/fms/fee-concession-report',
+  path: '/fms/fee-concession-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsFeeDescriptionRoute = FmsFeeDescriptionRouteImport.update({
+  id: '/fms/fee-description',
+  path: '/fms/fee-description',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsFeeDescriptionPendingReportRoute =
+  FmsFeeDescriptionPendingReportRouteImport.update({
+    id: '/fms/fee-description-pending-report',
+    path: '/fms/fee-description-pending-report',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const FmsFeeDueListPendingReportRoute =
+  FmsFeeDueListPendingReportRouteImport.update({
+    id: '/fms/fee-due-list-pending-report',
+    path: '/fms/fee-due-list-pending-report',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const FmsFeeMasterRoute = FmsFeeMasterRouteImport.update({
+  id: '/fms/fee-master',
+  path: '/fms/fee-master',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsFeePendingReportRoute = FmsFeePendingReportRouteImport.update({
+  id: '/fms/fee-pending-report',
+  path: '/fms/fee-pending-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsFeePrintListRoute = FmsFeePrintListRouteImport.update({
+  id: '/fms/fee-print-list',
+  path: '/fms/fee-print-list',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsFeeReceiptRoute = FmsFeeReceiptRouteImport.update({
+  id: '/fms/fee-receipt',
+  path: '/fms/fee-receipt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsFeeTypeMasterRoute = FmsFeeTypeMasterRouteImport.update({
+  id: '/fms/fee-type-master',
+  path: '/fms/fee-type-master',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsMopReportRoute = FmsMopReportRouteImport.update({
+  id: '/fms/mop-report',
+  path: '/fms/mop-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsPickupPointRoute = FmsPickupPointRouteImport.update({
+  id: '/fms/pickup-point',
+  path: '/fms/pickup-point',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsRteReportRoute = FmsRteReportRouteImport.update({
+  id: '/fms/rte-report',
+  path: '/fms/rte-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsStudentConcessionRoute = FmsStudentConcessionRouteImport.update({
+  id: '/fms/student-concession',
+  path: '/fms/student-concession',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsTransportFeeDueListPendingReportRoute =
+  FmsTransportFeeDueListPendingReportRouteImport.update({
+    id: '/fms/transport-fee-due-list-pending-report',
+    path: '/fms/transport-fee-due-list-pending-report',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const FmsUpdateMaterialFeeRoute = FmsUpdateMaterialFeeRouteImport.update({
+  id: '/fms/update-material-fee',
+  path: '/fms/update-material-fee',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FmsUpdateStudentFeeRoute = FmsUpdateStudentFeeRouteImport.update({
+  id: '/fms/update-student-fee',
+  path: '/fms/update-student-fee',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HrLeaveManagementRoute = HrLeaveManagementRouteImport.update({
@@ -270,21 +462,35 @@ const AdmissionsRegistrationStudentIdRoute =
     path: '/$studentId',
     getParentRoute: () => AdmissionsRegistrationRoute,
   } as any)
+const AdmissionsRegistrationNewRoute =
+  AdmissionsRegistrationNewRouteImport.update({
+    id: '/new',
+    path: '/new',
+    getParentRoute: () => AdmissionsRegistrationRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/settings': typeof SettingsRoute
   '/academic/attendance': typeof AcademicAttendanceRoute
+  '/academic/class-allocation-report': typeof AcademicClassAllocationReportRoute
   '/academic/classes': typeof AcademicClassesRoute
   '/academic/examinations': typeof AcademicExaminationsRoute
+  '/academic/feedback-report': typeof AcademicFeedbackReportRoute
+  '/academic/marks-card': typeof AcademicMarksCardRoute
+  '/academic/marks-report': typeof AcademicMarksReportRoute
   '/academic/report-cards': typeof AcademicReportCardsRoute
   '/academic/results': typeof AcademicResultsRoute
   '/academic/sections': typeof AcademicSectionsRoute
+  '/academic/sms-report': typeof AcademicSmsReportRoute
+  '/academic/student-tc': typeof AcademicStudentTcRoute
   '/academic/students': typeof AcademicStudentsRoute
   '/academic/subjects': typeof AcademicSubjectsRoute
+  '/academic/summatative-report': typeof AcademicSummatativeReportRoute
   '/academic/teachers': typeof AcademicTeachersRoute
   '/academic/timetable': typeof AcademicTimetableRoute
+  '/academic/withheld-list': typeof AcademicWithheldListRoute
   '/administration/communication': typeof AdministrationCommunicationRoute
   '/administration/documents': typeof AdministrationDocumentsRoute
   '/administration/events': typeof AdministrationEventsRoute
@@ -298,11 +504,34 @@ export interface FileRoutesByFullPath {
   '/admissions/portal': typeof AdmissionsPortalRoute
   '/admissions/process': typeof AdmissionsProcessRoute
   '/admissions/registration': typeof AdmissionsRegistrationRouteWithChildren
+  '/admissions/report': typeof AdmissionsReportRoute
   '/finance/expenses': typeof FinanceExpensesRoute
   '/finance/fee-structure': typeof FinanceFeeStructureRoute
   '/finance/fees': typeof FinanceFeesRoute
   '/finance/payments': typeof FinancePaymentsRoute
   '/finance/reports': typeof FinanceReportsRoute
+  '/fms/bank': typeof FmsBankRoute
+  '/fms/cancelled-fee-list': typeof FmsCancelledFeeListRoute
+  '/fms/change-student-fee': typeof FmsChangeStudentFeeRoute
+  '/fms/cheque-clearence': typeof FmsChequeClearenceRoute
+  '/fms/daily-mop-report': typeof FmsDailyMopReportRoute
+  '/fms/day-book-report': typeof FmsDayBookReportRoute
+  '/fms/fee-concession-report': typeof FmsFeeConcessionReportRoute
+  '/fms/fee-description': typeof FmsFeeDescriptionRoute
+  '/fms/fee-description-pending-report': typeof FmsFeeDescriptionPendingReportRoute
+  '/fms/fee-due-list-pending-report': typeof FmsFeeDueListPendingReportRoute
+  '/fms/fee-master': typeof FmsFeeMasterRoute
+  '/fms/fee-pending-report': typeof FmsFeePendingReportRoute
+  '/fms/fee-print-list': typeof FmsFeePrintListRoute
+  '/fms/fee-receipt': typeof FmsFeeReceiptRoute
+  '/fms/fee-type-master': typeof FmsFeeTypeMasterRoute
+  '/fms/mop-report': typeof FmsMopReportRoute
+  '/fms/pickup-point': typeof FmsPickupPointRoute
+  '/fms/rte-report': typeof FmsRteReportRoute
+  '/fms/student-concession': typeof FmsStudentConcessionRoute
+  '/fms/transport-fee-due-list-pending-report': typeof FmsTransportFeeDueListPendingReportRoute
+  '/fms/update-material-fee': typeof FmsUpdateMaterialFeeRoute
+  '/fms/update-student-fee': typeof FmsUpdateStudentFeeRoute
   '/hr/leave-management': typeof HrLeaveManagementRoute
   '/hr/payroll': typeof HrPayrollRoute
   '/hr/staff': typeof HrStaffRoute
@@ -315,21 +544,30 @@ export interface FileRoutesByFullPath {
   '/reports/fees': typeof ReportsFeesRoute
   '/reports/students': typeof ReportsStudentsRoute
   '/admissions/registration/$studentId': typeof AdmissionsRegistrationStudentIdRoute
+  '/admissions/registration/new': typeof AdmissionsRegistrationNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/settings': typeof SettingsRoute
   '/academic/attendance': typeof AcademicAttendanceRoute
+  '/academic/class-allocation-report': typeof AcademicClassAllocationReportRoute
   '/academic/classes': typeof AcademicClassesRoute
   '/academic/examinations': typeof AcademicExaminationsRoute
+  '/academic/feedback-report': typeof AcademicFeedbackReportRoute
+  '/academic/marks-card': typeof AcademicMarksCardRoute
+  '/academic/marks-report': typeof AcademicMarksReportRoute
   '/academic/report-cards': typeof AcademicReportCardsRoute
   '/academic/results': typeof AcademicResultsRoute
   '/academic/sections': typeof AcademicSectionsRoute
+  '/academic/sms-report': typeof AcademicSmsReportRoute
+  '/academic/student-tc': typeof AcademicStudentTcRoute
   '/academic/students': typeof AcademicStudentsRoute
   '/academic/subjects': typeof AcademicSubjectsRoute
+  '/academic/summatative-report': typeof AcademicSummatativeReportRoute
   '/academic/teachers': typeof AcademicTeachersRoute
   '/academic/timetable': typeof AcademicTimetableRoute
+  '/academic/withheld-list': typeof AcademicWithheldListRoute
   '/administration/communication': typeof AdministrationCommunicationRoute
   '/administration/documents': typeof AdministrationDocumentsRoute
   '/administration/events': typeof AdministrationEventsRoute
@@ -343,11 +581,34 @@ export interface FileRoutesByTo {
   '/admissions/portal': typeof AdmissionsPortalRoute
   '/admissions/process': typeof AdmissionsProcessRoute
   '/admissions/registration': typeof AdmissionsRegistrationRouteWithChildren
+  '/admissions/report': typeof AdmissionsReportRoute
   '/finance/expenses': typeof FinanceExpensesRoute
   '/finance/fee-structure': typeof FinanceFeeStructureRoute
   '/finance/fees': typeof FinanceFeesRoute
   '/finance/payments': typeof FinancePaymentsRoute
   '/finance/reports': typeof FinanceReportsRoute
+  '/fms/bank': typeof FmsBankRoute
+  '/fms/cancelled-fee-list': typeof FmsCancelledFeeListRoute
+  '/fms/change-student-fee': typeof FmsChangeStudentFeeRoute
+  '/fms/cheque-clearence': typeof FmsChequeClearenceRoute
+  '/fms/daily-mop-report': typeof FmsDailyMopReportRoute
+  '/fms/day-book-report': typeof FmsDayBookReportRoute
+  '/fms/fee-concession-report': typeof FmsFeeConcessionReportRoute
+  '/fms/fee-description': typeof FmsFeeDescriptionRoute
+  '/fms/fee-description-pending-report': typeof FmsFeeDescriptionPendingReportRoute
+  '/fms/fee-due-list-pending-report': typeof FmsFeeDueListPendingReportRoute
+  '/fms/fee-master': typeof FmsFeeMasterRoute
+  '/fms/fee-pending-report': typeof FmsFeePendingReportRoute
+  '/fms/fee-print-list': typeof FmsFeePrintListRoute
+  '/fms/fee-receipt': typeof FmsFeeReceiptRoute
+  '/fms/fee-type-master': typeof FmsFeeTypeMasterRoute
+  '/fms/mop-report': typeof FmsMopReportRoute
+  '/fms/pickup-point': typeof FmsPickupPointRoute
+  '/fms/rte-report': typeof FmsRteReportRoute
+  '/fms/student-concession': typeof FmsStudentConcessionRoute
+  '/fms/transport-fee-due-list-pending-report': typeof FmsTransportFeeDueListPendingReportRoute
+  '/fms/update-material-fee': typeof FmsUpdateMaterialFeeRoute
+  '/fms/update-student-fee': typeof FmsUpdateStudentFeeRoute
   '/hr/leave-management': typeof HrLeaveManagementRoute
   '/hr/payroll': typeof HrPayrollRoute
   '/hr/staff': typeof HrStaffRoute
@@ -360,6 +621,7 @@ export interface FileRoutesByTo {
   '/reports/fees': typeof ReportsFeesRoute
   '/reports/students': typeof ReportsStudentsRoute
   '/admissions/registration/$studentId': typeof AdmissionsRegistrationStudentIdRoute
+  '/admissions/registration/new': typeof AdmissionsRegistrationNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -367,15 +629,23 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/settings': typeof SettingsRoute
   '/academic/attendance': typeof AcademicAttendanceRoute
+  '/academic/class-allocation-report': typeof AcademicClassAllocationReportRoute
   '/academic/classes': typeof AcademicClassesRoute
   '/academic/examinations': typeof AcademicExaminationsRoute
+  '/academic/feedback-report': typeof AcademicFeedbackReportRoute
+  '/academic/marks-card': typeof AcademicMarksCardRoute
+  '/academic/marks-report': typeof AcademicMarksReportRoute
   '/academic/report-cards': typeof AcademicReportCardsRoute
   '/academic/results': typeof AcademicResultsRoute
   '/academic/sections': typeof AcademicSectionsRoute
+  '/academic/sms-report': typeof AcademicSmsReportRoute
+  '/academic/student-tc': typeof AcademicStudentTcRoute
   '/academic/students': typeof AcademicStudentsRoute
   '/academic/subjects': typeof AcademicSubjectsRoute
+  '/academic/summatative-report': typeof AcademicSummatativeReportRoute
   '/academic/teachers': typeof AcademicTeachersRoute
   '/academic/timetable': typeof AcademicTimetableRoute
+  '/academic/withheld-list': typeof AcademicWithheldListRoute
   '/administration/communication': typeof AdministrationCommunicationRoute
   '/administration/documents': typeof AdministrationDocumentsRoute
   '/administration/events': typeof AdministrationEventsRoute
@@ -389,11 +659,34 @@ export interface FileRoutesById {
   '/admissions/portal': typeof AdmissionsPortalRoute
   '/admissions/process': typeof AdmissionsProcessRoute
   '/admissions/registration': typeof AdmissionsRegistrationRouteWithChildren
+  '/admissions/report': typeof AdmissionsReportRoute
   '/finance/expenses': typeof FinanceExpensesRoute
   '/finance/fee-structure': typeof FinanceFeeStructureRoute
   '/finance/fees': typeof FinanceFeesRoute
   '/finance/payments': typeof FinancePaymentsRoute
   '/finance/reports': typeof FinanceReportsRoute
+  '/fms/bank': typeof FmsBankRoute
+  '/fms/cancelled-fee-list': typeof FmsCancelledFeeListRoute
+  '/fms/change-student-fee': typeof FmsChangeStudentFeeRoute
+  '/fms/cheque-clearence': typeof FmsChequeClearenceRoute
+  '/fms/daily-mop-report': typeof FmsDailyMopReportRoute
+  '/fms/day-book-report': typeof FmsDayBookReportRoute
+  '/fms/fee-concession-report': typeof FmsFeeConcessionReportRoute
+  '/fms/fee-description': typeof FmsFeeDescriptionRoute
+  '/fms/fee-description-pending-report': typeof FmsFeeDescriptionPendingReportRoute
+  '/fms/fee-due-list-pending-report': typeof FmsFeeDueListPendingReportRoute
+  '/fms/fee-master': typeof FmsFeeMasterRoute
+  '/fms/fee-pending-report': typeof FmsFeePendingReportRoute
+  '/fms/fee-print-list': typeof FmsFeePrintListRoute
+  '/fms/fee-receipt': typeof FmsFeeReceiptRoute
+  '/fms/fee-type-master': typeof FmsFeeTypeMasterRoute
+  '/fms/mop-report': typeof FmsMopReportRoute
+  '/fms/pickup-point': typeof FmsPickupPointRoute
+  '/fms/rte-report': typeof FmsRteReportRoute
+  '/fms/student-concession': typeof FmsStudentConcessionRoute
+  '/fms/transport-fee-due-list-pending-report': typeof FmsTransportFeeDueListPendingReportRoute
+  '/fms/update-material-fee': typeof FmsUpdateMaterialFeeRoute
+  '/fms/update-student-fee': typeof FmsUpdateStudentFeeRoute
   '/hr/leave-management': typeof HrLeaveManagementRoute
   '/hr/payroll': typeof HrPayrollRoute
   '/hr/staff': typeof HrStaffRoute
@@ -406,6 +699,7 @@ export interface FileRoutesById {
   '/reports/fees': typeof ReportsFeesRoute
   '/reports/students': typeof ReportsStudentsRoute
   '/admissions/registration/$studentId': typeof AdmissionsRegistrationStudentIdRoute
+  '/admissions/registration/new': typeof AdmissionsRegistrationNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -414,15 +708,23 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/settings'
     | '/academic/attendance'
+    | '/academic/class-allocation-report'
     | '/academic/classes'
     | '/academic/examinations'
+    | '/academic/feedback-report'
+    | '/academic/marks-card'
+    | '/academic/marks-report'
     | '/academic/report-cards'
     | '/academic/results'
     | '/academic/sections'
+    | '/academic/sms-report'
+    | '/academic/student-tc'
     | '/academic/students'
     | '/academic/subjects'
+    | '/academic/summatative-report'
     | '/academic/teachers'
     | '/academic/timetable'
+    | '/academic/withheld-list'
     | '/administration/communication'
     | '/administration/documents'
     | '/administration/events'
@@ -436,11 +738,34 @@ export interface FileRouteTypes {
     | '/admissions/portal'
     | '/admissions/process'
     | '/admissions/registration'
+    | '/admissions/report'
     | '/finance/expenses'
     | '/finance/fee-structure'
     | '/finance/fees'
     | '/finance/payments'
     | '/finance/reports'
+    | '/fms/bank'
+    | '/fms/cancelled-fee-list'
+    | '/fms/change-student-fee'
+    | '/fms/cheque-clearence'
+    | '/fms/daily-mop-report'
+    | '/fms/day-book-report'
+    | '/fms/fee-concession-report'
+    | '/fms/fee-description'
+    | '/fms/fee-description-pending-report'
+    | '/fms/fee-due-list-pending-report'
+    | '/fms/fee-master'
+    | '/fms/fee-pending-report'
+    | '/fms/fee-print-list'
+    | '/fms/fee-receipt'
+    | '/fms/fee-type-master'
+    | '/fms/mop-report'
+    | '/fms/pickup-point'
+    | '/fms/rte-report'
+    | '/fms/student-concession'
+    | '/fms/transport-fee-due-list-pending-report'
+    | '/fms/update-material-fee'
+    | '/fms/update-student-fee'
     | '/hr/leave-management'
     | '/hr/payroll'
     | '/hr/staff'
@@ -453,21 +778,30 @@ export interface FileRouteTypes {
     | '/reports/fees'
     | '/reports/students'
     | '/admissions/registration/$studentId'
+    | '/admissions/registration/new'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/dashboard'
     | '/settings'
     | '/academic/attendance'
+    | '/academic/class-allocation-report'
     | '/academic/classes'
     | '/academic/examinations'
+    | '/academic/feedback-report'
+    | '/academic/marks-card'
+    | '/academic/marks-report'
     | '/academic/report-cards'
     | '/academic/results'
     | '/academic/sections'
+    | '/academic/sms-report'
+    | '/academic/student-tc'
     | '/academic/students'
     | '/academic/subjects'
+    | '/academic/summatative-report'
     | '/academic/teachers'
     | '/academic/timetable'
+    | '/academic/withheld-list'
     | '/administration/communication'
     | '/administration/documents'
     | '/administration/events'
@@ -481,11 +815,34 @@ export interface FileRouteTypes {
     | '/admissions/portal'
     | '/admissions/process'
     | '/admissions/registration'
+    | '/admissions/report'
     | '/finance/expenses'
     | '/finance/fee-structure'
     | '/finance/fees'
     | '/finance/payments'
     | '/finance/reports'
+    | '/fms/bank'
+    | '/fms/cancelled-fee-list'
+    | '/fms/change-student-fee'
+    | '/fms/cheque-clearence'
+    | '/fms/daily-mop-report'
+    | '/fms/day-book-report'
+    | '/fms/fee-concession-report'
+    | '/fms/fee-description'
+    | '/fms/fee-description-pending-report'
+    | '/fms/fee-due-list-pending-report'
+    | '/fms/fee-master'
+    | '/fms/fee-pending-report'
+    | '/fms/fee-print-list'
+    | '/fms/fee-receipt'
+    | '/fms/fee-type-master'
+    | '/fms/mop-report'
+    | '/fms/pickup-point'
+    | '/fms/rte-report'
+    | '/fms/student-concession'
+    | '/fms/transport-fee-due-list-pending-report'
+    | '/fms/update-material-fee'
+    | '/fms/update-student-fee'
     | '/hr/leave-management'
     | '/hr/payroll'
     | '/hr/staff'
@@ -498,21 +855,30 @@ export interface FileRouteTypes {
     | '/reports/fees'
     | '/reports/students'
     | '/admissions/registration/$studentId'
+    | '/admissions/registration/new'
   id:
     | '__root__'
     | '/'
     | '/dashboard'
     | '/settings'
     | '/academic/attendance'
+    | '/academic/class-allocation-report'
     | '/academic/classes'
     | '/academic/examinations'
+    | '/academic/feedback-report'
+    | '/academic/marks-card'
+    | '/academic/marks-report'
     | '/academic/report-cards'
     | '/academic/results'
     | '/academic/sections'
+    | '/academic/sms-report'
+    | '/academic/student-tc'
     | '/academic/students'
     | '/academic/subjects'
+    | '/academic/summatative-report'
     | '/academic/teachers'
     | '/academic/timetable'
+    | '/academic/withheld-list'
     | '/administration/communication'
     | '/administration/documents'
     | '/administration/events'
@@ -526,11 +892,34 @@ export interface FileRouteTypes {
     | '/admissions/portal'
     | '/admissions/process'
     | '/admissions/registration'
+    | '/admissions/report'
     | '/finance/expenses'
     | '/finance/fee-structure'
     | '/finance/fees'
     | '/finance/payments'
     | '/finance/reports'
+    | '/fms/bank'
+    | '/fms/cancelled-fee-list'
+    | '/fms/change-student-fee'
+    | '/fms/cheque-clearence'
+    | '/fms/daily-mop-report'
+    | '/fms/day-book-report'
+    | '/fms/fee-concession-report'
+    | '/fms/fee-description'
+    | '/fms/fee-description-pending-report'
+    | '/fms/fee-due-list-pending-report'
+    | '/fms/fee-master'
+    | '/fms/fee-pending-report'
+    | '/fms/fee-print-list'
+    | '/fms/fee-receipt'
+    | '/fms/fee-type-master'
+    | '/fms/mop-report'
+    | '/fms/pickup-point'
+    | '/fms/rte-report'
+    | '/fms/student-concession'
+    | '/fms/transport-fee-due-list-pending-report'
+    | '/fms/update-material-fee'
+    | '/fms/update-student-fee'
     | '/hr/leave-management'
     | '/hr/payroll'
     | '/hr/staff'
@@ -543,6 +932,7 @@ export interface FileRouteTypes {
     | '/reports/fees'
     | '/reports/students'
     | '/admissions/registration/$studentId'
+    | '/admissions/registration/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -550,15 +940,23 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   SettingsRoute: typeof SettingsRoute
   AcademicAttendanceRoute: typeof AcademicAttendanceRoute
+  AcademicClassAllocationReportRoute: typeof AcademicClassAllocationReportRoute
   AcademicClassesRoute: typeof AcademicClassesRoute
   AcademicExaminationsRoute: typeof AcademicExaminationsRoute
+  AcademicFeedbackReportRoute: typeof AcademicFeedbackReportRoute
+  AcademicMarksCardRoute: typeof AcademicMarksCardRoute
+  AcademicMarksReportRoute: typeof AcademicMarksReportRoute
   AcademicReportCardsRoute: typeof AcademicReportCardsRoute
   AcademicResultsRoute: typeof AcademicResultsRoute
   AcademicSectionsRoute: typeof AcademicSectionsRoute
+  AcademicSmsReportRoute: typeof AcademicSmsReportRoute
+  AcademicStudentTcRoute: typeof AcademicStudentTcRoute
   AcademicStudentsRoute: typeof AcademicStudentsRoute
   AcademicSubjectsRoute: typeof AcademicSubjectsRoute
+  AcademicSummatativeReportRoute: typeof AcademicSummatativeReportRoute
   AcademicTeachersRoute: typeof AcademicTeachersRoute
   AcademicTimetableRoute: typeof AcademicTimetableRoute
+  AcademicWithheldListRoute: typeof AcademicWithheldListRoute
   AdministrationCommunicationRoute: typeof AdministrationCommunicationRoute
   AdministrationDocumentsRoute: typeof AdministrationDocumentsRoute
   AdministrationEventsRoute: typeof AdministrationEventsRoute
@@ -572,11 +970,34 @@ export interface RootRouteChildren {
   AdmissionsPortalRoute: typeof AdmissionsPortalRoute
   AdmissionsProcessRoute: typeof AdmissionsProcessRoute
   AdmissionsRegistrationRoute: typeof AdmissionsRegistrationRouteWithChildren
+  AdmissionsReportRoute: typeof AdmissionsReportRoute
   FinanceExpensesRoute: typeof FinanceExpensesRoute
   FinanceFeeStructureRoute: typeof FinanceFeeStructureRoute
   FinanceFeesRoute: typeof FinanceFeesRoute
   FinancePaymentsRoute: typeof FinancePaymentsRoute
   FinanceReportsRoute: typeof FinanceReportsRoute
+  FmsBankRoute: typeof FmsBankRoute
+  FmsCancelledFeeListRoute: typeof FmsCancelledFeeListRoute
+  FmsChangeStudentFeeRoute: typeof FmsChangeStudentFeeRoute
+  FmsChequeClearenceRoute: typeof FmsChequeClearenceRoute
+  FmsDailyMopReportRoute: typeof FmsDailyMopReportRoute
+  FmsDayBookReportRoute: typeof FmsDayBookReportRoute
+  FmsFeeConcessionReportRoute: typeof FmsFeeConcessionReportRoute
+  FmsFeeDescriptionRoute: typeof FmsFeeDescriptionRoute
+  FmsFeeDescriptionPendingReportRoute: typeof FmsFeeDescriptionPendingReportRoute
+  FmsFeeDueListPendingReportRoute: typeof FmsFeeDueListPendingReportRoute
+  FmsFeeMasterRoute: typeof FmsFeeMasterRoute
+  FmsFeePendingReportRoute: typeof FmsFeePendingReportRoute
+  FmsFeePrintListRoute: typeof FmsFeePrintListRoute
+  FmsFeeReceiptRoute: typeof FmsFeeReceiptRoute
+  FmsFeeTypeMasterRoute: typeof FmsFeeTypeMasterRoute
+  FmsMopReportRoute: typeof FmsMopReportRoute
+  FmsPickupPointRoute: typeof FmsPickupPointRoute
+  FmsRteReportRoute: typeof FmsRteReportRoute
+  FmsStudentConcessionRoute: typeof FmsStudentConcessionRoute
+  FmsTransportFeeDueListPendingReportRoute: typeof FmsTransportFeeDueListPendingReportRoute
+  FmsUpdateMaterialFeeRoute: typeof FmsUpdateMaterialFeeRoute
+  FmsUpdateStudentFeeRoute: typeof FmsUpdateStudentFeeRoute
   HrLeaveManagementRoute: typeof HrLeaveManagementRoute
   HrPayrollRoute: typeof HrPayrollRoute
   HrStaffRoute: typeof HrStaffRoute
@@ -620,6 +1041,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AcademicAttendanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/academic/class-allocation-report': {
+      id: '/academic/class-allocation-report'
+      path: '/academic/class-allocation-report'
+      fullPath: '/academic/class-allocation-report'
+      preLoaderRoute: typeof AcademicClassAllocationReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/academic/classes': {
       id: '/academic/classes'
       path: '/academic/classes'
@@ -632,6 +1060,27 @@ declare module '@tanstack/react-router' {
       path: '/academic/examinations'
       fullPath: '/academic/examinations'
       preLoaderRoute: typeof AcademicExaminationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academic/feedback-report': {
+      id: '/academic/feedback-report'
+      path: '/academic/feedback-report'
+      fullPath: '/academic/feedback-report'
+      preLoaderRoute: typeof AcademicFeedbackReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academic/marks-card': {
+      id: '/academic/marks-card'
+      path: '/academic/marks-card'
+      fullPath: '/academic/marks-card'
+      preLoaderRoute: typeof AcademicMarksCardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academic/marks-report': {
+      id: '/academic/marks-report'
+      path: '/academic/marks-report'
+      fullPath: '/academic/marks-report'
+      preLoaderRoute: typeof AcademicMarksReportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/academic/report-cards': {
@@ -655,6 +1104,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AcademicSectionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/academic/sms-report': {
+      id: '/academic/sms-report'
+      path: '/academic/sms-report'
+      fullPath: '/academic/sms-report'
+      preLoaderRoute: typeof AcademicSmsReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academic/student-tc': {
+      id: '/academic/student-tc'
+      path: '/academic/student-tc'
+      fullPath: '/academic/student-tc'
+      preLoaderRoute: typeof AcademicStudentTcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/academic/students': {
       id: '/academic/students'
       path: '/academic/students'
@@ -669,6 +1132,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AcademicSubjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/academic/summatative-report': {
+      id: '/academic/summatative-report'
+      path: '/academic/summatative-report'
+      fullPath: '/academic/summatative-report'
+      preLoaderRoute: typeof AcademicSummatativeReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/academic/teachers': {
       id: '/academic/teachers'
       path: '/academic/teachers'
@@ -681,6 +1151,13 @@ declare module '@tanstack/react-router' {
       path: '/academic/timetable'
       fullPath: '/academic/timetable'
       preLoaderRoute: typeof AcademicTimetableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academic/withheld-list': {
+      id: '/academic/withheld-list'
+      path: '/academic/withheld-list'
+      fullPath: '/academic/withheld-list'
+      preLoaderRoute: typeof AcademicWithheldListRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/administration/communication': {
@@ -774,6 +1251,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdmissionsRegistrationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admissions/report': {
+      id: '/admissions/report'
+      path: '/admissions/report'
+      fullPath: '/admissions/report'
+      preLoaderRoute: typeof AdmissionsReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/finance/expenses': {
       id: '/finance/expenses'
       path: '/finance/expenses'
@@ -807,6 +1291,160 @@ declare module '@tanstack/react-router' {
       path: '/finance/reports'
       fullPath: '/finance/reports'
       preLoaderRoute: typeof FinanceReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/bank': {
+      id: '/fms/bank'
+      path: '/fms/bank'
+      fullPath: '/fms/bank'
+      preLoaderRoute: typeof FmsBankRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/cancelled-fee-list': {
+      id: '/fms/cancelled-fee-list'
+      path: '/fms/cancelled-fee-list'
+      fullPath: '/fms/cancelled-fee-list'
+      preLoaderRoute: typeof FmsCancelledFeeListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/change-student-fee': {
+      id: '/fms/change-student-fee'
+      path: '/fms/change-student-fee'
+      fullPath: '/fms/change-student-fee'
+      preLoaderRoute: typeof FmsChangeStudentFeeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/cheque-clearence': {
+      id: '/fms/cheque-clearence'
+      path: '/fms/cheque-clearence'
+      fullPath: '/fms/cheque-clearence'
+      preLoaderRoute: typeof FmsChequeClearenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/daily-mop-report': {
+      id: '/fms/daily-mop-report'
+      path: '/fms/daily-mop-report'
+      fullPath: '/fms/daily-mop-report'
+      preLoaderRoute: typeof FmsDailyMopReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/day-book-report': {
+      id: '/fms/day-book-report'
+      path: '/fms/day-book-report'
+      fullPath: '/fms/day-book-report'
+      preLoaderRoute: typeof FmsDayBookReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/fee-concession-report': {
+      id: '/fms/fee-concession-report'
+      path: '/fms/fee-concession-report'
+      fullPath: '/fms/fee-concession-report'
+      preLoaderRoute: typeof FmsFeeConcessionReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/fee-description': {
+      id: '/fms/fee-description'
+      path: '/fms/fee-description'
+      fullPath: '/fms/fee-description'
+      preLoaderRoute: typeof FmsFeeDescriptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/fee-description-pending-report': {
+      id: '/fms/fee-description-pending-report'
+      path: '/fms/fee-description-pending-report'
+      fullPath: '/fms/fee-description-pending-report'
+      preLoaderRoute: typeof FmsFeeDescriptionPendingReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/fee-due-list-pending-report': {
+      id: '/fms/fee-due-list-pending-report'
+      path: '/fms/fee-due-list-pending-report'
+      fullPath: '/fms/fee-due-list-pending-report'
+      preLoaderRoute: typeof FmsFeeDueListPendingReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/fee-master': {
+      id: '/fms/fee-master'
+      path: '/fms/fee-master'
+      fullPath: '/fms/fee-master'
+      preLoaderRoute: typeof FmsFeeMasterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/fee-pending-report': {
+      id: '/fms/fee-pending-report'
+      path: '/fms/fee-pending-report'
+      fullPath: '/fms/fee-pending-report'
+      preLoaderRoute: typeof FmsFeePendingReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/fee-print-list': {
+      id: '/fms/fee-print-list'
+      path: '/fms/fee-print-list'
+      fullPath: '/fms/fee-print-list'
+      preLoaderRoute: typeof FmsFeePrintListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/fee-receipt': {
+      id: '/fms/fee-receipt'
+      path: '/fms/fee-receipt'
+      fullPath: '/fms/fee-receipt'
+      preLoaderRoute: typeof FmsFeeReceiptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/fee-type-master': {
+      id: '/fms/fee-type-master'
+      path: '/fms/fee-type-master'
+      fullPath: '/fms/fee-type-master'
+      preLoaderRoute: typeof FmsFeeTypeMasterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/mop-report': {
+      id: '/fms/mop-report'
+      path: '/fms/mop-report'
+      fullPath: '/fms/mop-report'
+      preLoaderRoute: typeof FmsMopReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/pickup-point': {
+      id: '/fms/pickup-point'
+      path: '/fms/pickup-point'
+      fullPath: '/fms/pickup-point'
+      preLoaderRoute: typeof FmsPickupPointRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/rte-report': {
+      id: '/fms/rte-report'
+      path: '/fms/rte-report'
+      fullPath: '/fms/rte-report'
+      preLoaderRoute: typeof FmsRteReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/student-concession': {
+      id: '/fms/student-concession'
+      path: '/fms/student-concession'
+      fullPath: '/fms/student-concession'
+      preLoaderRoute: typeof FmsStudentConcessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/transport-fee-due-list-pending-report': {
+      id: '/fms/transport-fee-due-list-pending-report'
+      path: '/fms/transport-fee-due-list-pending-report'
+      fullPath: '/fms/transport-fee-due-list-pending-report'
+      preLoaderRoute: typeof FmsTransportFeeDueListPendingReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/update-material-fee': {
+      id: '/fms/update-material-fee'
+      path: '/fms/update-material-fee'
+      fullPath: '/fms/update-material-fee'
+      preLoaderRoute: typeof FmsUpdateMaterialFeeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fms/update-student-fee': {
+      id: '/fms/update-student-fee'
+      path: '/fms/update-student-fee'
+      fullPath: '/fms/update-student-fee'
+      preLoaderRoute: typeof FmsUpdateStudentFeeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hr/leave-management': {
@@ -893,16 +1531,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdmissionsRegistrationStudentIdRouteImport
       parentRoute: typeof AdmissionsRegistrationRoute
     }
+    '/admissions/registration/new': {
+      id: '/admissions/registration/new'
+      path: '/new'
+      fullPath: '/admissions/registration/new'
+      preLoaderRoute: typeof AdmissionsRegistrationNewRouteImport
+      parentRoute: typeof AdmissionsRegistrationRoute
+    }
   }
 }
 
 interface AdmissionsRegistrationRouteChildren {
   AdmissionsRegistrationStudentIdRoute: typeof AdmissionsRegistrationStudentIdRoute
+  AdmissionsRegistrationNewRoute: typeof AdmissionsRegistrationNewRoute
 }
 
 const AdmissionsRegistrationRouteChildren: AdmissionsRegistrationRouteChildren =
   {
     AdmissionsRegistrationStudentIdRoute: AdmissionsRegistrationStudentIdRoute,
+    AdmissionsRegistrationNewRoute: AdmissionsRegistrationNewRoute,
   }
 
 const AdmissionsRegistrationRouteWithChildren =
@@ -915,15 +1562,23 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   SettingsRoute: SettingsRoute,
   AcademicAttendanceRoute: AcademicAttendanceRoute,
+  AcademicClassAllocationReportRoute: AcademicClassAllocationReportRoute,
   AcademicClassesRoute: AcademicClassesRoute,
   AcademicExaminationsRoute: AcademicExaminationsRoute,
+  AcademicFeedbackReportRoute: AcademicFeedbackReportRoute,
+  AcademicMarksCardRoute: AcademicMarksCardRoute,
+  AcademicMarksReportRoute: AcademicMarksReportRoute,
   AcademicReportCardsRoute: AcademicReportCardsRoute,
   AcademicResultsRoute: AcademicResultsRoute,
   AcademicSectionsRoute: AcademicSectionsRoute,
+  AcademicSmsReportRoute: AcademicSmsReportRoute,
+  AcademicStudentTcRoute: AcademicStudentTcRoute,
   AcademicStudentsRoute: AcademicStudentsRoute,
   AcademicSubjectsRoute: AcademicSubjectsRoute,
+  AcademicSummatativeReportRoute: AcademicSummatativeReportRoute,
   AcademicTeachersRoute: AcademicTeachersRoute,
   AcademicTimetableRoute: AcademicTimetableRoute,
+  AcademicWithheldListRoute: AcademicWithheldListRoute,
   AdministrationCommunicationRoute: AdministrationCommunicationRoute,
   AdministrationDocumentsRoute: AdministrationDocumentsRoute,
   AdministrationEventsRoute: AdministrationEventsRoute,
@@ -937,11 +1592,35 @@ const rootRouteChildren: RootRouteChildren = {
   AdmissionsPortalRoute: AdmissionsPortalRoute,
   AdmissionsProcessRoute: AdmissionsProcessRoute,
   AdmissionsRegistrationRoute: AdmissionsRegistrationRouteWithChildren,
+  AdmissionsReportRoute: AdmissionsReportRoute,
   FinanceExpensesRoute: FinanceExpensesRoute,
   FinanceFeeStructureRoute: FinanceFeeStructureRoute,
   FinanceFeesRoute: FinanceFeesRoute,
   FinancePaymentsRoute: FinancePaymentsRoute,
   FinanceReportsRoute: FinanceReportsRoute,
+  FmsBankRoute: FmsBankRoute,
+  FmsCancelledFeeListRoute: FmsCancelledFeeListRoute,
+  FmsChangeStudentFeeRoute: FmsChangeStudentFeeRoute,
+  FmsChequeClearenceRoute: FmsChequeClearenceRoute,
+  FmsDailyMopReportRoute: FmsDailyMopReportRoute,
+  FmsDayBookReportRoute: FmsDayBookReportRoute,
+  FmsFeeConcessionReportRoute: FmsFeeConcessionReportRoute,
+  FmsFeeDescriptionRoute: FmsFeeDescriptionRoute,
+  FmsFeeDescriptionPendingReportRoute: FmsFeeDescriptionPendingReportRoute,
+  FmsFeeDueListPendingReportRoute: FmsFeeDueListPendingReportRoute,
+  FmsFeeMasterRoute: FmsFeeMasterRoute,
+  FmsFeePendingReportRoute: FmsFeePendingReportRoute,
+  FmsFeePrintListRoute: FmsFeePrintListRoute,
+  FmsFeeReceiptRoute: FmsFeeReceiptRoute,
+  FmsFeeTypeMasterRoute: FmsFeeTypeMasterRoute,
+  FmsMopReportRoute: FmsMopReportRoute,
+  FmsPickupPointRoute: FmsPickupPointRoute,
+  FmsRteReportRoute: FmsRteReportRoute,
+  FmsStudentConcessionRoute: FmsStudentConcessionRoute,
+  FmsTransportFeeDueListPendingReportRoute:
+    FmsTransportFeeDueListPendingReportRoute,
+  FmsUpdateMaterialFeeRoute: FmsUpdateMaterialFeeRoute,
+  FmsUpdateStudentFeeRoute: FmsUpdateStudentFeeRoute,
   HrLeaveManagementRoute: HrLeaveManagementRoute,
   HrPayrollRoute: HrPayrollRoute,
   HrStaffRoute: HrStaffRoute,
