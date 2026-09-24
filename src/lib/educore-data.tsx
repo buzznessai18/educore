@@ -49,6 +49,10 @@ export type EduRoutePath =
   | "/academic/examinations"
   | "/academic/results"
   | "/academic/report-cards"
+  | "/admissions/portal"
+  | "/admissions/applied"
+  | "/admissions/admitted"
+  | "/admissions/registration"
   | "/admissions/applications"
   | "/admissions/enquiries"
   | "/admissions/process"
@@ -115,6 +119,10 @@ export const navigationSections: NavSection[] = [
     label: "Admissions",
     icon: ClipboardList,
     items: [
+      { title: "Admin Portal", path: "/admissions/portal", icon: LayoutDashboard, pageKey: "admin-portal" },
+      { title: "Applied", path: "/admissions/applied", icon: ClipboardList, pageKey: "applied" },
+      { title: "Admitted", path: "/admissions/admitted", icon: UserCheck, pageKey: "admitted" },
+      { title: "Registration", path: "/admissions/registration", icon: FilePenLine, pageKey: "registration" },
       { title: "Applications", path: "/admissions/applications", icon: ClipboardList, pageKey: "applications" },
       { title: "Admission Enquiries", path: "/admissions/enquiries", icon: Megaphone, pageKey: "admission-enquiries" },
       { title: "Admission Process", path: "/admissions/process", icon: Workflow, pageKey: "admission-process" },
@@ -589,8 +597,8 @@ export const pageConfigs: Record<string, PageConfig> = {
     filters: ["All settings", "Institution", "Users", "Notifications", "Security"],
     tabs: ["General", "Users", "Roles", "Notifications"],
     stats: [
-      { label: "System Users", value: "86", helper: "12 admins", tone: "primary" },
-      { label: "Active Roles", value: "6", helper: "Admin, Editor, Viewer", tone: "info" },
+      { label: "System Users", value: "86", helper: "5 role types", tone: "primary" },
+      { label: "Active Roles", value: "5", helper: "Super Admin, Admin, Staff Admin, Teacher, Parent", tone: "info" },
       { label: "Alerts Enabled", value: "14", helper: "Email, SMS, App", tone: "success" },
       { label: "Policy Reviews", value: "3", helper: "Due this month", tone: "warning" },
     ],
@@ -604,7 +612,10 @@ export const pageConfigs: Record<string, PageConfig> = {
     rows: [
       { setting: "Academic Year 2026-27", area: "Institution", owner: "Admin Office", updated: "Today", status: "Active" },
       { setting: "Parent Notification Rules", area: "Notifications", owner: "Communication", updated: "Yesterday", status: "Review" },
-      { setting: "Role Access Matrix", area: "Security", owner: "IT Admin", updated: "15 Sep", status: "Active" },
+      { setting: "Role Access Matrix", area: "Security", owner: "Super Admin", updated: "15 Sep", status: "Active" },
+      { setting: "Staff Admin Operations Scope", area: "Security", owner: "Admin", updated: "14 Sep", status: "Active" },
+      { setting: "Teacher Classroom Access", area: "Security", owner: "Admin", updated: "12 Sep", status: "Active" },
+      { setting: "Parent Guardian Portal", area: "Security", owner: "Staff Admin", updated: "10 Sep", status: "Active" },
     ],
     emptyState: { title: "No settings found", description: "Try a different settings area or keyword." },
   },

@@ -98,7 +98,6 @@ import {
   feeCollectionData,
   flatNavigation,
   getNavigationItem,
-  navigationSections,
   pageConfigs,
   pendingApprovals,
   recentActivities,
@@ -107,6 +106,20 @@ import {
   type DataRow,
   type PageConfig,
 } from "@/lib/educore-data";
+import {
+  APP_ROLES,
+  canAccessRoute,
+  clearDemoSession,
+  getDefaultRouteForRole,
+  getDemoSession,
+  getDemoUserByEmail,
+  getDemoUserByRole,
+  getNavigationForRole,
+  getRoleLabel,
+  saveDemoSession,
+  type AppRole,
+  type DemoSession,
+} from "@/lib/roles";
 import { cn } from "@/lib/utils";
 
 const fallbackRoute: EduRoutePath = "/dashboard";
@@ -154,13 +167,22 @@ export function EduCoreLoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
+  const [selectedRole, setSelectedRole] = useState<AppRole>("admin");
+  const [email, setEmail] = useState(getDemoUserByRole("admin").email);
+
+  const handleRoleChange = (role: AppRole) => {
+    setSelectedRole(role);
+    setEmail(getDemoUserByRole(role).email);
+  };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
+    const matchedUser = getDemoUserByEmail(email) ?? getDemoUserByRole(selectedRole);
     window.setTimeout(() => {
-      toast.success("Signed in to EduCore workspace");
-      window.location.assign("/dashboard");
+      saveDemoSession(matchedUser);
+      toast.success(`Signed in as ${getRoleLabel(matchedUser.role)}`);
+      window.location.assign(getDefaultRouteForRole(matchedUser.role));
     }, 650);
   };
 
@@ -221,14 +243,37 @@ export function EduCoreLoginPage() {
                 </div>
                 <h1 className="text-2xl font-semibold tracking-normal text-foreground">Sign in to EduCore</h1>
                 <p className="text-sm leading-6 text-muted-foreground">
-                  Access the school management workspace with demo credentials.
+                  Choose a demo role to preview workspace access for that persona.
                 </p>
               </CardHeader>
               <CardContent className="p-7 pt-3">
                 <form className="space-y-5" onSubmit={handleSubmit}>
                   <div className="space-y-2">
+                    <label className="text-sm font-medium text-foreground" htmlFor="role">
+                      Role
+                    </label>
+                    <Select value={selectedRole} onValueChange={(value) => handleRoleChange(value as AppRole)}>
+                      <SelectTrigger id="role" className="h-11 w-full">
+                        <SelectValue placeholder="Select a role" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {APP_ROLES.map((role) => (
+                          <SelectItem key={role} value={role}>
+                            {getRoleLabel(role)}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground" htmlFor="email">Email</label>
-                    <Input id="email" type="email" defaultValue="admin@educore.school" placeholder="admin@educore.school" />
+                    <Input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      placeholder="admin@educore.school"
+                    />
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between gap-4">
@@ -276,22 +321,85 @@ export function EduCoreLoginPage() {
 }
 
 export function EduCoreRoutePage({ path }: { path: EduRoutePath }) {
+  const session = useDemoSession();
+  const role = session?.role ?? "admin";
+
+  useEffect(() => {
+    if (!session) return;
+    if (!canAccessRoute(session.role, path)) {
+      window.location.replace(getDefaultRouteForRole(session.role));
+    }
+  }, [path, session]);
+
   const navItem = getNavigationItem(path) ?? getNavigationItem(fallbackRoute);
   const pageConfig = navItem?.pageKey === "dashboard" ? undefined : pageConfigs[navItem?.pageKey ?? "students"];
 
   return (
-    <EduCoreShell currentPath={path}>
+    <EduCoreShell currentPath={path} session={session} role={role}>
       {navItem?.pageKey === "dashboard" ? <DashboardPage /> : <ModulePage config={pageConfig} />}
     </EduCoreShell>
   );
 }
 
-function EduCoreShell({ currentPath, children }: { currentPath: EduRoutePath; children: ReactNode }) {
+/** Shell wrapper for custom module pages (Admin Portal, etc.). */
+export function EduCoreAppShell({
+  path,
+  children,
+}: {
+  path: EduRoutePath;
+  children: ReactNode;
+}) {
+  const session = useDemoSession();
+  const role = session?.role ?? "admin";
+
+  useEffect(() => {
+    if (!session) return;
+    if (!canAccessRoute(session.role, path)) {
+      window.location.replace(getDefaultRouteForRole(session.role));
+    }
+  }, [path, session]);
+
+  return (
+    <EduCoreShell currentPath={path} session={session} role={role}>
+      {children}
+    </EduCoreShell>
+  );
+}
+
+function useDemoSession(): DemoSession | null {
+  const [session, setSession] = useState<DemoSession | null>(null);
+
+  useEffect(() => {
+    const current = getDemoSession();
+    if (!current) {
+      const fallback = getDemoUserByRole("admin");
+      saveDemoSession(fallback);
+      setSession(fallback);
+      return;
+    }
+    setSession(current);
+  }, []);
+
+  return session;
+}
+
+function EduCoreShell({
+  currentPath,
+  children,
+  session,
+  role,
+}: {
+  currentPath: EduRoutePath;
+  children: ReactNode;
+  session: DemoSession | null;
+  role: AppRole;
+}) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const activeItem = getNavigationItem(currentPath);
   const breadcrumbs = activeItem ? [activeItem.section, activeItem.title] : ["Workspace", "Dashboard"];
+  const sections = useMemo(() => getNavigationForRole(role), [role]);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
@@ -302,7 +410,7 @@ function EduCoreShell({ currentPath, children }: { currentPath: EduRoutePath; ch
     <div className="min-h-screen bg-app text-foreground">
       <div className="flex min-h-screen w-full">
         <aside className={cn("hidden border-r border-sidebar-border bg-sidebar transition-all duration-200 lg:block", collapsed ? "w-20" : "w-72")}>
-          <SidebarContent currentPath={currentPath} collapsed={collapsed} onNavigate={() => undefined} />
+          <SidebarContent currentPath={currentPath} collapsed={collapsed} sections={sections} onNavigate={() => undefined} />
         </aside>
         <div className="flex min-w-0 flex-1 flex-col">
           <header className="sticky top-0 z-30 border-b border-border bg-header/95 backdrop-blur">
@@ -315,7 +423,12 @@ function EduCoreShell({ currentPath, children }: { currentPath: EduRoutePath; ch
                     </Button>
                   </SheetTrigger>
                   <SheetContent side="left" className="w-80 p-0">
-                    <SidebarContent currentPath={currentPath} collapsed={false} onNavigate={() => setMobileOpen(false)} />
+                    <SidebarContent
+                      currentPath={currentPath}
+                      collapsed={false}
+                      sections={sections}
+                      onNavigate={() => setMobileOpen(false)}
+                    />
                   </SheetContent>
                 </Sheet>
                 <Button
@@ -343,7 +456,7 @@ function EduCoreShell({ currentPath, children }: { currentPath: EduRoutePath; ch
                   {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
                 </Button>
                 <NotificationsMenu />
-                <ProfileMenu />
+                <ProfileMenu session={session} />
               </div>
             </div>
           </header>
@@ -354,7 +467,17 @@ function EduCoreShell({ currentPath, children }: { currentPath: EduRoutePath; ch
   );
 }
 
-function SidebarContent({ currentPath, collapsed, onNavigate }: { currentPath: EduRoutePath; collapsed: boolean; onNavigate: () => void }) {
+function SidebarContent({
+  currentPath,
+  collapsed,
+  sections,
+  onNavigate,
+}: {
+  currentPath: EduRoutePath;
+  collapsed: boolean;
+  sections: ReturnType<typeof getNavigationForRole>;
+  onNavigate: () => void;
+}) {
   return (
     <div className="flex h-screen min-h-0 flex-col">
       <div className="border-b border-sidebar-border p-4">
@@ -362,7 +485,7 @@ function SidebarContent({ currentPath, collapsed, onNavigate }: { currentPath: E
       </div>
       <ScrollArea className="min-h-0 flex-1 px-3 py-4">
         <nav className="space-y-5">
-          {navigationSections.map((section) => (
+          {sections.map((section) => (
             <div key={section.label} className="space-y-1">
               {!collapsed && <p className="px-3 text-xs font-semibold uppercase text-muted-foreground">{section.label}</p>}
               {section.items.map((item) => {
@@ -460,25 +583,39 @@ function NotificationsMenu() {
   );
 }
 
-function ProfileMenu() {
+function ProfileMenu({ session }: { session: DemoSession | null }) {
+  const display = session ?? getDemoUserByRole("admin");
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-10 gap-2 px-2" aria-label="Open profile menu">
           <Avatar className="size-8">
-            <AvatarFallback className="bg-primary-soft text-primary">MS</AvatarFallback>
+            <AvatarFallback className="bg-primary-soft text-primary">{display.initials}</AvatarFallback>
           </Avatar>
-          <span className="hidden text-sm font-medium text-foreground sm:inline">Maya Singh</span>
+          <span className="hidden text-sm font-medium text-foreground sm:inline">{display.name}</span>
           <ChevronDown className="hidden size-4 text-muted-foreground sm:inline" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>Principal Admin</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          <div className="space-y-0.5">
+            <p>{getRoleLabel(display.role)}</p>
+            <p className="text-xs font-normal text-muted-foreground">{display.title}</p>
+          </div>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem><User className="size-4" /> Profile</DropdownMenuItem>
         <DropdownMenuItem><Settings className="size-4" /> Preferences</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => window.location.assign("/")}><LogOut className="size-4" /> Sign out</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            clearDemoSession();
+            window.location.assign("/");
+          }}
+        >
+          <LogOut className="size-4" /> Sign out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

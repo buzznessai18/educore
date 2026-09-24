@@ -28,9 +28,13 @@ import { Route as AdministrationEventsRouteImport } from './routes/administratio
 import { Route as AdministrationInventoryRouteImport } from './routes/administration.inventory'
 import { Route as AdministrationLibraryRouteImport } from './routes/administration.library'
 import { Route as AdministrationTransportRouteImport } from './routes/administration.transport'
+import { Route as AdmissionsAdmittedRouteImport } from './routes/admissions.admitted'
 import { Route as AdmissionsApplicationsRouteImport } from './routes/admissions.applications'
+import { Route as AdmissionsAppliedRouteImport } from './routes/admissions.applied'
 import { Route as AdmissionsEnquiriesRouteImport } from './routes/admissions.enquiries'
+import { Route as AdmissionsPortalRouteImport } from './routes/admissions.portal'
 import { Route as AdmissionsProcessRouteImport } from './routes/admissions.process'
+import { Route as AdmissionsRegistrationRouteImport } from './routes/admissions.registration'
 import { Route as FinanceExpensesRouteImport } from './routes/finance.expenses'
 import { Route as FinanceFeeStructureRouteImport } from './routes/finance.fee-structure'
 import { Route as FinanceFeesRouteImport } from './routes/finance.fees'
@@ -47,6 +51,7 @@ import { Route as ReportsAcademicRouteImport } from './routes/reports.academic'
 import { Route as ReportsAttendanceRouteImport } from './routes/reports.attendance'
 import { Route as ReportsFeesRouteImport } from './routes/reports.fees'
 import { Route as ReportsStudentsRouteImport } from './routes/reports.students'
+import { Route as AdmissionsRegistrationStudentIdRouteImport } from './routes/admissions.registration.$studentId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -144,9 +149,19 @@ const AdministrationTransportRoute = AdministrationTransportRouteImport.update({
   path: '/administration/transport',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdmissionsAdmittedRoute = AdmissionsAdmittedRouteImport.update({
+  id: '/admissions/admitted',
+  path: '/admissions/admitted',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdmissionsApplicationsRoute = AdmissionsApplicationsRouteImport.update({
   id: '/admissions/applications',
   path: '/admissions/applications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdmissionsAppliedRoute = AdmissionsAppliedRouteImport.update({
+  id: '/admissions/applied',
+  path: '/admissions/applied',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdmissionsEnquiriesRoute = AdmissionsEnquiriesRouteImport.update({
@@ -154,9 +169,19 @@ const AdmissionsEnquiriesRoute = AdmissionsEnquiriesRouteImport.update({
   path: '/admissions/enquiries',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdmissionsPortalRoute = AdmissionsPortalRouteImport.update({
+  id: '/admissions/portal',
+  path: '/admissions/portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdmissionsProcessRoute = AdmissionsProcessRouteImport.update({
   id: '/admissions/process',
   path: '/admissions/process',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdmissionsRegistrationRoute = AdmissionsRegistrationRouteImport.update({
+  id: '/admissions/registration',
+  path: '/admissions/registration',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FinanceExpensesRoute = FinanceExpensesRouteImport.update({
@@ -239,6 +264,12 @@ const ReportsStudentsRoute = ReportsStudentsRouteImport.update({
   path: '/reports/students',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdmissionsRegistrationStudentIdRoute =
+  AdmissionsRegistrationStudentIdRouteImport.update({
+    id: '/$studentId',
+    path: '/$studentId',
+    getParentRoute: () => AdmissionsRegistrationRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -260,9 +291,13 @@ export interface FileRoutesByFullPath {
   '/administration/inventory': typeof AdministrationInventoryRoute
   '/administration/library': typeof AdministrationLibraryRoute
   '/administration/transport': typeof AdministrationTransportRoute
+  '/admissions/admitted': typeof AdmissionsAdmittedRoute
   '/admissions/applications': typeof AdmissionsApplicationsRoute
+  '/admissions/applied': typeof AdmissionsAppliedRoute
   '/admissions/enquiries': typeof AdmissionsEnquiriesRoute
+  '/admissions/portal': typeof AdmissionsPortalRoute
   '/admissions/process': typeof AdmissionsProcessRoute
+  '/admissions/registration': typeof AdmissionsRegistrationRouteWithChildren
   '/finance/expenses': typeof FinanceExpensesRoute
   '/finance/fee-structure': typeof FinanceFeeStructureRoute
   '/finance/fees': typeof FinanceFeesRoute
@@ -279,6 +314,7 @@ export interface FileRoutesByFullPath {
   '/reports/attendance': typeof ReportsAttendanceRoute
   '/reports/fees': typeof ReportsFeesRoute
   '/reports/students': typeof ReportsStudentsRoute
+  '/admissions/registration/$studentId': typeof AdmissionsRegistrationStudentIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -300,9 +336,13 @@ export interface FileRoutesByTo {
   '/administration/inventory': typeof AdministrationInventoryRoute
   '/administration/library': typeof AdministrationLibraryRoute
   '/administration/transport': typeof AdministrationTransportRoute
+  '/admissions/admitted': typeof AdmissionsAdmittedRoute
   '/admissions/applications': typeof AdmissionsApplicationsRoute
+  '/admissions/applied': typeof AdmissionsAppliedRoute
   '/admissions/enquiries': typeof AdmissionsEnquiriesRoute
+  '/admissions/portal': typeof AdmissionsPortalRoute
   '/admissions/process': typeof AdmissionsProcessRoute
+  '/admissions/registration': typeof AdmissionsRegistrationRouteWithChildren
   '/finance/expenses': typeof FinanceExpensesRoute
   '/finance/fee-structure': typeof FinanceFeeStructureRoute
   '/finance/fees': typeof FinanceFeesRoute
@@ -319,6 +359,7 @@ export interface FileRoutesByTo {
   '/reports/attendance': typeof ReportsAttendanceRoute
   '/reports/fees': typeof ReportsFeesRoute
   '/reports/students': typeof ReportsStudentsRoute
+  '/admissions/registration/$studentId': typeof AdmissionsRegistrationStudentIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -341,9 +382,13 @@ export interface FileRoutesById {
   '/administration/inventory': typeof AdministrationInventoryRoute
   '/administration/library': typeof AdministrationLibraryRoute
   '/administration/transport': typeof AdministrationTransportRoute
+  '/admissions/admitted': typeof AdmissionsAdmittedRoute
   '/admissions/applications': typeof AdmissionsApplicationsRoute
+  '/admissions/applied': typeof AdmissionsAppliedRoute
   '/admissions/enquiries': typeof AdmissionsEnquiriesRoute
+  '/admissions/portal': typeof AdmissionsPortalRoute
   '/admissions/process': typeof AdmissionsProcessRoute
+  '/admissions/registration': typeof AdmissionsRegistrationRouteWithChildren
   '/finance/expenses': typeof FinanceExpensesRoute
   '/finance/fee-structure': typeof FinanceFeeStructureRoute
   '/finance/fees': typeof FinanceFeesRoute
@@ -360,6 +405,7 @@ export interface FileRoutesById {
   '/reports/attendance': typeof ReportsAttendanceRoute
   '/reports/fees': typeof ReportsFeesRoute
   '/reports/students': typeof ReportsStudentsRoute
+  '/admissions/registration/$studentId': typeof AdmissionsRegistrationStudentIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -383,9 +429,13 @@ export interface FileRouteTypes {
     | '/administration/inventory'
     | '/administration/library'
     | '/administration/transport'
+    | '/admissions/admitted'
     | '/admissions/applications'
+    | '/admissions/applied'
     | '/admissions/enquiries'
+    | '/admissions/portal'
     | '/admissions/process'
+    | '/admissions/registration'
     | '/finance/expenses'
     | '/finance/fee-structure'
     | '/finance/fees'
@@ -402,6 +452,7 @@ export interface FileRouteTypes {
     | '/reports/attendance'
     | '/reports/fees'
     | '/reports/students'
+    | '/admissions/registration/$studentId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -423,9 +474,13 @@ export interface FileRouteTypes {
     | '/administration/inventory'
     | '/administration/library'
     | '/administration/transport'
+    | '/admissions/admitted'
     | '/admissions/applications'
+    | '/admissions/applied'
     | '/admissions/enquiries'
+    | '/admissions/portal'
     | '/admissions/process'
+    | '/admissions/registration'
     | '/finance/expenses'
     | '/finance/fee-structure'
     | '/finance/fees'
@@ -442,6 +497,7 @@ export interface FileRouteTypes {
     | '/reports/attendance'
     | '/reports/fees'
     | '/reports/students'
+    | '/admissions/registration/$studentId'
   id:
     | '__root__'
     | '/'
@@ -463,9 +519,13 @@ export interface FileRouteTypes {
     | '/administration/inventory'
     | '/administration/library'
     | '/administration/transport'
+    | '/admissions/admitted'
     | '/admissions/applications'
+    | '/admissions/applied'
     | '/admissions/enquiries'
+    | '/admissions/portal'
     | '/admissions/process'
+    | '/admissions/registration'
     | '/finance/expenses'
     | '/finance/fee-structure'
     | '/finance/fees'
@@ -482,6 +542,7 @@ export interface FileRouteTypes {
     | '/reports/attendance'
     | '/reports/fees'
     | '/reports/students'
+    | '/admissions/registration/$studentId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -504,9 +565,13 @@ export interface RootRouteChildren {
   AdministrationInventoryRoute: typeof AdministrationInventoryRoute
   AdministrationLibraryRoute: typeof AdministrationLibraryRoute
   AdministrationTransportRoute: typeof AdministrationTransportRoute
+  AdmissionsAdmittedRoute: typeof AdmissionsAdmittedRoute
   AdmissionsApplicationsRoute: typeof AdmissionsApplicationsRoute
+  AdmissionsAppliedRoute: typeof AdmissionsAppliedRoute
   AdmissionsEnquiriesRoute: typeof AdmissionsEnquiriesRoute
+  AdmissionsPortalRoute: typeof AdmissionsPortalRoute
   AdmissionsProcessRoute: typeof AdmissionsProcessRoute
+  AdmissionsRegistrationRoute: typeof AdmissionsRegistrationRouteWithChildren
   FinanceExpensesRoute: typeof FinanceExpensesRoute
   FinanceFeeStructureRoute: typeof FinanceFeeStructureRoute
   FinanceFeesRoute: typeof FinanceFeesRoute
@@ -660,11 +725,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdministrationTransportRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admissions/admitted': {
+      id: '/admissions/admitted'
+      path: '/admissions/admitted'
+      fullPath: '/admissions/admitted'
+      preLoaderRoute: typeof AdmissionsAdmittedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admissions/applications': {
       id: '/admissions/applications'
       path: '/admissions/applications'
       fullPath: '/admissions/applications'
       preLoaderRoute: typeof AdmissionsApplicationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admissions/applied': {
+      id: '/admissions/applied'
+      path: '/admissions/applied'
+      fullPath: '/admissions/applied'
+      preLoaderRoute: typeof AdmissionsAppliedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admissions/enquiries': {
@@ -674,11 +753,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdmissionsEnquiriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admissions/portal': {
+      id: '/admissions/portal'
+      path: '/admissions/portal'
+      fullPath: '/admissions/portal'
+      preLoaderRoute: typeof AdmissionsPortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admissions/process': {
       id: '/admissions/process'
       path: '/admissions/process'
       fullPath: '/admissions/process'
       preLoaderRoute: typeof AdmissionsProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admissions/registration': {
+      id: '/admissions/registration'
+      path: '/admissions/registration'
+      fullPath: '/admissions/registration'
+      preLoaderRoute: typeof AdmissionsRegistrationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/finance/expenses': {
@@ -793,8 +886,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReportsStudentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admissions/registration/$studentId': {
+      id: '/admissions/registration/$studentId'
+      path: '/$studentId'
+      fullPath: '/admissions/registration/$studentId'
+      preLoaderRoute: typeof AdmissionsRegistrationStudentIdRouteImport
+      parentRoute: typeof AdmissionsRegistrationRoute
+    }
   }
 }
+
+interface AdmissionsRegistrationRouteChildren {
+  AdmissionsRegistrationStudentIdRoute: typeof AdmissionsRegistrationStudentIdRoute
+}
+
+const AdmissionsRegistrationRouteChildren: AdmissionsRegistrationRouteChildren =
+  {
+    AdmissionsRegistrationStudentIdRoute: AdmissionsRegistrationStudentIdRoute,
+  }
+
+const AdmissionsRegistrationRouteWithChildren =
+  AdmissionsRegistrationRoute._addFileChildren(
+    AdmissionsRegistrationRouteChildren,
+  )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -816,9 +930,13 @@ const rootRouteChildren: RootRouteChildren = {
   AdministrationInventoryRoute: AdministrationInventoryRoute,
   AdministrationLibraryRoute: AdministrationLibraryRoute,
   AdministrationTransportRoute: AdministrationTransportRoute,
+  AdmissionsAdmittedRoute: AdmissionsAdmittedRoute,
   AdmissionsApplicationsRoute: AdmissionsApplicationsRoute,
+  AdmissionsAppliedRoute: AdmissionsAppliedRoute,
   AdmissionsEnquiriesRoute: AdmissionsEnquiriesRoute,
+  AdmissionsPortalRoute: AdmissionsPortalRoute,
   AdmissionsProcessRoute: AdmissionsProcessRoute,
+  AdmissionsRegistrationRoute: AdmissionsRegistrationRouteWithChildren,
   FinanceExpensesRoute: FinanceExpensesRoute,
   FinanceFeeStructureRoute: FinanceFeeStructureRoute,
   FinanceFeesRoute: FinanceFeesRoute,
