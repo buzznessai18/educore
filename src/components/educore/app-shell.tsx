@@ -24,7 +24,8 @@ import {
   User,
   X,
 } from "lucide-react";
-import { FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
+import { FormEvent, ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -60,7 +61,6 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
@@ -101,6 +101,9 @@ import { AdminHomeDashboard } from "@/modules/admin-portal/components/admin-home
 import { cn } from "@/lib/utils";
 
 const fallbackRoute: EduRoutePath = "/dashboard";
+
+/** Survives EduCoreAppShell remounts so Settings sidebar scroll stays put. */
+let persistedSidebarScrollTop = 0;
 
 const toneStyles: Record<SummaryMetric["tone"], string> = {
   primary: "bg-primary-soft text-primary border-primary-soft",
@@ -417,6 +420,26 @@ function EduCoreShell({
   const isChequeClearence = locationPath === "/fms/cheque-clearence";
   const isMopReport = locationPath === "/fms/mop-report";
   const isDailyMopReport = locationPath === "/fms/daily-mop-report";
+  const isSettingsAcademic = locationPath === "/settings/academic";
+  const isSettingsFinancialYear = locationPath === "/settings/financial-year";
+  const isSettingsLeaveYear = locationPath === "/settings/leave-year";
+  const isSettingsSchoolProfile = locationPath === "/settings/school-profile";
+  const isSettingsNationality = locationPath === "/settings/nationality";
+  const isSettingsQuota = locationPath === "/settings/quota";
+  const isSettingsBoard = locationPath === "/settings/board";
+  const isSettingsCourse = locationPath === "/settings/course";
+  const isSettingsSyllabus = locationPath === "/settings/syllabus";
+  const isSettingsLevel = locationPath === "/settings/level";
+  const isSettingsClass = locationPath === "/settings/class";
+  const isSettingsDocumentLabel = locationPath === "/settings/document-label";
+  const isSettingsLeadSource = locationPath === "/settings/lead-source";
+  const isSettingsDepartmentMaster = locationPath === "/settings/department-master";
+  const isSettingsDesignationMaster = locationPath === "/settings/designation-master";
+  const isSettingsHouseMaster = locationPath === "/settings/house-master";
+  const isSettingsFeedbackQuestionnaire = locationPath === "/settings/feedback-questionnaire";
+  const isSettingsSessionPeriod = locationPath === "/settings/session-period";
+  const isSettingsGradeList = locationPath === "/settings/grade-list";
+  const isSettingsMetaFormPlatformList = locationPath === "/settings/metaform-platform-list";
   const breadcrumbs =
     currentPath === "/dashboard"
       ? ["Home", "Dashboard"]
@@ -486,9 +509,49 @@ function EduCoreShell({
                                                                       ? ["Home", "Mode of Payment Report"]
                                                                       : isDailyMopReport
                                                                         ? ["Home", "Mode of Payment Report"]
-                                                                        : activeItem
-                                                                          ? [activeItem.section, activeItem.title]
-                                                                          : ["Workspace", "Dashboard"];
+                                                                        : isSettingsAcademic
+                                                                          ? ["Home", "Add Academic"]
+                                                                          : isSettingsFinancialYear
+                                                                            ? ["Home", "Add Year"]
+                                                                            : isSettingsLeaveYear
+                                                                              ? ["Home", "Add Leave Year"]
+                                                                              : isSettingsSchoolProfile
+                                                                                ? ["Home", "College Profile List"]
+                                                                                : isSettingsNationality
+                                                                                  ? ["Home", "Add Country"]
+                                                                                  : isSettingsQuota
+                                                                                    ? ["Home", "Add Quota"]
+                                                                                    : isSettingsBoard
+                                                                                      ? ["Home", "Add Board"]
+                                                                                      : isSettingsCourse
+                                                                                        ? ["Home", "Add Course"]
+                                                                                        : isSettingsSyllabus
+                                                                                          ? ["Home", "Add Syllabus"]
+                                                                                          : isSettingsLevel
+                                                                                            ? ["Home", "Add Level/Combination"]
+                                                                                            : isSettingsClass
+                                                                                              ? ["Home", "Add Class"]
+                                                                                              : isSettingsDocumentLabel
+                                                                                                ? ["Home", "Add Label"]
+                                                                                                : isSettingsLeadSource
+                                                                                                  ? ["Home", "Add Source"]
+                                                                                                  : isSettingsDepartmentMaster
+                                                                                                    ? ["Home", "Department List"]
+                                                                                                    : isSettingsDesignationMaster
+                                                                                                      ? ["Home", "Designation List"]
+                                                                                                      : isSettingsHouseMaster
+                                                                                                        ? ["Home", "House Master"]
+                                                                                                        : isSettingsFeedbackQuestionnaire
+                                                                                                          ? ["Home", "FeedBack Questionairre"]
+                                                                                                          : isSettingsSessionPeriod
+                                                                                                            ? ["Home", "Add Session"]
+                                                                                                            : isSettingsGradeList
+                                                                                                              ? ["Home", "Add Grade"]
+                                                                                                              : isSettingsMetaFormPlatformList
+                                                                                                                ? ["Home", "MetaFormPlatform list"]
+                                                                                                                : activeItem
+                                                                                                                  ? [activeItem.section, activeItem.title]
+                                                                                                                  : ["Workspace", "Dashboard"];
   const pageTitle =
     currentPath === "/dashboard"
       ? "Admin Dashboard"
@@ -560,7 +623,47 @@ function EduCoreShell({
                                                                         ? "Mode of Payment Report"
                                                                         : isDailyMopReport
                                                                           ? "Daily MOP Report"
-                                                                          : breadcrumbs[1];
+                                                                          : isSettingsAcademic
+                                                                            ? "Academic Year"
+                                                                            : isSettingsFinancialYear
+                                                                              ? "Financial Year"
+                                                                              : isSettingsLeaveYear
+                                                                                ? "Leave Year"
+                                                                                : isSettingsSchoolProfile
+                                                                                  ? "College Profile List"
+                                                                                  : isSettingsNationality
+                                                                                    ? "Country"
+                                                                                    : isSettingsQuota
+                                                                                      ? "Quota"
+                                                                                      : isSettingsBoard
+                                                                                        ? "Board"
+                                                                                        : isSettingsCourse
+                                                                                          ? "Course"
+                                                                                          : isSettingsSyllabus
+                                                                                            ? "Syllabus"
+                                                                                            : isSettingsLevel
+                                                                                              ? "Level"
+                                                                                              : isSettingsClass
+                                                                                                ? "Class"
+                                                                                                : isSettingsDocumentLabel
+                                                                                                  ? "Document Label"
+                                                                                                  : isSettingsLeadSource
+                                                                                                    ? "Lead Source"
+                                                                                                    : isSettingsDepartmentMaster
+                                                                                                      ? "Department List"
+                                                                                                      : isSettingsDesignationMaster
+                                                                                                        ? "Designation List"
+                                                                                                        : isSettingsHouseMaster
+                                                                                                          ? "House Master"
+                                                                                                          : isSettingsFeedbackQuestionnaire
+                                                                                                            ? "FeedBack Questionairre"
+                                                                                                            : isSettingsSessionPeriod
+                                                                                                              ? "Session/Period"
+                                                                                                              : isSettingsGradeList
+                                                                                                                ? "Grade list"
+                                                                                                                : isSettingsMetaFormPlatformList
+                                                                                                                  ? "MetaFormPlatform list"
+                                                                                                                  : breadcrumbs[1];
   const sections = useMemo(() => getNavigationForRole(role), [role]);
 
   useEffect(() => {
@@ -643,7 +746,27 @@ function EduCoreShell({
                   isTransportFeeDueListPendingReport ||
                   isChequeClearence ||
                   isMopReport ||
-                  isDailyMopReport
+                  isDailyMopReport ||
+                  isSettingsAcademic ||
+                  isSettingsFinancialYear ||
+                  isSettingsLeaveYear ||
+                  isSettingsSchoolProfile ||
+                  isSettingsNationality ||
+                  isSettingsQuota ||
+                  isSettingsBoard ||
+                  isSettingsCourse ||
+                  isSettingsSyllabus ||
+                  isSettingsLevel ||
+                  isSettingsClass ||
+                  isSettingsDocumentLabel ||
+                  isSettingsLeadSource ||
+                  isSettingsDepartmentMaster ||
+                  isSettingsDesignationMaster ||
+                  isSettingsHouseMaster ||
+                  isSettingsFeedbackQuestionnaire ||
+                  isSettingsSessionPeriod ||
+                  isSettingsGradeList ||
+                  isSettingsMetaFormPlatformList
                     ? "text-primary"
                     : "text-foreground",
                 )}>{pageTitle}</h1>
@@ -683,6 +806,7 @@ function SidebarContent({
   sections: ReturnType<typeof getNavigationForRole>;
   onNavigate: () => void;
 }) {
+  const navScrollRef = useRef<HTMLDivElement>(null);
   const [expandedIds, setExpandedIds] = useState<string[]>(() =>
     sections.filter((section) => isSectionActive(section, currentPath)).map((section) => section.id),
   );
@@ -692,6 +816,17 @@ function SidebarContent({
     if (activeIds.length === 0) return;
     setExpandedIds((current) => Array.from(new Set([...current, ...activeIds])));
   }, [currentPath, sections]);
+
+  useEffect(() => {
+    const el = navScrollRef.current;
+    if (!el) return;
+    el.scrollTop = persistedSidebarScrollTop;
+    const onScroll = () => {
+      persistedSidebarScrollTop = el.scrollTop;
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
 
   const mainSections = sections.filter((section) => section.group !== "extra");
   const extraSections = sections.filter((section) => section.group === "extra");
@@ -705,7 +840,7 @@ function SidebarContent({
       <div className="shrink-0 border-b border-sidebar-border p-4">
         <BrandMark expanded={!collapsed} />
       </div>
-      <ScrollArea className="min-h-0 flex-1">
+      <div ref={navScrollRef} className="min-h-0 flex-1 overflow-y-auto">
         <nav className="py-2">
           {mainSections.map((section) => (
             <SidebarNavRow
@@ -740,7 +875,7 @@ function SidebarContent({
             </>
           )}
         </nav>
-      </ScrollArea>
+      </div>
     </div>
   );
 }
@@ -801,15 +936,15 @@ function SidebarNavRow({
           {content}
         </button>
       ) : href ? (
-        <a
-          href={href}
+        <Link
+          to={href}
           onClick={onNavigate}
           className={rowClassName}
           aria-current={isActive ? "page" : undefined}
           title={collapsed ? section.label : undefined}
         >
           {content}
-        </a>
+        </Link>
       ) : (
         <button type="button" className={rowClassName} onClick={onToggle} title={collapsed ? section.label : undefined}>
           {content}
@@ -821,9 +956,9 @@ function SidebarNavRow({
           {section.items.map((item) => {
             const childActive = item.path === currentPath;
             return (
-              <a
+              <Link
                 key={`${section.id}-${item.path}`}
-                href={item.path}
+                to={item.path}
                 onClick={onNavigate}
                 className={cn(
                   "block py-2.5 text-sm font-medium transition-colors",
@@ -832,7 +967,7 @@ function SidebarNavRow({
                 aria-current={childActive ? "page" : undefined}
               >
                 {item.title}
-              </a>
+              </Link>
             );
           })}
         </div>

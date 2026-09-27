@@ -109,7 +109,27 @@ export type EduRoutePath =
   | "/reports/attendance"
   | "/reports/fees"
   | "/reports/students"
-  | "/settings";
+  | "/settings"
+  | "/settings/academic"
+  | "/settings/financial-year"
+  | "/settings/leave-year"
+  | "/settings/school-profile"
+  | "/settings/nationality"
+  | "/settings/quota"
+  | "/settings/board"
+  | "/settings/course"
+  | "/settings/syllabus"
+  | "/settings/level"
+  | "/settings/class"
+  | "/settings/document-label"
+  | "/settings/lead-source"
+  | "/settings/department-master"
+  | "/settings/designation-master"
+  | "/settings/house-master"
+  | "/settings/feedback-questionnaire"
+  | "/settings/session-period"
+  | "/settings/grade-list"
+  | "/settings/metaform-platform-list";
 
 export type NavItem = {
   title: string;
@@ -148,9 +168,30 @@ export const navigationSections: NavSection[] = [
     label: "Settings",
     icon: Database,
     expandable: true,
-    path: "/settings",
-    pageKey: "settings",
-    items: [{ title: "Settings", path: "/settings", icon: Database, pageKey: "settings" }],
+    path: "/settings/academic",
+    pageKey: "settings-academic",
+    items: [
+      { title: "Academic", path: "/settings/academic", icon: Database, pageKey: "settings-academic" },
+      { title: "Financial Year", path: "/settings/financial-year", icon: Database, pageKey: "settings-financial-year" },
+      { title: "Leave Year", path: "/settings/leave-year", icon: Database, pageKey: "settings-leave-year" },
+      { title: "School Profile", path: "/settings/school-profile", icon: Database, pageKey: "settings-school-profile" },
+      { title: "Nationality", path: "/settings/nationality", icon: Database, pageKey: "settings-nationality" },
+      { title: "Quota", path: "/settings/quota", icon: Database, pageKey: "settings-quota" },
+      { title: "Board", path: "/settings/board", icon: Database, pageKey: "settings-board" },
+      { title: "Course", path: "/settings/course", icon: Database, pageKey: "settings-course" },
+      { title: "Syllabus", path: "/settings/syllabus", icon: Database, pageKey: "settings-syllabus" },
+      { title: "Level", path: "/settings/level", icon: Database, pageKey: "settings-level" },
+      { title: "Class", path: "/settings/class", icon: Database, pageKey: "settings-class" },
+      { title: "Document Label", path: "/settings/document-label", icon: Database, pageKey: "settings-document-label" },
+      { title: "Lead Source", path: "/settings/lead-source", icon: Database, pageKey: "settings-lead-source" },
+      { title: "Department Master", path: "/settings/department-master", icon: Database, pageKey: "settings-department-master" },
+      { title: "Designation Master", path: "/settings/designation-master", icon: Database, pageKey: "settings-designation-master" },
+      { title: "House Master", path: "/settings/house-master", icon: Database, pageKey: "settings-house-master" },
+      { title: "FeedBack Questionairre", path: "/settings/feedback-questionnaire", icon: Database, pageKey: "settings-feedback-questionnaire" },
+      { title: "Session/Period", path: "/settings/session-period", icon: Database, pageKey: "settings-session-period" },
+      { title: "Grade list", path: "/settings/grade-list", icon: Database, pageKey: "settings-grade-list" },
+      { title: "MetaFormPlatform list", path: "/settings/metaform-platform-list", icon: Database, pageKey: "settings-metaform-platform-list" },
+    ],
   },
   {
     id: "reports",
@@ -1232,10 +1273,84 @@ export const pageConfigs: Record<string, PageConfig> = {
       { setting: "Role Access Matrix", area: "Security", owner: "Super Admin", updated: "15 Sep", status: "Active" },
       { setting: "Staff Admin Operations Scope", area: "Security", owner: "Admin", updated: "14 Sep", status: "Active" },
       { setting: "Teacher Classroom Access", area: "Security", owner: "Admin", updated: "12 Sep", status: "Active" },
-      { setting: "Parent Guardian Portal", area: "Security", owner: "Staff Admin", updated: "10 Sep", status: "Active" },
     ],
-    emptyState: { title: "No settings found", description: "Try a different settings area or keyword." },
   },
+  "settings-academic": makeSettingsPage("settings-academic", "Academic", "Academic setup", "Configure academic year defaults and core academic masters.", "Save Academic", ["name", "year", "status"], [
+    { name: "Academic Year 2026-27", year: "2026-27", status: "Active" },
+    { name: "Term Structure", year: "2026-27", status: "Active" },
+  ]),
+  "settings-financial-year": makeSettingsPage("settings-financial-year", "Financial Year", "Financial year", "Maintain financial year periods for fee and accounting cycles.", "Add Financial Year", ["name", "from", "to", "status"], [
+    { name: "FY 2026-27", from: "01 Apr 2026", to: "31 Mar 2027", status: "Active" },
+  ]),
+  "settings-leave-year": makeSettingsPage("settings-leave-year", "Leave Year", "Leave year", "Define leave year windows used by HR leave policies.", "Add Leave Year", ["name", "from", "to", "status"], [
+    { name: "Leave Year 2026", from: "01 Jan 2026", to: "31 Dec 2026", status: "Active" },
+  ]),
+  "settings-school-profile": makeSettingsPage("settings-school-profile", "School Profile", "Profile", "Update school identity, contact, and affiliation details.", "Save Profile", ["field", "value", "status"], [
+    { field: "School Name", value: "EduCore Public School", status: "Active" },
+    { field: "Affiliation No", value: "CBSE-102938", status: "Active" },
+  ]),
+  "settings-nationality": makeSettingsPage("settings-nationality", "Nationality", "Nationality", "Maintain nationality masters used in admissions and student profiles.", "Add Nationality", ["name", "code", "status"], [
+    { name: "Indian", code: "IN", status: "Active" },
+    { name: "Other", code: "OT", status: "Active" },
+  ]),
+  "settings-quota": makeSettingsPage("settings-quota", "Quota", "Quota", "Manage admission quota categories and reservation codes.", "Add Quota", ["name", "code", "status"], [
+    { name: "General", code: "GEN", status: "Active" },
+    { name: "RTE", code: "RTE", status: "Active" },
+  ]),
+  "settings-board": makeSettingsPage("settings-board", "Board", "Board", "Configure education boards linked to classes and syllabus.", "Add Board", ["name", "code", "status"], [
+    { name: "CBSE", code: "CBSE", status: "Active" },
+    { name: "State Board", code: "STATE", status: "Active" },
+  ]),
+  "settings-course": makeSettingsPage("settings-course", "Course", "Course", "Maintain courses offered under each board and level.", "Add Course", ["name", "board", "status"], [
+    { name: "Primary", board: "CBSE", status: "Active" },
+    { name: "Secondary", board: "CBSE", status: "Active" },
+  ]),
+  "settings-syllabus": makeSettingsPage("settings-syllabus", "Syllabus", "Syllabus", "Define syllabus masters mapped to courses and classes.", "Add Syllabus", ["name", "course", "status"], [
+    { name: "CBSE Primary Syllabus", course: "Primary", status: "Active" },
+  ]),
+  "settings-level": makeSettingsPage("settings-level", "Level", "Level", "Set academic levels such as Primary, Middle, and Senior.", "Add Level", ["name", "order", "status"], [
+    { name: "Primary", order: "1", status: "Active" },
+    { name: "Secondary", order: "2", status: "Active" },
+  ]),
+  "settings-class": makeSettingsPage("settings-class", "Class", "Class", "Maintain class masters used across academics and fees.", "Add Class", ["name", "level", "status"], [
+    { name: "Class 1", level: "Primary", status: "Active" },
+    { name: "Class 10", level: "Secondary", status: "Active" },
+  ]),
+  "settings-document-label": makeSettingsPage("settings-document-label", "Document Label", "Document label", "Configure document labels collected during admissions.", "Add Document Label", ["name", "required", "status"], [
+    { name: "Birth Certificate", required: "Yes", status: "Active" },
+    { name: "Aadhaar Card", required: "Yes", status: "Active" },
+  ]),
+  "settings-lead-source": makeSettingsPage("settings-lead-source", "Lead Source", "Lead source", "Track enquiry lead sources for admissions marketing.", "Add Lead Source", ["name", "channel", "status"], [
+    { name: "Walk-in", channel: "Campus", status: "Active" },
+    { name: "Website", channel: "Digital", status: "Active" },
+  ]),
+  "settings-department-master": makeSettingsPage("settings-department-master", "Department Master", "Department", "Maintain departments for staff allocation and reporting.", "Add Department", ["name", "code", "status"], [
+    { name: "Academics", code: "ACAD", status: "Active" },
+    { name: "Accounts", code: "ACCT", status: "Active" },
+  ]),
+  "settings-designation-master": makeSettingsPage("settings-designation-master", "Designation Master", "Designation", "Define staff designations used in HR and payroll.", "Add Designation", ["name", "department", "status"], [
+    { name: "Principal", department: "Academics", status: "Active" },
+    { name: "Accountant", department: "Accounts", status: "Active" },
+  ]),
+  "settings-house-master": makeSettingsPage("settings-house-master", "House Master", "House", "Manage student houses for activities and competitions.", "Add House", ["name", "color", "status"], [
+    { name: "Red House", color: "Red", status: "Active" },
+    { name: "Blue House", color: "Blue", status: "Active" },
+  ]),
+  "settings-feedback-questionnaire": makeSettingsPage("settings-feedback-questionnaire", "FeedBack Questionairre", "Questionnaire", "Create and maintain feedback questionnaires for students and parents.", "Add Questionnaire", ["name", "audience", "status"], [
+    { name: "Parent Feedback", audience: "Parents", status: "Active" },
+    { name: "Student Feedback", audience: "Students", status: "Active" },
+  ]),
+  "settings-session-period": makeSettingsPage("settings-session-period", "Session/Period", "Session", "Configure timetable sessions and period slots.", "Add Session", ["name", "start", "end", "status"], [
+    { name: "Period 1", start: "08:00", end: "08:45", status: "Active" },
+    { name: "Period 2", start: "08:45", end: "09:30", status: "Active" },
+  ]),
+  "settings-grade-list": makeSettingsPage("settings-grade-list", "Grade list", "Grade", "Maintain grade scales used in marks and report cards.", "Add Grade", ["grade", "from", "to", "status"], [
+    { grade: "A+", from: "90", to: "100", status: "Active" },
+    { grade: "A", from: "80", to: "89", status: "Active" },
+  ]),
+  "settings-metaform-platform-list": makeSettingsPage("settings-metaform-platform-list", "MetaFormPlatform list", "Platform", "Manage MetaForm platform integrations and form sources.", "Add Platform", ["name", "source", "status"], [
+    { name: "Default Platform", source: "Internal", status: "Active" },
+  ]),
 };
 
 function makeAcademicPage(
@@ -1303,6 +1418,23 @@ function makeFmsPage(
     { label: "Pending Dues", value: "₹12.6L", helper: "Open balances", tone: "warning" },
     { label: "Concessions", value: "86", helper: "Active this term", tone: "info" },
     { label: "Reconciled", value: "94%", helper: "Bank + MOP", tone: "primary" },
+  ]);
+}
+
+function makeSettingsPage(
+  key: string,
+  title: string,
+  noun: string,
+  description: string,
+  primaryAction: string,
+  columnKeys: string[],
+  rows: DataRow[],
+): PageConfig {
+  return makePage(key, title, "Settings", noun, description, primaryAction, columnKeys, rows, [
+    { label: `Active ${pluralize(noun)}`, value: String(Math.max(rows.length * 4, rows.length)), helper: "Configured masters", tone: "primary" },
+    { label: "In Use", value: "92%", helper: "Linked to modules", tone: "success" },
+    { label: "Needs Review", value: String(Math.max(rows.length - 1, 1)), helper: "Pending updates", tone: "warning" },
+    { label: "Updated", value: "Today", helper: "Latest master sync", tone: "info" },
   ]);
 }
 

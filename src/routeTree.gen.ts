@@ -82,6 +82,26 @@ import { Route as ReportsAcademicRouteImport } from './routes/reports.academic'
 import { Route as ReportsAttendanceRouteImport } from './routes/reports.attendance'
 import { Route as ReportsFeesRouteImport } from './routes/reports.fees'
 import { Route as ReportsStudentsRouteImport } from './routes/reports.students'
+import { Route as SettingsAcademicRouteImport } from './routes/settings.academic'
+import { Route as SettingsBoardRouteImport } from './routes/settings.board'
+import { Route as SettingsClassRouteImport } from './routes/settings.class'
+import { Route as SettingsCourseRouteImport } from './routes/settings.course'
+import { Route as SettingsDepartmentMasterRouteImport } from './routes/settings.department-master'
+import { Route as SettingsDesignationMasterRouteImport } from './routes/settings.designation-master'
+import { Route as SettingsDocumentLabelRouteImport } from './routes/settings.document-label'
+import { Route as SettingsFeedbackQuestionnaireRouteImport } from './routes/settings.feedback-questionnaire'
+import { Route as SettingsFinancialYearRouteImport } from './routes/settings.financial-year'
+import { Route as SettingsGradeListRouteImport } from './routes/settings.grade-list'
+import { Route as SettingsHouseMasterRouteImport } from './routes/settings.house-master'
+import { Route as SettingsLeadSourceRouteImport } from './routes/settings.lead-source'
+import { Route as SettingsLeaveYearRouteImport } from './routes/settings.leave-year'
+import { Route as SettingsLevelRouteImport } from './routes/settings.level'
+import { Route as SettingsMetaformPlatformListRouteImport } from './routes/settings.metaform-platform-list'
+import { Route as SettingsNationalityRouteImport } from './routes/settings.nationality'
+import { Route as SettingsQuotaRouteImport } from './routes/settings.quota'
+import { Route as SettingsSchoolProfileRouteImport } from './routes/settings.school-profile'
+import { Route as SettingsSessionPeriodRouteImport } from './routes/settings.session-period'
+import { Route as SettingsSyllabusRouteImport } from './routes/settings.syllabus'
 import { Route as AdmissionsRegistrationStudentIdRouteImport } from './routes/admissions.registration.$studentId'
 import { Route as AdmissionsRegistrationNewRouteImport } from './routes/admissions.registration.new'
 
@@ -456,6 +476,110 @@ const ReportsStudentsRoute = ReportsStudentsRouteImport.update({
   path: '/reports/students',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsAcademicRoute = SettingsAcademicRouteImport.update({
+  id: '/academic',
+  path: '/academic',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsBoardRoute = SettingsBoardRouteImport.update({
+  id: '/board',
+  path: '/board',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsClassRoute = SettingsClassRouteImport.update({
+  id: '/class',
+  path: '/class',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsCourseRoute = SettingsCourseRouteImport.update({
+  id: '/course',
+  path: '/course',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsDepartmentMasterRoute =
+  SettingsDepartmentMasterRouteImport.update({
+    id: '/department-master',
+    path: '/department-master',
+    getParentRoute: () => SettingsRoute,
+  } as any)
+const SettingsDesignationMasterRoute =
+  SettingsDesignationMasterRouteImport.update({
+    id: '/designation-master',
+    path: '/designation-master',
+    getParentRoute: () => SettingsRoute,
+  } as any)
+const SettingsDocumentLabelRoute = SettingsDocumentLabelRouteImport.update({
+  id: '/document-label',
+  path: '/document-label',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsFeedbackQuestionnaireRoute =
+  SettingsFeedbackQuestionnaireRouteImport.update({
+    id: '/feedback-questionnaire',
+    path: '/feedback-questionnaire',
+    getParentRoute: () => SettingsRoute,
+  } as any)
+const SettingsFinancialYearRoute = SettingsFinancialYearRouteImport.update({
+  id: '/financial-year',
+  path: '/financial-year',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsGradeListRoute = SettingsGradeListRouteImport.update({
+  id: '/grade-list',
+  path: '/grade-list',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsHouseMasterRoute = SettingsHouseMasterRouteImport.update({
+  id: '/house-master',
+  path: '/house-master',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsLeadSourceRoute = SettingsLeadSourceRouteImport.update({
+  id: '/lead-source',
+  path: '/lead-source',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsLeaveYearRoute = SettingsLeaveYearRouteImport.update({
+  id: '/leave-year',
+  path: '/leave-year',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsLevelRoute = SettingsLevelRouteImport.update({
+  id: '/level',
+  path: '/level',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsMetaformPlatformListRoute =
+  SettingsMetaformPlatformListRouteImport.update({
+    id: '/metaform-platform-list',
+    path: '/metaform-platform-list',
+    getParentRoute: () => SettingsRoute,
+  } as any)
+const SettingsNationalityRoute = SettingsNationalityRouteImport.update({
+  id: '/nationality',
+  path: '/nationality',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsQuotaRoute = SettingsQuotaRouteImport.update({
+  id: '/quota',
+  path: '/quota',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsSchoolProfileRoute = SettingsSchoolProfileRouteImport.update({
+  id: '/school-profile',
+  path: '/school-profile',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsSessionPeriodRoute = SettingsSessionPeriodRouteImport.update({
+  id: '/session-period',
+  path: '/session-period',
+  getParentRoute: () => SettingsRoute,
+} as any)
+const SettingsSyllabusRoute = SettingsSyllabusRouteImport.update({
+  id: '/syllabus',
+  path: '/syllabus',
+  getParentRoute: () => SettingsRoute,
+} as any)
 const AdmissionsRegistrationStudentIdRoute =
   AdmissionsRegistrationStudentIdRouteImport.update({
     id: '/$studentId',
@@ -472,7 +596,7 @@ const AdmissionsRegistrationNewRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
-  '/settings': typeof SettingsRoute
+  '/settings': typeof SettingsRouteWithChildren
   '/academic/attendance': typeof AcademicAttendanceRoute
   '/academic/class-allocation-report': typeof AcademicClassAllocationReportRoute
   '/academic/classes': typeof AcademicClassesRoute
@@ -543,13 +667,33 @@ export interface FileRoutesByFullPath {
   '/reports/attendance': typeof ReportsAttendanceRoute
   '/reports/fees': typeof ReportsFeesRoute
   '/reports/students': typeof ReportsStudentsRoute
+  '/settings/academic': typeof SettingsAcademicRoute
+  '/settings/board': typeof SettingsBoardRoute
+  '/settings/class': typeof SettingsClassRoute
+  '/settings/course': typeof SettingsCourseRoute
+  '/settings/department-master': typeof SettingsDepartmentMasterRoute
+  '/settings/designation-master': typeof SettingsDesignationMasterRoute
+  '/settings/document-label': typeof SettingsDocumentLabelRoute
+  '/settings/feedback-questionnaire': typeof SettingsFeedbackQuestionnaireRoute
+  '/settings/financial-year': typeof SettingsFinancialYearRoute
+  '/settings/grade-list': typeof SettingsGradeListRoute
+  '/settings/house-master': typeof SettingsHouseMasterRoute
+  '/settings/lead-source': typeof SettingsLeadSourceRoute
+  '/settings/leave-year': typeof SettingsLeaveYearRoute
+  '/settings/level': typeof SettingsLevelRoute
+  '/settings/metaform-platform-list': typeof SettingsMetaformPlatformListRoute
+  '/settings/nationality': typeof SettingsNationalityRoute
+  '/settings/quota': typeof SettingsQuotaRoute
+  '/settings/school-profile': typeof SettingsSchoolProfileRoute
+  '/settings/session-period': typeof SettingsSessionPeriodRoute
+  '/settings/syllabus': typeof SettingsSyllabusRoute
   '/admissions/registration/$studentId': typeof AdmissionsRegistrationStudentIdRoute
   '/admissions/registration/new': typeof AdmissionsRegistrationNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
-  '/settings': typeof SettingsRoute
+  '/settings': typeof SettingsRouteWithChildren
   '/academic/attendance': typeof AcademicAttendanceRoute
   '/academic/class-allocation-report': typeof AcademicClassAllocationReportRoute
   '/academic/classes': typeof AcademicClassesRoute
@@ -620,6 +764,26 @@ export interface FileRoutesByTo {
   '/reports/attendance': typeof ReportsAttendanceRoute
   '/reports/fees': typeof ReportsFeesRoute
   '/reports/students': typeof ReportsStudentsRoute
+  '/settings/academic': typeof SettingsAcademicRoute
+  '/settings/board': typeof SettingsBoardRoute
+  '/settings/class': typeof SettingsClassRoute
+  '/settings/course': typeof SettingsCourseRoute
+  '/settings/department-master': typeof SettingsDepartmentMasterRoute
+  '/settings/designation-master': typeof SettingsDesignationMasterRoute
+  '/settings/document-label': typeof SettingsDocumentLabelRoute
+  '/settings/feedback-questionnaire': typeof SettingsFeedbackQuestionnaireRoute
+  '/settings/financial-year': typeof SettingsFinancialYearRoute
+  '/settings/grade-list': typeof SettingsGradeListRoute
+  '/settings/house-master': typeof SettingsHouseMasterRoute
+  '/settings/lead-source': typeof SettingsLeadSourceRoute
+  '/settings/leave-year': typeof SettingsLeaveYearRoute
+  '/settings/level': typeof SettingsLevelRoute
+  '/settings/metaform-platform-list': typeof SettingsMetaformPlatformListRoute
+  '/settings/nationality': typeof SettingsNationalityRoute
+  '/settings/quota': typeof SettingsQuotaRoute
+  '/settings/school-profile': typeof SettingsSchoolProfileRoute
+  '/settings/session-period': typeof SettingsSessionPeriodRoute
+  '/settings/syllabus': typeof SettingsSyllabusRoute
   '/admissions/registration/$studentId': typeof AdmissionsRegistrationStudentIdRoute
   '/admissions/registration/new': typeof AdmissionsRegistrationNewRoute
 }
@@ -627,7 +791,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
-  '/settings': typeof SettingsRoute
+  '/settings': typeof SettingsRouteWithChildren
   '/academic/attendance': typeof AcademicAttendanceRoute
   '/academic/class-allocation-report': typeof AcademicClassAllocationReportRoute
   '/academic/classes': typeof AcademicClassesRoute
@@ -698,6 +862,26 @@ export interface FileRoutesById {
   '/reports/attendance': typeof ReportsAttendanceRoute
   '/reports/fees': typeof ReportsFeesRoute
   '/reports/students': typeof ReportsStudentsRoute
+  '/settings/academic': typeof SettingsAcademicRoute
+  '/settings/board': typeof SettingsBoardRoute
+  '/settings/class': typeof SettingsClassRoute
+  '/settings/course': typeof SettingsCourseRoute
+  '/settings/department-master': typeof SettingsDepartmentMasterRoute
+  '/settings/designation-master': typeof SettingsDesignationMasterRoute
+  '/settings/document-label': typeof SettingsDocumentLabelRoute
+  '/settings/feedback-questionnaire': typeof SettingsFeedbackQuestionnaireRoute
+  '/settings/financial-year': typeof SettingsFinancialYearRoute
+  '/settings/grade-list': typeof SettingsGradeListRoute
+  '/settings/house-master': typeof SettingsHouseMasterRoute
+  '/settings/lead-source': typeof SettingsLeadSourceRoute
+  '/settings/leave-year': typeof SettingsLeaveYearRoute
+  '/settings/level': typeof SettingsLevelRoute
+  '/settings/metaform-platform-list': typeof SettingsMetaformPlatformListRoute
+  '/settings/nationality': typeof SettingsNationalityRoute
+  '/settings/quota': typeof SettingsQuotaRoute
+  '/settings/school-profile': typeof SettingsSchoolProfileRoute
+  '/settings/session-period': typeof SettingsSessionPeriodRoute
+  '/settings/syllabus': typeof SettingsSyllabusRoute
   '/admissions/registration/$studentId': typeof AdmissionsRegistrationStudentIdRoute
   '/admissions/registration/new': typeof AdmissionsRegistrationNewRoute
 }
@@ -777,6 +961,26 @@ export interface FileRouteTypes {
     | '/reports/attendance'
     | '/reports/fees'
     | '/reports/students'
+    | '/settings/academic'
+    | '/settings/board'
+    | '/settings/class'
+    | '/settings/course'
+    | '/settings/department-master'
+    | '/settings/designation-master'
+    | '/settings/document-label'
+    | '/settings/feedback-questionnaire'
+    | '/settings/financial-year'
+    | '/settings/grade-list'
+    | '/settings/house-master'
+    | '/settings/lead-source'
+    | '/settings/leave-year'
+    | '/settings/level'
+    | '/settings/metaform-platform-list'
+    | '/settings/nationality'
+    | '/settings/quota'
+    | '/settings/school-profile'
+    | '/settings/session-period'
+    | '/settings/syllabus'
     | '/admissions/registration/$studentId'
     | '/admissions/registration/new'
   fileRoutesByTo: FileRoutesByTo
@@ -854,6 +1058,26 @@ export interface FileRouteTypes {
     | '/reports/attendance'
     | '/reports/fees'
     | '/reports/students'
+    | '/settings/academic'
+    | '/settings/board'
+    | '/settings/class'
+    | '/settings/course'
+    | '/settings/department-master'
+    | '/settings/designation-master'
+    | '/settings/document-label'
+    | '/settings/feedback-questionnaire'
+    | '/settings/financial-year'
+    | '/settings/grade-list'
+    | '/settings/house-master'
+    | '/settings/lead-source'
+    | '/settings/leave-year'
+    | '/settings/level'
+    | '/settings/metaform-platform-list'
+    | '/settings/nationality'
+    | '/settings/quota'
+    | '/settings/school-profile'
+    | '/settings/session-period'
+    | '/settings/syllabus'
     | '/admissions/registration/$studentId'
     | '/admissions/registration/new'
   id:
@@ -931,6 +1155,26 @@ export interface FileRouteTypes {
     | '/reports/attendance'
     | '/reports/fees'
     | '/reports/students'
+    | '/settings/academic'
+    | '/settings/board'
+    | '/settings/class'
+    | '/settings/course'
+    | '/settings/department-master'
+    | '/settings/designation-master'
+    | '/settings/document-label'
+    | '/settings/feedback-questionnaire'
+    | '/settings/financial-year'
+    | '/settings/grade-list'
+    | '/settings/house-master'
+    | '/settings/lead-source'
+    | '/settings/leave-year'
+    | '/settings/level'
+    | '/settings/metaform-platform-list'
+    | '/settings/nationality'
+    | '/settings/quota'
+    | '/settings/school-profile'
+    | '/settings/session-period'
+    | '/settings/syllabus'
     | '/admissions/registration/$studentId'
     | '/admissions/registration/new'
   fileRoutesById: FileRoutesById
@@ -938,7 +1182,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
-  SettingsRoute: typeof SettingsRoute
+  SettingsRoute: typeof SettingsRouteWithChildren
   AcademicAttendanceRoute: typeof AcademicAttendanceRoute
   AcademicClassAllocationReportRoute: typeof AcademicClassAllocationReportRoute
   AcademicClassesRoute: typeof AcademicClassesRoute
@@ -1524,6 +1768,146 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReportsStudentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings/academic': {
+      id: '/settings/academic'
+      path: '/academic'
+      fullPath: '/settings/academic'
+      preLoaderRoute: typeof SettingsAcademicRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/board': {
+      id: '/settings/board'
+      path: '/board'
+      fullPath: '/settings/board'
+      preLoaderRoute: typeof SettingsBoardRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/class': {
+      id: '/settings/class'
+      path: '/class'
+      fullPath: '/settings/class'
+      preLoaderRoute: typeof SettingsClassRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/course': {
+      id: '/settings/course'
+      path: '/course'
+      fullPath: '/settings/course'
+      preLoaderRoute: typeof SettingsCourseRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/department-master': {
+      id: '/settings/department-master'
+      path: '/department-master'
+      fullPath: '/settings/department-master'
+      preLoaderRoute: typeof SettingsDepartmentMasterRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/designation-master': {
+      id: '/settings/designation-master'
+      path: '/designation-master'
+      fullPath: '/settings/designation-master'
+      preLoaderRoute: typeof SettingsDesignationMasterRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/document-label': {
+      id: '/settings/document-label'
+      path: '/document-label'
+      fullPath: '/settings/document-label'
+      preLoaderRoute: typeof SettingsDocumentLabelRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/feedback-questionnaire': {
+      id: '/settings/feedback-questionnaire'
+      path: '/feedback-questionnaire'
+      fullPath: '/settings/feedback-questionnaire'
+      preLoaderRoute: typeof SettingsFeedbackQuestionnaireRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/financial-year': {
+      id: '/settings/financial-year'
+      path: '/financial-year'
+      fullPath: '/settings/financial-year'
+      preLoaderRoute: typeof SettingsFinancialYearRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/grade-list': {
+      id: '/settings/grade-list'
+      path: '/grade-list'
+      fullPath: '/settings/grade-list'
+      preLoaderRoute: typeof SettingsGradeListRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/house-master': {
+      id: '/settings/house-master'
+      path: '/house-master'
+      fullPath: '/settings/house-master'
+      preLoaderRoute: typeof SettingsHouseMasterRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/lead-source': {
+      id: '/settings/lead-source'
+      path: '/lead-source'
+      fullPath: '/settings/lead-source'
+      preLoaderRoute: typeof SettingsLeadSourceRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/leave-year': {
+      id: '/settings/leave-year'
+      path: '/leave-year'
+      fullPath: '/settings/leave-year'
+      preLoaderRoute: typeof SettingsLeaveYearRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/level': {
+      id: '/settings/level'
+      path: '/level'
+      fullPath: '/settings/level'
+      preLoaderRoute: typeof SettingsLevelRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/metaform-platform-list': {
+      id: '/settings/metaform-platform-list'
+      path: '/metaform-platform-list'
+      fullPath: '/settings/metaform-platform-list'
+      preLoaderRoute: typeof SettingsMetaformPlatformListRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/nationality': {
+      id: '/settings/nationality'
+      path: '/nationality'
+      fullPath: '/settings/nationality'
+      preLoaderRoute: typeof SettingsNationalityRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/quota': {
+      id: '/settings/quota'
+      path: '/quota'
+      fullPath: '/settings/quota'
+      preLoaderRoute: typeof SettingsQuotaRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/school-profile': {
+      id: '/settings/school-profile'
+      path: '/school-profile'
+      fullPath: '/settings/school-profile'
+      preLoaderRoute: typeof SettingsSchoolProfileRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/session-period': {
+      id: '/settings/session-period'
+      path: '/session-period'
+      fullPath: '/settings/session-period'
+      preLoaderRoute: typeof SettingsSessionPeriodRouteImport
+      parentRoute: typeof SettingsRoute
+    }
+    '/settings/syllabus': {
+      id: '/settings/syllabus'
+      path: '/syllabus'
+      fullPath: '/settings/syllabus'
+      preLoaderRoute: typeof SettingsSyllabusRouteImport
+      parentRoute: typeof SettingsRoute
+    }
     '/admissions/registration/$studentId': {
       id: '/admissions/registration/$studentId'
       path: '/$studentId'
@@ -1540,6 +1924,56 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface SettingsRouteChildren {
+  SettingsAcademicRoute: typeof SettingsAcademicRoute
+  SettingsBoardRoute: typeof SettingsBoardRoute
+  SettingsClassRoute: typeof SettingsClassRoute
+  SettingsCourseRoute: typeof SettingsCourseRoute
+  SettingsDepartmentMasterRoute: typeof SettingsDepartmentMasterRoute
+  SettingsDesignationMasterRoute: typeof SettingsDesignationMasterRoute
+  SettingsDocumentLabelRoute: typeof SettingsDocumentLabelRoute
+  SettingsFeedbackQuestionnaireRoute: typeof SettingsFeedbackQuestionnaireRoute
+  SettingsFinancialYearRoute: typeof SettingsFinancialYearRoute
+  SettingsGradeListRoute: typeof SettingsGradeListRoute
+  SettingsHouseMasterRoute: typeof SettingsHouseMasterRoute
+  SettingsLeadSourceRoute: typeof SettingsLeadSourceRoute
+  SettingsLeaveYearRoute: typeof SettingsLeaveYearRoute
+  SettingsLevelRoute: typeof SettingsLevelRoute
+  SettingsMetaformPlatformListRoute: typeof SettingsMetaformPlatformListRoute
+  SettingsNationalityRoute: typeof SettingsNationalityRoute
+  SettingsQuotaRoute: typeof SettingsQuotaRoute
+  SettingsSchoolProfileRoute: typeof SettingsSchoolProfileRoute
+  SettingsSessionPeriodRoute: typeof SettingsSessionPeriodRoute
+  SettingsSyllabusRoute: typeof SettingsSyllabusRoute
+}
+
+const SettingsRouteChildren: SettingsRouteChildren = {
+  SettingsAcademicRoute: SettingsAcademicRoute,
+  SettingsBoardRoute: SettingsBoardRoute,
+  SettingsClassRoute: SettingsClassRoute,
+  SettingsCourseRoute: SettingsCourseRoute,
+  SettingsDepartmentMasterRoute: SettingsDepartmentMasterRoute,
+  SettingsDesignationMasterRoute: SettingsDesignationMasterRoute,
+  SettingsDocumentLabelRoute: SettingsDocumentLabelRoute,
+  SettingsFeedbackQuestionnaireRoute: SettingsFeedbackQuestionnaireRoute,
+  SettingsFinancialYearRoute: SettingsFinancialYearRoute,
+  SettingsGradeListRoute: SettingsGradeListRoute,
+  SettingsHouseMasterRoute: SettingsHouseMasterRoute,
+  SettingsLeadSourceRoute: SettingsLeadSourceRoute,
+  SettingsLeaveYearRoute: SettingsLeaveYearRoute,
+  SettingsLevelRoute: SettingsLevelRoute,
+  SettingsMetaformPlatformListRoute: SettingsMetaformPlatformListRoute,
+  SettingsNationalityRoute: SettingsNationalityRoute,
+  SettingsQuotaRoute: SettingsQuotaRoute,
+  SettingsSchoolProfileRoute: SettingsSchoolProfileRoute,
+  SettingsSessionPeriodRoute: SettingsSessionPeriodRoute,
+  SettingsSyllabusRoute: SettingsSyllabusRoute,
+}
+
+const SettingsRouteWithChildren = SettingsRoute._addFileChildren(
+  SettingsRouteChildren,
+)
 
 interface AdmissionsRegistrationRouteChildren {
   AdmissionsRegistrationStudentIdRoute: typeof AdmissionsRegistrationStudentIdRoute
@@ -1560,7 +1994,7 @@ const AdmissionsRegistrationRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
-  SettingsRoute: SettingsRoute,
+  SettingsRoute: SettingsRouteWithChildren,
   AcademicAttendanceRoute: AcademicAttendanceRoute,
   AcademicClassAllocationReportRoute: AcademicClassAllocationReportRoute,
   AcademicClassesRoute: AcademicClassesRoute,

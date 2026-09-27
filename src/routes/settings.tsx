@@ -1,13 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-import { EduCoreRoutePage } from "@/components/educore/app-shell";
-import { educoreHead } from "@/lib/educore-seo";
+import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/settings")({
-  head: () => educoreHead("EduCore Settings", "EduCore education ERP workspace with static Phase 1 screens for school operations."),
-  component: RouteComponent,
+  beforeLoad: ({ location }) => {
+    if (location.pathname === "/settings" || location.pathname === "/settings/") {
+      throw redirect({ to: "/settings/academic" });
+    }
+  },
+  component: SettingsLayout,
 });
 
-function RouteComponent() {
-  return <EduCoreRoutePage path="/settings" />;
+function SettingsLayout() {
+  return <Outlet />;
 }

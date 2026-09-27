@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { toast } from "sonner";
 
@@ -13,15 +13,44 @@ export type ActionPill = {
   dropdown?: boolean;
 };
 
-export function ActionPills({ items }: { items: ActionPill[] }) {
+export const SETTINGS_MASTER_PILLS: ActionPill[] = [
+  { label: "Academic", tone: "green", href: "/settings/academic" },
+  { label: "Year", tone: "green", href: "/settings/financial-year" },
+  { label: "Leave Year", tone: "green", href: "/settings/leave-year" },
+  { label: "Board", tone: "green", href: "/settings/board" },
+  { label: "Course", tone: "green", href: "/settings/course" },
+  { label: "Syllabus", tone: "green", href: "/settings/syllabus" },
+  { label: "Level", tone: "green", href: "/settings/level" },
+  { label: "Quota", tone: "green", href: "/settings/quota" },
+  { label: "Class", tone: "green", href: "/settings/class" },
+  { label: "Label Master", tone: "green", href: "/settings/document-label" },
+  { label: "Exam Passed", tone: "green" },
+  { label: "Components List", tone: "green" },
+  { label: "Shift Master", tone: "green" },
+  { label: "Country", tone: "green", href: "/settings/nationality" },
+];
+
+export function ActionPills({
+  items,
+  className,
+}: {
+  items: ActionPill[];
+  className?: string;
+}) {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+
   return (
-    <div className="flex flex-wrap justify-end gap-2">
+    <div className={cn("flex flex-wrap justify-end gap-2", className)}>
       {items.map((pill) => {
-        const className = cn(portalTone[pill.tone]);
+        const isActive = Boolean(pill.href && pathname === pill.href);
+        const pillClassName = cn(
+          portalTone[pill.tone],
+          isActive && "brightness-90 ring-2 ring-white/40",
+        );
 
         if (pill.href) {
           return (
-            <Button key={pill.label} asChild className={className}>
+            <Button key={pill.label} asChild className={pillClassName}>
               <Link to={pill.href}>
                 {pill.label}
                 {pill.dropdown ? <ChevronDown className="size-3.5" /> : null}
@@ -34,7 +63,7 @@ export function ActionPills({ items }: { items: ActionPill[] }) {
           <Button
             key={pill.label}
             type="button"
-            className={className}
+            className={pillClassName}
             onClick={() => toast.info(`${pill.label} ready for Phase 2 wiring`)}
           >
             {pill.label}
